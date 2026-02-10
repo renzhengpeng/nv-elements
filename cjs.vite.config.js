@@ -42,7 +42,7 @@ export default defineConfig(() => ({
       //   button: resolve(__dirname, 'src/components/nv-button/index.ts')
       // },
       formats: ['cjs'],
-      name: 'nv-components', // 暴露的全局变量
+      name: 'nv-elements', // 暴露的全局变量
       // 默认是package.json的name选项
       fileName(format, entryName) {
         const extension = '.cjs';

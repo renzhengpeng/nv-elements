@@ -6,8 +6,8 @@
  * @lastTime: 2024-12-19
  *
  * 使用方式：
- * 1. 全量引入：import * from 'nv-components'
- * 2. 按需引入：import { NvButton } from 'nv-components/es/components/button'（ES）或 'nv-components/lib/components/button'（CJS）
+ * 1. 全量引入：import * from 'nv-elements'
+ * 2. 按需引入：import { NvButton } from 'nv-elements/es/components/button'（ES）或 'nv-elements/lib/components/button'（CJS）
  */
 
 // 导出所有组件（按需引入时，用户可以选择性导入）

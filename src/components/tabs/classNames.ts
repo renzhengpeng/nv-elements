@@ -5,11 +5,11 @@
  */
 import getRootCssVariable from '../../tools/getRootCssVariable.ts';
 
-const BLOCK = getRootCssVariable('--nv-components-namespace-tabs-block');
-// const BLOCK_CONNECTOR = getRootCssVariable('--nv-components-block-connector');
-const ELEMENT_CONNECTOR = getRootCssVariable('--nv-components-element-connector');
-// const MODIFIER_CONNECTOR = getRootCssVariable('--nv-components-modifier-connector');
-const COMMON_PREFIX = '--nv-components-namespace-tabs-';
+const BLOCK = getRootCssVariable('--nv-elements-namespace-tabs-block');
+// const BLOCK_CONNECTOR = getRootCssVariable('--nv-elements-block-connector');
+const ELEMENT_CONNECTOR = getRootCssVariable('--nv-elements-element-connector');
+// const MODIFIER_CONNECTOR = getRootCssVariable('--nv-elements-modifier-connector');
+const COMMON_PREFIX = '--nv-elements-namespace-tabs-';
 
 const header = getRootCssVariable(`${ COMMON_PREFIX }element-header`);
 const navWrap = getRootCssVariable(`${ COMMON_PREFIX }element-nav-wrap`);

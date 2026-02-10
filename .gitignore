@@ -19,7 +19,6 @@ es/**
 # Editor directories and files
 .vscode/*
 .kiro/*
-.storybook/*
 .cursor/*
 !.vscode/extensions.json
 .idea

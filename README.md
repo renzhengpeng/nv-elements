@@ -5,13 +5,13 @@
  * @LastAuthor: zhengpeng.ren
  * @lastTime: 2024-12-19
 -->
-# nv-components
+# nv-elements
 
 > Lightweight component library based on Lit
 
 ## 简介
 
-`nv-components` 是一个基于 [Lit](https://lit.dev/) 构建的轻量级 Web Components 组件库。它提供了丰富的 UI 组件，支持多种构建格式（UMD、CJS、ES），可以轻松集成到任何现代前端项目中。
+`nv-elements` 是一个基于 [Lit](https://lit.dev/) 构建的轻量级 Web Components 组件库。它提供了丰富的 UI 组件，支持多种构建格式（UMD、CJS、ES），可以轻松集成到任何现代前端项目中。
 
 ### 特性
 
@@ -51,10 +51,12 @@ yarn install
 ### 启动开发服务器
 
 ```bash
-yarn run dev
+yarn start
+# 或
+yarn run storybook
 ```
 
-开发服务器将在 <http://localhost:5173> 启动。页面会自动重载，你可以在控制台看到任何 lint 错误。
+Storybook 开发服务器将在 <http://localhost:6006> 启动。页面会自动重载，你可以在控制台看到任何 lint 错误。
 
 ### 构建
 
@@ -90,9 +92,9 @@ yarn run lint
 ### 安装
 
 ```bash
-yarn add nv-components
+yarn add nv-elements
 # 或
-npm install nv-components
+npm install nv-elements
 ```
 
 ### 引入方式
@@ -105,28 +107,28 @@ npm install nv-components
 
 ```javascript
 // 按需引入单个组件
-import { NvButton } from 'nv-components/es/components/button';
-import 'nv-components/es/components/button/style.css';
+import { NvButton } from 'nv-elements/es/components/button';
+import 'nv-elements/es/components/button/style.css';
 
 // 按需引入多个组件
-import { NvButton } from 'nv-components/es/components/button';
-import { NvInput } from 'nv-components/es/components/input';
-import 'nv-components/es/components/button/style.css';
-import 'nv-components/es/components/input/style.css';
+import { NvButton } from 'nv-elements/es/components/button';
+import { NvInput } from 'nv-elements/es/components/input';
+import 'nv-elements/es/components/button/style.css';
+import 'nv-elements/es/components/input/style.css';
 ```
 
 ##### CommonJS 方式
 
 ```javascript
 // 按需引入单个组件
-const { NvButton } = require('nv-components/lib/components/button');
-require('nv-components/lib/components/button/style.css');
+const { NvButton } = require('nv-elements/lib/components/button');
+require('nv-elements/lib/components/button/style.css');
 
 // 按需引入多个组件
-const { NvButton } = require('nv-components/lib/components/button');
-const { NvInput } = require('nv-components/lib/components/input');
-require('nv-components/lib/components/button/style.css');
-require('nv-components/lib/components/input/style.css');
+const { NvButton } = require('nv-elements/lib/components/button');
+const { NvInput } = require('nv-elements/lib/components/input');
+require('nv-elements/lib/components/button/style.css');
+require('nv-elements/lib/components/input/style.css');
 ```
 
 #### 方式二：全量引入
@@ -136,20 +138,20 @@ require('nv-components/lib/components/input/style.css');
 ```javascript
 // ES Module
 // 引入组件库样式
-import "nv-components/es/styles/style.css";
+import "nv-elements/es/styles/style.css";
 // 引入组件库（注册所有自定义元素）
-import "nv-components";
+import "nv-elements";
 
 // CommonJS
-require('nv-components/lib/styles/style.css');
-require('nv-components');
+require('nv-elements/lib/styles/style.css');
+require('nv-elements');
 ```
 
 #### 方式三：UMD 方式（浏览器）
 
 ```html
-<link rel="stylesheet" href="path/to/nv-components/dist/style.css">
-<script src="path/to/nv-components/dist/index.js"></script>
+<link rel="stylesheet" href="path/to/nv-elements/dist/style.css">
+<script src="path/to/nv-elements/dist/index.js"></script>
 ```
 
 ### 使用组件
@@ -183,8 +185,8 @@ function App() {
 #### 原生 JavaScript 中使用
 
 ```javascript
-import { NvButton } from 'nv-components/es/components/button';
-import 'nv-components/es/components/button/style.css';
+import { NvButton } from 'nv-elements/es/components/button';
+import 'nv-elements/es/components/button/style.css';
 
 // 直接使用自定义元素
 const button = document.createElement('nv-button');
@@ -199,15 +201,15 @@ document.body.appendChild(button);
 
 ```javascript
 // 只引入需要的组件样式
-import 'nv-components/es/components/button/style.css';
-import 'nv-components/es/components/input/style.css';
+import 'nv-elements/es/components/button/style.css';
+import 'nv-elements/es/components/input/style.css';
 ```
 
 #### 全量引入样式
 
 ```javascript
 // 引入全局样式（包含变量和全局样式）
-import 'nv-components/es/styles/style.css';
+import 'nv-elements/es/styles/style.css';
 ```
 
 ## 全局 CSS 变量
@@ -301,28 +303,28 @@ import 'nv-components/es/styles/style.css';
 
 ```css
 /* 常规状态 */
---nv-component-bg-color-primary: #409EFF;
---nv-component-bg-color-success: #67C23A;
---nv-component-bg-color-warning: #E6A23C;
---nv-component-bg-color-info: #909399;
+--nv-element-bg-color-primary: #409EFF;
+--nv-element-bg-color-success: #67C23A;
+--nv-element-bg-color-warning: #E6A23C;
+--nv-element-bg-color-info: #909399;
 
 /* 禁用状态 */
---nv-component-bg-color-primary-disabled: #409EFF;
---nv-component-bg-color-success-disabled: #67C23A;
---nv-component-bg-color-warning-disabled: #E6A23C;
---nv-component-bg-color-info-disabled: #909399;
+--nv-element-bg-color-primary-disabled: #409EFF;
+--nv-element-bg-color-success-disabled: #67C23A;
+--nv-element-bg-color-warning-disabled: #E6A23C;
+--nv-element-bg-color-info-disabled: #909399;
 
 /* Hover 状态 */
---nv-component-bg-color-primary-hover: #409EFF;
---nv-component-bg-color-success-hover: #67C23A;
---nv-component-bg-color-warning-hover: #E6A23C;
---nv-component-bg-color-info-hover: #909399;
+--nv-element-bg-color-primary-hover: #409EFF;
+--nv-element-bg-color-success-hover: #67C23A;
+--nv-element-bg-color-warning-hover: #E6A23C;
+--nv-element-bg-color-info-hover: #909399;
 
 /* Active 状态 */
---nv-component-bg-color-primary-active: #409EFF;
---nv-component-bg-color-success-active: #67C23A;
---nv-component-bg-color-warning-active: #E6A23C;
---nv-component-bg-color-info-active: #909399;
+--nv-element-bg-color-primary-active: #409EFF;
+--nv-element-bg-color-success-active: #67C23A;
+--nv-element-bg-color-warning-active: #E6A23C;
+--nv-element-bg-color-info-active: #909399;
 ```
 
 ### 字体变量

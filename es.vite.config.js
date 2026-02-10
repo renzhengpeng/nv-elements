@@ -37,7 +37,7 @@ export default defineConfig(() => ({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       formats: ['es'],
-      name: 'nv-components',
+      name: 'nv-elements',
       fileName(format, entryName) {
         return entryName + '.mjs';
       }

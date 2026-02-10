@@ -1,12 +1,12 @@
 {
-  "name": "nv-components",
+  "name": "nv-elements",
   "description": "基于Lit的高质量Web Components组件库",
   "keywords": [
-    "NV Components",
+    "NV Elements",
     "NV",
+    "native web components",
     "Components",
     "Lit",
-    "Lit Components",
     "Lit Components",
     "Web Components",
     "Web Components Library",
@@ -14,13 +14,13 @@
   ],
   "author": "NV",
   "license": "MIT",
-  "homepage": "https://github.com/renzhengpeng/nv-components",
+  "homepage": "https://github.com/renzhengpeng/nv-elements",
   "repository": {
     "type": "git",
-    "url": "https://github.com/renzhengpeng/nv-components.git"
+    "url": "https://github.com/renzhengpeng/nv-elements.git"
   },
   "bugs": {
-    "url": "https://github.com/renzhengpeng/nv-components/issues"
+    "url": "https://github.com/renzhengpeng/nv-elements/issues"
   },
   "type": "module",
   "version": "1.0.0",
@@ -48,8 +48,7 @@
   ],
   "scripts": {
     "start": "yarn run dev",
-    "dev": "vite",
-    "storybook": "storybook dev -p 6006",
+    "dev": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build": "yarn run build:umd && yarn run build:cmd && yarn run build:es",
     "build:umd": "tsc && vite build -c umd.vite.config.js",

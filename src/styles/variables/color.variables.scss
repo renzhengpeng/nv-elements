@@ -128,7 +128,7 @@ $component_bg_color_danger: $secondary_color_danger_1;
   --nv-secondary-color-danger-1-active: #{ $secondary_color_danger_1_active };
   --nv-secondary-color-danger-1-disabled: #{ $secondary_color_danger_1_disabled };
   --nv-secondary-color-danger-2-disabled: #{ $secondary_color_danger_2_disabled };
-  
+
 
   // 中性色
   --nv-neutral-color-font-1: #{ $neutral_color_font_1 };
@@ -143,30 +143,30 @@ $component_bg_color_danger: $secondary_color_danger_1;
   --nv-neutral-color-black: #{ $neutral_color_black };
 
   // 组件常规
-  --nv-component-bg-color-primary: #{ $component_bg_color_primary };
-  --nv-component-bg-color-success: #{ $component_bg_color_success };
-  --nv-component-bg-color-warning: #{ $component_bg_color_warning };
-  --nv-component-bg-color-info: #{ $component_bg_color_info };
+  --nv-element-bg-color-primary: #{ $component_bg_color_primary };
+  --nv-element-bg-color-success: #{ $component_bg_color_success };
+  --nv-element-bg-color-warning: #{ $component_bg_color_warning };
+  --nv-element-bg-color-info: #{ $component_bg_color_info };
 
 
   // 组件禁用
-  --nv-component-bg-color-primary-disabled: #{ $component_bg_color_primary };
-  --nv-component-bg-color-success-disabled: #{ $component_bg_color_success };
-  --nv-component-bg-color-warning-disabled: #{ $component_bg_color_warning };
-  --nv-component-bg-color-info-disabled: #{ $component_bg_color_info };
+  --nv-element-bg-color-primary-disabled: #{ $component_bg_color_primary };
+  --nv-element-bg-color-success-disabled: #{ $component_bg_color_success };
+  --nv-element-bg-color-warning-disabled: #{ $component_bg_color_warning };
+  --nv-element-bg-color-info-disabled: #{ $component_bg_color_info };
 
 
   // 组件hover
-  --nv-component-bg-color-primary-hover: #{ $component_bg_color_primary };
-  --nv-component-bg-color-success-hover: #{ $component_bg_color_success };
-  --nv-component-bg-color-warning-hover: #{ $component_bg_color_warning };
-  --nv-component-bg-color-info-hover: #{ $component_bg_color_info };
+  --nv-element-bg-color-primary-hover: #{ $component_bg_color_primary };
+  --nv-element-bg-color-success-hover: #{ $component_bg_color_success };
+  --nv-element-bg-color-warning-hover: #{ $component_bg_color_warning };
+  --nv-element-bg-color-info-hover: #{ $component_bg_color_info };
 
 
   // 组件active
-  --nv-component-bg-color-primary-active: #{ $component_bg_color_primary };
-  --nv-component-bg-color-success-active: #{ $component_bg_color_success };
-  --nv-component-bg-color-warning-active: #{ $component_bg_color_warning };
-  --nv-component-bg-color-info-active: #{ $component_bg_color_info };
+  --nv-element-bg-color-primary-active: #{ $component_bg_color_primary };
+  --nv-element-bg-color-success-active: #{ $component_bg_color_success };
+  --nv-element-bg-color-warning-active: #{ $component_bg_color_warning };
+  --nv-element-bg-color-info-active: #{ $component_bg_color_info };
 
 }

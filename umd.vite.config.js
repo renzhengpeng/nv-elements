@@ -47,7 +47,7 @@ export default defineConfig(() => ({
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, 'src/index.ts'),
       formats: ['umd'],
-      name: 'nv-components', // 暴露的全局变量
+      name: 'nv-elements', // 暴露的全局变量
       fileName(format, entryName) {
         const extension = '.js';
         return entryName + extension;

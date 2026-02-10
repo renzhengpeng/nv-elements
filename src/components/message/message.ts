@@ -2,20 +2,20 @@
  * @Descripttion: message全局方法
  * @creater: zhengpeng.ren
  * @since: 2024-12-19
- * 
+ *
  * 使用方式：
- * 
+ *
  * 1. 基础用法：
- *    import { message } from 'nv-components';
+ *    import { message } from 'nv-elements';
  *    message('这是一条消息');
  *    message({ message: '这是一条消息', type: 'info' });
- * 
+ *
  * 2. 快捷方法：
  *    message.success('操作成功');
  *    message.warning('请注意');
  *    message.error('操作失败');
  *    message.info('提示信息');
- * 
+ *
  * 3. 配置选项：
  *    message.success({
  *      message: '操作成功',
@@ -24,10 +24,10 @@
  *      closable: false,
  *      onClose: () => console.log('closed')
  *    });
- * 
+ *
  * 4. 关闭所有消息：
  *    message.closeAll();
- * 
+ *
  * 5. 全局配置：
  *    message.config({ duration: 5000, offset: 30 });
  */
@@ -62,7 +62,7 @@ const defaultConfig = {
  */
 const updatePositions = (): void => {
   let offset = defaultConfig.offset;
-  
+
   instances.forEach((instance) => {
     if (instance.isConnected) {
       instance.style.top = `${ offset }px`;
@@ -78,7 +78,7 @@ const updatePositions = (): void => {
  */
 const createMessage = (options: MessageOptions | string): NvMessage => {
   const opts: MessageOptions = typeof options === 'string' ? { message: options } : options;
-  
+
   const message = document.createElement('nv-message') as NvMessage;
   message.message = opts.message || '';
   message.type = opts.type || 'info';
@@ -89,10 +89,10 @@ const createMessage = (options: MessageOptions | string): NvMessage => {
 
   // 添加到DOM
   document.body.appendChild(message);
-  
+
   // 添加到实例列表
   instances.push(message);
-  
+
   // 使用requestAnimationFrame确保元素已渲染
   requestAnimationFrame(() => {
     updatePositions();
@@ -112,18 +112,18 @@ const createMessage = (options: MessageOptions | string): NvMessage => {
   message.close = function() {
     // 执行原始关闭逻辑（或降级逻辑）
     originalClose();
-    
+
     // 从实例列表中移除
     const index = instances.indexOf(message);
     if (index > -1) {
       instances.splice(index, 1);
     }
-    
+
     // 延迟更新位置，等待关闭动画完成
     setTimeout(() => {
       updatePositions();
     }, 50);
-    
+
     // 执行回调
     if (opts.onClose) {
       opts.onClose();
@@ -149,7 +149,7 @@ export const message = Object.assign(
           ? { message: options, type: 'success' }
           : { ...options, type: 'success' }
       ),
-    
+
     /**
      * 显示警告消息
      */
@@ -159,7 +159,7 @@ export const message = Object.assign(
           ? { message: options, type: 'warning' }
           : { ...options, type: 'warning' }
       ),
-    
+
     /**
      * 显示信息消息
      */
@@ -169,7 +169,7 @@ export const message = Object.assign(
           ? { message: options, type: 'info' }
           : { ...options, type: 'info' }
       ),
-    
+
     /**
      * 显示错误消息
      */
@@ -179,7 +179,7 @@ export const message = Object.assign(
           ? { message: options, type: 'error' }
           : { ...options, type: 'error' }
       ),
-    
+
     /**
      * 关闭所有消息
      */
@@ -191,7 +191,7 @@ export const message = Object.assign(
       });
       instances.length = 0;
     },
-    
+
     /**
      * 配置默认选项
      */

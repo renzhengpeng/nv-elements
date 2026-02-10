@@ -5,11 +5,11 @@
  * @lastTime: 2024-12-19
  *
  * 使用方式：
- * - 全量引入（本入口）：import 'nv-components' 或 import * as Nv from 'nv-components'
- * - 按需引入：import { NvButton } from 'nv-components/es/components/button'
+ * - 全量引入（本入口）：import 'nv-elements' 或 import * as Nv from 'nv-elements'
+ * - 按需引入：import { NvButton } from 'nv-elements/es/components/button'
  */
 // 全局样式由构建后脚本输出到 es/styles/、lib/styles/，不在此 import，避免产出空 .scss.mjs。
-// 使用方式：import 'nv-components' 后单独引入 import 'nv-components/es/styles/style.css'（或按需引入 variables/index.css、global/global.style.css）
+// 使用方式：import 'nv-elements' 后单独引入 import 'nv-elements/es/styles/style.css'（或按需引入 variables/index.css、global/global.style.css）
 
 // 导出基础类与工具
 import { Component } from './based-on';

@@ -9,18 +9,18 @@
 
 :root {
   /**************************************************** namespace start ********************************************************/
-  --nv-components-namespace-tabs-block: 'nv-tabs';
-  --nv-components-namespace-tabs-element-header: 'header';
-  --nv-components-namespace-tabs-element-nav-wrap: 'nav-wrap';
-  --nv-components-namespace-tabs-element-nav-scroll: 'nav-scroll';
-  --nv-components-namespace-tabs-element-nav: 'nav';
-  --nv-components-namespace-tabs-element-item: 'item';
-  --nv-components-namespace-tabs-element-item-label: 'item-label';
-  --nv-components-namespace-tabs-element-item-close: 'item-close';
-  --nv-components-namespace-tabs-element-item-label: 'item-label';
-  --nv-components-namespace-tabs-element-item-edit-input: 'item-edit-input';
-  --nv-components-namespace-tabs-element-item-add: 'item-add';
-  --nv-components-namespace-tabs-element-content: 'content';
+  --nv-elements-namespace-tabs-block: 'nv-tabs';
+  --nv-elements-namespace-tabs-element-header: 'header';
+  --nv-elements-namespace-tabs-element-nav-wrap: 'nav-wrap';
+  --nv-elements-namespace-tabs-element-nav-scroll: 'nav-scroll';
+  --nv-elements-namespace-tabs-element-nav: 'nav';
+  --nv-elements-namespace-tabs-element-item: 'item';
+  --nv-elements-namespace-tabs-element-item-label: 'item-label';
+  --nv-elements-namespace-tabs-element-item-close: 'item-close';
+  --nv-elements-namespace-tabs-element-item-label: 'item-label';
+  --nv-elements-namespace-tabs-element-item-edit-input: 'item-edit-input';
+  --nv-elements-namespace-tabs-element-item-add: 'item-add';
+  --nv-elements-namespace-tabs-element-content: 'content';
   /**************************************************** namespace end ********************************************************/
 
 
@@ -86,4 +86,3 @@
 
   /**************************************************** color end ********************************************************/
 }
-
