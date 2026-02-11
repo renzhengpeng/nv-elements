@@ -119,6 +119,7 @@
 
 :host {
     display: inline-flex;
+    overflow: auto;
     & + nv-button {
     margin-left: 5px;
   }
@@ -128,10 +129,11 @@
 :host-context(nv-button-group:not([vertical])) {
   // 处于分组中且不是第一个的按钮，使用负 margin 让边框重叠
   &:host(:not(:first-child)) {
+    margin-left: -1px;
     .nv-button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      margin-left: -1px;
+      // margin-left: -1px;
     }
   }
 
@@ -155,13 +157,57 @@
   // hover 状态：悬停状态，中等层级
   .nv-button:hover:not(.is-disabled) {
     position: relative;
-    z-index: 2;
+    z-index: 1;
   }
 
   // active 状态：点击按下状态，最高层级
   .nv-button:active:not(.is-disabled) {
     position: relative;
-    z-index: 3;
+    z-index: 1;
+  }
+
+  // focus-visible 状态：键盘焦点状态
+  .nv-button:focus-visible:not(.is-disabled) {
+    position: relative;
+    z-index: 1;
+  }
+
+  // 深色背景按钮的白色半透明分割线
+  // 第一个按钮：右border使用白色半透明
+  &:host(:first-child) {
+    .nv-button--primary:not(.is-plain),
+    .nv-button--success:not(.is-plain),
+    .nv-button--warning:not(.is-plain),
+    .nv-button--info:not(.is-plain),
+    .nv-button--error:not(.is-plain),
+    .nv-button--danger:not(.is-plain) {
+      border-right-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // 最后一个按钮：左border使用白色半透明
+  &:host(:last-child) {
+    .nv-button--primary:not(.is-plain),
+    .nv-button--success:not(.is-plain),
+    .nv-button--warning:not(.is-plain),
+    .nv-button--info:not(.is-plain),
+    .nv-button--error:not(.is-plain),
+    .nv-button--danger:not(.is-plain) {
+      border-left-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // 中间按钮（非第一个且非最后一个）：左右border都使用白色半透明
+  &:host(:not(:first-child):not(:last-child)) {
+    .nv-button--primary:not(.is-plain),
+    .nv-button--success:not(.is-plain),
+    .nv-button--warning:not(.is-plain),
+    .nv-button--info:not(.is-plain),
+    .nv-button--error:not(.is-plain),
+    .nv-button--danger:not(.is-plain) {
+      border-left-color: rgba(255, 255, 255, 0.5);
+      border-right-color: rgba(255, 255, 255, 0.5);
+    }
   }
 }
 
@@ -169,10 +215,10 @@
 :host-context(nv-button-group[vertical]) {
   // 处于垂直分组中且不是第一个的按钮，使用负 margin 让边框重叠
   &:host(:not(:first-child)) {
+    margin-top: -1px;
     .nv-button {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
-      margin-top: -1px;
     }
   }
 
@@ -196,13 +242,57 @@
   // hover 状态：悬停状态，中等层级
   .nv-button:hover:not(.is-disabled) {
     position: relative;
-    z-index: 2;
+    z-index: 1;
   }
 
   // active 状态：点击按下状态，最高层级
   .nv-button:active:not(.is-disabled) {
     position: relative;
-    z-index: 3;
+    z-index: 1;
+  }
+
+  // focus-visible 状态：键盘焦点状态
+  .nv-button:focus-visible:not(.is-disabled) {
+    position: relative;
+    z-index: 1;
+  }
+
+  // 深色背景按钮的白色半透明分割线
+  // 第一个按钮：下border使用白色半透明
+  &:host(:first-child) {
+    .nv-button--primary:not(.is-plain),
+    .nv-button--success:not(.is-plain),
+    .nv-button--warning:not(.is-plain),
+    .nv-button--info:not(.is-plain),
+    .nv-button--error:not(.is-plain),
+    .nv-button--danger:not(.is-plain) {
+      border-bottom-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // 最后一个按钮：上border使用白色半透明
+  &:host(:last-child) {
+    .nv-button--primary:not(.is-plain),
+    .nv-button--success:not(.is-plain),
+    .nv-button--warning:not(.is-plain),
+    .nv-button--info:not(.is-plain),
+    .nv-button--error:not(.is-plain),
+    .nv-button--danger:not(.is-plain) {
+      border-top-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // 中间按钮（非第一个且非最后一个）：上下border都使用白色半透明
+  &:host(:not(:first-child):not(:last-child)) {
+    .nv-button--primary:not(.is-plain),
+    .nv-button--success:not(.is-plain),
+    .nv-button--warning:not(.is-plain),
+    .nv-button--info:not(.is-plain),
+    .nv-button--error:not(.is-plain),
+    .nv-button--danger:not(.is-plain) {
+      border-top-color: rgba(255, 255, 255, 0.5);
+      border-bottom-color: rgba(255, 255, 255, 0.5);
+    }
   }
 }
 
