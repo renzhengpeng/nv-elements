@@ -15,10 +15,10 @@ Drawer 抽屉组件从屏幕边缘滑出，用于展示详细信息或进行复�
 | direction             | Drawer 打开的方向                  | string  | rtl / ltr / ttb / btt | rtl    |
 | size                  | Drawer 窗体的大小                  | string  | —                     | 30%    |
 | show-close            | 是否显示关闭按钮                   | boolean | —                     | true   |
-| close-on-click-modal  | 是否可以通过点击 modal 关闭 Drawer | boolean | —                     | true   |
+| close-on-click-modal  | 是否可以通过点击遮罩层关闭 Drawer  | boolean | —                     | true   |
 | close-on-press-escape | 是否可以通过按下 ESC 关闭 Drawer   | boolean | —                     | true   |
 | lock-scroll           | 是否锁定滚动                       | boolean | —                     | true   |
-| modal                 | 是否需要遮罩层                     | boolean | —                     | true   |
+| mask                  | 是否需要遮罩层                     | boolean | —                     | true   |
 | append-to-body        | 是否插入到 body 元素上             | boolean | —                     | true   |
 | custom-class          | 自定义类名                         | string  | —                     | —      |
 

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * @Descripttion: drawer组件模板
  * @creater: zhengpeng.ren
  * @since: 2024-12-19
@@ -47,12 +47,14 @@ const template = function(this: NvDrawer, context: Context) {
 
   // 检查是否有自定义头部插槽内容
   const hasHeaderSlot = _hasHeaderSlot();
+  const shouldRenderHeader = hasHeaderSlot || !!this.label || !!this.showClose;
+  const shouldRenderCloseButton = !!this.showClose && !hasHeaderSlot;
 
   return html`
     <!-- 遮罩层容器：position: fixed 覆盖整个视口 -->
     <div part="base mask" class="${ classMap({
       [classNamesConfig.elements.wrapper]: true,
-      'is-modal': this.modal  // 如果 modal 为 true，添加半透明背景
+      [classNamesConfig.modifiers.mask]: this.mask // 如果 mask 为 true，添加半透明背景
     }) }"
          @click=${ _handleModalClick }>
 
@@ -67,7 +69,7 @@ const template = function(this: NvDrawer, context: Context) {
            style="${ _getDrawerStyle() }">
 
         <!-- 头部区域：条件渲染，只有在有内容时才显示 -->
-        ${ hasHeaderSlot || this.label || this.showClose
+        ${ shouldRenderHeader
           ? html`
               <div part="header" class=${ classNamesConfig.elements.header }>
                 <!-- 判断使用自定义头部还是默认头部 -->
@@ -82,7 +84,7 @@ const template = function(this: NvDrawer, context: Context) {
                         ${ this.label }
                       </div>
                       <!-- 关闭按钮：只在 showClose 为 true 时显示 -->
-                      ${ this.showClose
+                      ${ shouldRenderCloseButton
                         ? html`
                             <button part="close" class=${ classNamesConfig.elements.close }
                                     @click=${ _handleClose }>

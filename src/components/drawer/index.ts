@@ -153,7 +153,7 @@ export class NvDrawer extends Component {
    * 用户可以与页面其他部分交互
    */
   @property({ type: Boolean })
-  modal: boolean = true;
+  mask: boolean = true;
 
   /**
    * 遮罩层是否插入至 body 元素上

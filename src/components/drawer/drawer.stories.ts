@@ -48,7 +48,7 @@ const meta: Meta = {
       control: 'boolean',
       description: '是否在抽屉出现时将 body 滚动锁定'
     },
-    modal: {
+    mask: {
       control: 'boolean',
       description: '是否显示遮罩层'
     },
@@ -125,10 +125,10 @@ export const Overview: Story = {
         <nv-divider></nv-divider>
 
         <div class="example-item">
-          <h3 class="example-title">No Modal</h3>
-          <p class="example-desc">No Modal 示例</p>
+          <h3 class="example-title">No mask</h3>
+          <p class="example-desc">No mask 示例</p>
           <div class="example-demo">
-            ${ NoModal.render?.(NoModal.args || { }, { } as any) }
+            ${ NoMask.render?.(NoMask.args || { }, { } as any) }
           </div>
         </div>
 
@@ -329,7 +329,7 @@ export const Default: Story = {
         label="${ args.label }"
         direction="${ args.direction }"
         .size="${ args.size }"
-        ?showClose="${ args.showClose }"
+        .showClose="${ args.showClose }"
         @close="${ (e: Event) => {
           const drawer = e.target as any;
           if (drawer) {
@@ -351,7 +351,7 @@ export const Default: Story = {
     closeOnClickModal: true,
     closeOnPressEscape: true,
     lockScroll: true,
-    modal: true,
+    mask: true,
     customClass: ''
   }
 };
@@ -371,11 +371,11 @@ export const Left: Story = {
         label="${ args.label ?? '标题' }"
         direction="${ args.direction ?? 'ltr' }"
         .size="${ args.size ?? '30%' }"
-        ?showClose="${ args.showClose ?? true }"
+        .showClose="${ args.showClose ?? true }"
         .closeOnClickModal="${ args.closeOnClickModal ?? true }"
         .closeOnPressEscape="${ args.closeOnPressEscape ?? true }"
         .lockScroll="${ args.lockScroll ?? true }"
-        .modal="${ args.modal ?? true }"
+        .mask="${ args.mask ?? true }"
         @close="${ (e: Event) => {
           const drawer = e.target as any;
           if (drawer) {
@@ -396,7 +396,7 @@ export const Left: Story = {
     closeOnClickModal: true,
     closeOnPressEscape: true,
     lockScroll: true,
-    modal: true,
+    mask: true,
     customClass: ''
   }
 };
@@ -416,11 +416,11 @@ export const Top: Story = {
         label="${ args.label ?? '标题' }"
         direction="${ args.direction ?? 'ttb' }"
         .size="${ args.size ?? '200px' }"
-        ?showClose="${ args.showClose ?? true }"
+        .showClose="${ args.showClose ?? true }"
         .closeOnClickModal="${ args.closeOnClickModal ?? true }"
         .closeOnPressEscape="${ args.closeOnPressEscape ?? true }"
         .lockScroll="${ args.lockScroll ?? true }"
-        .modal="${ args.modal ?? true }"
+        .mask="${ args.mask ?? true }"
         @close="${ (e: Event) => {
           const drawer = e.target as any;
           if (drawer) {
@@ -441,7 +441,7 @@ export const Top: Story = {
     closeOnClickModal: true,
     closeOnPressEscape: true,
     lockScroll: true,
-    modal: true,
+    mask: true,
     customClass: ''
   }
 };
@@ -461,11 +461,11 @@ export const Bottom: Story = {
         label="${ args.label ?? '标题' }"
         direction="${ args.direction ?? 'btt' }"
         .size="${ args.size ?? '200px' }"
-        ?showClose="${ args.showClose ?? true }"
+        .showClose="${ args.showClose ?? true }"
         .closeOnClickModal="${ args.closeOnClickModal ?? true }"
         .closeOnPressEscape="${ args.closeOnPressEscape ?? true }"
         .lockScroll="${ args.lockScroll ?? true }"
-        .modal="${ args.modal ?? true }"
+        .mask="${ args.mask ?? true }"
         @close="${ (e: Event) => {
           const drawer = e.target as any;
           if (drawer) {
@@ -486,7 +486,7 @@ export const Bottom: Story = {
     closeOnClickModal: true,
     closeOnPressEscape: true,
     lockScroll: true,
-    modal: true,
+    mask: true,
     customClass: ''
   }
 };
@@ -540,7 +540,7 @@ export const CustomWidth: Story = {
   }
 };
 
-export const NoModal: Story = {
+export const NoMask: Story = {
   render: (args) => {
     return html`
       <nv-button @click="${ (e: Event) => {
@@ -555,11 +555,11 @@ export const NoModal: Story = {
         label="${ args.label }"
         direction="${ args.direction }"
         .size="${ args.size }"
-        ?showClose="${ args.showClose }"
+        .showClose="${ args.showClose }"
         .closeOnClickModal="${ args.closeOnClickModal }"
         .closeOnPressEscape="${ args.closeOnPressEscape }"
         .lockScroll="${ args.lockScroll }"
-        .modal="${ args.modal }"
+        .mask="${ args.mask }"
         @close="${ (e: Event) => {
           const drawer = e.target as any;
           if (drawer) {
@@ -581,7 +581,7 @@ export const NoModal: Story = {
     closeOnClickModal: true,
     closeOnPressEscape: true,
     lockScroll: true,
-    modal: false,
+    mask: false,
     customClass: ''
   }
 };
@@ -601,11 +601,11 @@ export const NoCloseButton: Story = {
         label="${ args.label }"
         direction="${ args.direction }"
         .size="${ args.size }"
-        ?showClose="${ args.showClose }"
+        .showClose="${ args.showClose }"
         .closeOnClickModal="${ args.closeOnClickModal }"
         .closeOnPressEscape="${ args.closeOnPressEscape }"
         .lockScroll="${ args.lockScroll }"
-        .modal="${ args.modal }"
+        .mask="${ args.mask }"
         @close="${ (e: Event) => {
           const drawer = e.target as any;
           if (drawer) {
@@ -627,7 +627,7 @@ export const NoCloseButton: Story = {
     closeOnClickModal: true,
     closeOnPressEscape: true,
     lockScroll: true,
-    modal: true,
+    mask: true,
     customClass: ''
   }
 };
@@ -647,11 +647,11 @@ export const DisableClickModal: Story = {
         label="${ args.label }"
         direction="${ args.direction }"
         .size="${ args.size }"
-        ?showClose="${ args.showClose }"
+        .showClose="${ args.showClose }"
         .closeOnClickModal="${ args.closeOnClickModal }"
         .closeOnPressEscape="${ args.closeOnPressEscape }"
         .lockScroll="${ args.lockScroll }"
-        .modal="${ args.modal }"
+        .mask="${ args.mask }"
         @close="${ (e: Event) => {
           const drawer = e.target as any;
           if (drawer) {
@@ -673,7 +673,7 @@ export const DisableClickModal: Story = {
     closeOnClickModal: false,
     closeOnPressEscape: true,
     lockScroll: true,
-    modal: true,
+    mask: true,
     customClass: ''
   }
 };
@@ -693,11 +693,11 @@ export const DisablePressEscape: Story = {
         label="${ args.label }"
         direction="${ args.direction }"
         .size="${ args.size }"
-        ?showClose="${ args.showClose }"
+        .showClose="${ args.showClose }"
         .closeOnClickModal="${ args.closeOnClickModal }"
         .closeOnPressEscape="${ args.closeOnPressEscape }"
         .lockScroll="${ args.lockScroll }"
-        .modal="${ args.modal }"
+        .mask="${ args.mask }"
         @close="${ (e: Event) => {
           const drawer = e.target as any;
           if (drawer) {
@@ -719,7 +719,7 @@ export const DisablePressEscape: Story = {
     closeOnClickModal: true,
     closeOnPressEscape: false,
     lockScroll: true,
-    modal: true,
+    mask: true,
     customClass: ''
   }
 };
@@ -823,11 +823,11 @@ export const LongContent: Story = {
         label="${ args.label }"
         direction="${ args.direction }"
         .size="${ args.size }"
-        ?showClose="${ args.showClose }"
+        .showClose="${ args.showClose }"
         .closeOnClickModal="${ args.closeOnClickModal }"
         .closeOnPressEscape="${ args.closeOnPressEscape }"
         .lockScroll="${ args.lockScroll }"
-        .modal="${ args.modal }"
+        .mask="${ args.mask }"
         @close="${ (e: Event) => {
           const drawer = e.target as any;
           if (drawer) {
@@ -849,7 +849,7 @@ export const LongContent: Story = {
     closeOnClickModal: true,
     closeOnPressEscape: true,
     lockScroll: true,
-    modal: true,
+    mask: true,
     customClass: ''
   }
 };
@@ -870,11 +870,11 @@ export const NoLockScroll: Story = {
           label="${ args.label }"
           direction="${ args.direction }"
           .size="${ args.size }"
-          ?showClose="${ args.showClose }"
+          .showClose="${ args.showClose }"
           .closeOnClickModal="${ args.closeOnClickModal }"
           .closeOnPressEscape="${ args.closeOnPressEscape }"
           .lockScroll="${ args.lockScroll }"
-          .modal="${ args.modal }"
+          .mask="${ args.mask }"
           @close="${ (e: Event) => {
             const drawer = e.target as any;
             if (drawer) {
@@ -898,7 +898,7 @@ export const NoLockScroll: Story = {
     closeOnClickModal: true,
     closeOnPressEscape: true,
     lockScroll: false,
-    modal: true,
+    mask: true,
     customClass: ''
   }
 };

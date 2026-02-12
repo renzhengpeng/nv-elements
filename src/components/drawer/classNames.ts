@@ -17,7 +17,7 @@ const classNames = {
     footer: `${ BLOCK }__footer`
   },
   modifiers: {
-    modal: 'is-modal'
+    mask: 'is-modal'
   }
 };
 

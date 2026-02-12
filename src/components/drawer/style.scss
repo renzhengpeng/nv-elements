@@ -16,6 +16,12 @@
 // 处于渲染态时才挂载到布局树中（此时内部 wrapper 通过 fixed 覆盖视口）
 :host([data-rendered]) {
   display: block;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  position: fixed;
+  overflow: hidden;
+  z-index: var(--nv-drawer-z-index, 2000);
 }
 
 .nv-drawer__wrapper {
