@@ -1,4 +1,4 @@
-﻿/*
+/*
  * @Descripttion: back-top组件模板
  * @creater: zhengpeng.ren
  * @since: 2024-12-19
@@ -29,16 +29,17 @@ const template = function(this: NvBackTop, context: Context) {
   const buttonStyle = '--nv-button-length-of-side-medium: var(--nv-back-top-width, 40px);';
 
   return html`
-    <div part="base" class=${ classMapResult } style="${ style }">
-      <nv-button
-        part="button"
-        circle
-        size="medium"
-        style="${ buttonStyle }"
-        @click=${ _handleClick }
-        icon=${ this.icon }
-      >
-      </nv-button>
+    <div part="base" class=${ classMapResult } style="${ style }" @click=${ _handleClick }>
+      <slot>
+        <nv-button
+          part="button"
+          circle
+          size="medium"
+          style="${ buttonStyle }"
+          icon=${ this.icon }
+        >
+        </nv-button>
+      </slot>
     </div>
   `;
 };

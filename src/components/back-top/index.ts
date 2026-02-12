@@ -19,7 +19,7 @@ export class NvBackTop extends Component {
   /**
    * 触发显示回到顶部按钮的滚动高度
    */
-  @property({ type: Number })
+  @property({ type: Number, attribute: 'visibility-height' })
   visibilityHeight: number = 400;
 
   /**
