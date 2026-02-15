@@ -40,16 +40,28 @@ export class NvPopconfirm extends Component {
   cancelButtonText: string = '取消';
 
   /**
-   * 确认按钮类型
+   * 确认按钮类型（与 nv-button 的 type 一致，不含 text，文字样式由 confirmTextButton 控制）
    */
   @property({ type: String })
-  confirmButtonType: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text' = 'primary';
+  confirmButtonType: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info' = 'primary';
 
   /**
-   * 取消按钮类型
+   * 取消按钮类型（与 nv-button 的 type 一致，不含 text，文字样式由 cancelTextButton 控制）
    */
   @property({ type: String })
-  cancelButtonType: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text' = 'text';
+  cancelButtonType: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info' = 'default';
+
+  /**
+   * 确认按钮是否为文字按钮（对应 nv-button 的 text 属性）
+   */
+  @property({ type: Boolean, attribute: 'confirm-text-button' })
+  confirmTextButton: boolean = false;
+
+  /**
+   * 取消按钮是否为文字按钮（对应 nv-button 的 text 属性），默认 true
+   */
+  @property({ type: Boolean, attribute: 'cancel-text-button' })
+  cancelTextButton: boolean = true;
 
   /**
    * 确认按钮尺寸
@@ -80,6 +92,12 @@ export class NvPopconfirm extends Component {
    */
   @property({ type: Boolean, reflect: true })
   arrow: boolean = true;
+
+  /**
+   * 弹出层与触发元素的距离（像素）
+   */
+  @property({ type: Number, reflect: true })
+  distance: number = 8;
 
   /**
    * 是否禁用（禁用后无法通过触发器激活）

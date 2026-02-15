@@ -10,7 +10,7 @@ const classNames = {
   elements: {
     content: `${ BLOCK }__content`,
     icon: `${ BLOCK }__icon`,
-    title: `${ BLOCK }__title`
+    label: `${ BLOCK }__label`
   },
   modifiers: {
     active: 'is-active',

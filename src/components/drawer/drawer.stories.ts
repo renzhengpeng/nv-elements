@@ -748,7 +748,7 @@ export const CustomHeader: Story = {
             <nv-icon name="setting" style="margin-right: 8px;"></nv-icon>
             <span style="font-size: 18px; font-weight: 500;">自定义标题</span>
           </div>
-          <nv-button size="small" type="text" @click="${ (e: Event) => {
+          <nv-button size="small" text @click="${ (e: Event) => {
             const path = e.composedPath();
             const drawer = path.find((el: any) => el.tagName === 'NV-DRAWER') as any;
             if (drawer) {

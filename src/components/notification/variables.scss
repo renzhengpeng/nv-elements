@@ -15,12 +15,12 @@
   --nv-notification-width: 330px;
 
   /**************** padding *****************/
-  --nv-notification-padding: var(--nv-padding-small) var(--nv-padding-huge) var(--nv-padding-small) var(--nv-padding-medium);
+  --nv-notification-padding: var(--nv-padding-huge) var(--nv-padding-huge) var(--nv-padding-huge) var(--nv-padding-huge);
   --nv-notification-main-padding-right: var(--nv-padding-medium);
 
   /**************** font-size *****************/
   --nv-notification-icon-font-size: var(--nv-font-size-large);
-  --nv-notification-title-font-size: var(--nv-font-size-medium);
+  --nv-notification-label-font-size: var(--nv-font-size-medium);
   --nv-notification-content-font-size: var(--nv-font-size-small);
   --nv-notification-closebtn-font-size: var(--nv-font-size-medium);
 
@@ -28,8 +28,8 @@
   --nv-notification-icon-width: var(--nv-font-size-large);
   --nv-notification-icon-height: var(--nv-font-size-large);
   --nv-notification-icon-margin-right: var(--nv-padding-medium);
-  --nv-notification-title-margin-bottom: 6px;
-  --nv-notification-title-line-height: var(--nv-font-size-large);
+  --nv-notification-label-margin-bottom: 6px;
+  --nv-notification-label-line-height: var(--nv-font-size-large);
   --nv-notification-content-line-height: 21px;
   --nv-notification-closebtn-top: var(--nv-padding-medium);
   --nv-notification-closebtn-right: var(--nv-padding-medium);
@@ -50,7 +50,7 @@
   --nv-notification-border-color: var(--nv-neutral-color-border-3);
 
   /**************** font *****************/
-  --nv-notification-title-font-color: var(--nv-neutral-color-font-1);
+  --nv-notification-label-font-color: var(--nv-neutral-color-font-1);
   --nv-notification-content-font-color: var(--nv-neutral-color-font-2);
 
   /**************** icon *****************/

@@ -41,12 +41,12 @@
 内部结构：
 - `nv-menu-item__content`：内容容器
 - `nv-menu-item__icon`：图标容器
-- `nv-menu-item__title`：标题容器
+- `nv-menu-item__label`：标题容器
 
 #### Submenu 组件
 ```html
 <!-- 基础用法 -->
-<nv-submenu index="1" title="导航一">
+<nv-submenu index="1" label="导航一">
   <nv-icon slot="icon" name="location"></nv-icon>
   <nv-menu-item index="1-1">选项1</nv-menu-item>
   <nv-menu-item index="1-2">选项2</nv-menu-item>
@@ -54,7 +54,7 @@
 ```
 
 内部结构：
-- `nv-submenu__title`：标题容器
+- `nv-submenu__label`：标题容器
 - `nv-submenu__title-content`：标题内容
 - `nv-submenu__icon`：图标容器
 - `nv-submenu__arrow`：箭头指示器
@@ -108,7 +108,7 @@
   @open=${(e) => console.log('Opened:', e.detail)}
   @close=${(e) => console.log('Closed:', e.detail)}
 >
-  <nv-submenu index="1" title="导航一">
+  <nv-submenu index="1" label="导航一">
     <nv-icon slot="icon" name="location"></nv-icon>
     <nv-menu-item index="1-1">选项1</nv-menu-item>
     <nv-menu-item index="1-2">选项2</nv-menu-item>
@@ -124,9 +124,9 @@
   .defaultOpeneds=${['1', '1-1']}
   style="width: 240px;"
 >
-  <nv-submenu index="1" title="导航一">
+  <nv-submenu index="1" label="导航一">
     <nv-icon slot="icon" name="location"></nv-icon>
-    <nv-submenu index="1-1" title="选项1">
+    <nv-submenu index="1-1" label="选项1">
       <nv-menu-item index="1-1-1">子选项1</nv-menu-item>
       <nv-menu-item index="1-1-2">子选项2</nv-menu-item>
     </nv-submenu>
@@ -143,10 +143,10 @@
   uniqueOpened
   style="width: 240px;"
 >
-  <nv-submenu index="1" title="导航一">
+  <nv-submenu index="1" label="导航一">
     <nv-menu-item index="1-1">选项1</nv-menu-item>
   </nv-submenu>
-  <nv-submenu index="2" title="导航二">
+  <nv-submenu index="2" label="导航二">
     <nv-menu-item index="2-1">选项1</nv-menu-item>
   </nv-submenu>
 </nv-nav-menu>
@@ -195,10 +195,10 @@
 ```html
 <nv-nav-menu defaultActive="1-1">
   <nv-menu-item index="1">首页</nv-menu-item>
-  <nv-submenu index="2" title="产品">
+  <nv-submenu index="2" label="产品">
     <nv-menu-item index="2-1">产品 A</nv-menu-item>
     <nv-menu-item index="2-2">产品 B</nv-menu-item>
-    <nv-submenu index="2-3" title="更多产品">
+    <nv-submenu index="2-3" label="更多产品">
       <nv-menu-item index="2-3-1">产品 C</nv-menu-item>
     </nv-submenu>
   </nv-submenu>

@@ -17,9 +17,16 @@
   gap: var(--nv-pagination-gap, 4px);
 
   // 禁用状态
-  &.is-disabled {
+  &.disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  // 带背景色：分页条整体显示背景
+  &.background {
+    padding: var(--nv-pagination-background-padding, 4px 8px);
+    border-radius: var(--nv-pagination-background-radius, 4px);
+    background-color: var(--nv-pagination-background-color, #f5f7fa);
   }
 
   // 分页大小选择器的外边距

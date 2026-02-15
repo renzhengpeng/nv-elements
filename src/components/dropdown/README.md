@@ -26,10 +26,13 @@ Dropdown 下拉菜单组件用于将一组操作或选项折叠到一个下拉�
 
 ## 事件
 
-| 事件名             | 说明                                              | 回调参数                                         |
-| ------------------ | ------------------------------------------------- | ------------------------------------------------ |
-| nv-command         | 点击菜单项触发的事件（当菜单项有 command 属性时） | command 值                                       |
-| nv-menu-item-click | 点击菜单项触发的事件                              | { target: HTMLElement, command: string \| null } |
+| 事件名              | 说明                                       | 回调参数 / detail                                |
+| ------------------- | ------------------------------------------ | ------------------------------------------------ |
+| nv-command          | 点击带 command 的菜单项时触发               | command 值（string）                              |
+| nv-menu-item-click  | 点击任意菜单项时触发（先于 nv-command）     | `{ target: HTMLElement, command: string \| null }` |
+| nv-visible-change   | 下拉显示/隐藏状态变化时触发                 | 当前是否显示（boolean，true 为展开，false 为收起） |
+
+菜单项可通过 `command` 或 `data-command` 属性设置命令值，点击时会将对应值通过 `nv-command` 的 detail 传出；无 command 时仍会触发 `nv-menu-item-click`，detail.command 为 null。
 
 ## 插槽
 
@@ -82,8 +85,9 @@ Dropdown 下拉菜单组件用于将一组操作或选项折叠到一个下拉�
 
 ## 使用示例
 
+### 基础用法
+
 ```html
-<!-- 基础用法 -->
 <nv-dropdown>
   <nv-button slot="trigger">下拉菜单</nv-button>
   <div slot="menu">
@@ -91,16 +95,56 @@ Dropdown 下拉菜单组件用于将一组操作或选项折叠到一个下拉�
     <nv-option value="2" label="选项2"></nv-option>
   </div>
 </nv-dropdown>
+```
 
-<!-- 不同触发方式 -->
+### 事件使用
+
+**监听菜单项点击与 command**
+
+```javascript
+dropdown.addEventListener('nv-menu-item-click', (e) => {
+  const { target, command } = e.detail;
+  console.log('点击的菜单项元素:', target, 'command:', command);
+});
+
+// 仅当菜单项设置了 command / data-command 时才会触发
+dropdown.addEventListener('nv-command', (e) => {
+  console.log('选中命令:', e.detail);
+});
+```
+
+```html
+<nv-dropdown>
+  <nv-button slot="trigger">操作菜单</nv-button>
+  <div slot="menu">
+    <nv-option value="edit" label="编辑" command="edit"></nv-option>
+    <nv-option value="delete" label="删除" command="delete"></nv-option>
+  </div>
+</nv-dropdown>
+```
+
+**监听下拉显示/隐藏**
+
+```javascript
+dropdown.addEventListener('nv-visible-change', (e) => {
+  console.log('下拉是否显示:', e.detail);
+});
+```
+
+**不同触发方式**
+
+```html
 <nv-dropdown trigger="hover">
   <span slot="trigger">悬停触发</span>
   <div slot="menu">
     <nv-option value="1" label="选项1"></nv-option>
   </div>
 </nv-dropdown>
+```
 
-<!-- 自定义样式 -->
+**自定义样式**
+
+```html
 <nv-dropdown
   style="
   --nv-dropdown-border-radius: 12px;

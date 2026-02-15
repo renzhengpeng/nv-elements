@@ -14,7 +14,7 @@ const meta: Meta = {
   argTypes: {
     type: {
       control: 'select',
-      options: ['default', 'primary', 'success', 'info', 'warning', 'error', 'danger', 'text'],
+      options: ['default', 'primary', 'success', 'info', 'warning', 'danger'],
       description: '按钮类型'
     },
     size: {
@@ -37,6 +37,14 @@ const meta: Meta = {
     plain: {
       control: 'boolean',
       description: '是否为朴素按钮'
+    },
+    text: {
+      control: 'boolean',
+      description: '是否为文字按钮'
+    },
+    link: {
+      control: 'boolean',
+      description: '是否为链接按钮'
     },
     round: {
       control: 'boolean',
@@ -188,9 +196,31 @@ export const Overview: Story = {
           <!-- 不同类型 -->
           <div class="example-item">
             <h3 class="example-title">不同类型</h3>
-            <p class="example-desc">Button 组件提供了 8 种不同类型的按钮样式</p>
+            <p class="example-desc">Button 组件提供了 7 种不同类型的按钮样式</p>
             <div class="example-demo">
               ${ Types.render?.(Types.args as any, {} as any) }
+            </div>
+          </div>
+
+          <nv-divider></nv-divider>
+
+          <!-- 文本按钮 -->
+          <div class="example-item">
+            <h3 class="example-title">文本按钮</h3>
+            <p class="example-desc">文本按钮通过 text 属性设置，可与不同 type 组合使用，文字颜色由 type 决定，hover 时显示浅灰色背景</p>
+            <div class="example-demo">
+              ${ TextButton.render?.(TextButton.args as any, {} as any) }
+            </div>
+          </div>
+
+          <nv-divider></nv-divider>
+
+          <!-- 链接按钮 -->
+          <div class="example-item">
+            <h3 class="example-title">链接按钮</h3>
+            <p class="example-desc">链接按钮通过 link 属性设置，可与不同 type 组合使用，文字颜色由 type 决定，hover 和 active 时颜色变化但不显示背景</p>
+            <div class="example-demo">
+              ${ LinkButton.render?.(LinkButton.args as any, {} as any) }
             </div>
           </div>
 
@@ -363,7 +393,7 @@ export const Default: Story = {
 };
 
 /**
- * 不同类型的按钮，包括 default、primary、success、info、warning、error、danger 和 text
+ * 不同类型的按钮，包括 default、primary、success、info、warning、danger 和 text
  */
 export const Types: Story = {
   render: () => html`
@@ -373,9 +403,41 @@ export const Types: Story = {
       <nv-button type="success">成功按钮</nv-button>
       <nv-button type="info">信息按钮</nv-button>
       <nv-button type="warning">警告按钮</nv-button>
-      <nv-button type="error">错误按钮</nv-button>
       <nv-button type="danger">危险按钮</nv-button>
-      <nv-button type="text">文本按钮</nv-button>
+    </div>
+  `
+};
+
+/**
+ * 文本按钮，通过 text 属性设置，可以与不同 type 组合使用
+ * 文字颜色由 type 决定，hover 时显示浅灰色背景
+ */
+export const TextButton: Story = {
+  render: () => html`
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+      <nv-button text>默认文本</nv-button>
+      <nv-button type="primary" text>主要文本</nv-button>
+      <nv-button type="success" text>成功文本</nv-button>
+      <nv-button type="info" text>信息文本</nv-button>
+      <nv-button type="warning" text>警告文本</nv-button>
+      <nv-button type="danger" text>危险文本</nv-button>
+    </div>
+  `
+};
+
+/**
+ * 链接按钮，通过 link 属性设置，可以与不同 type 组合使用
+ * 文字颜色由 type 决定，hover 和 active 时颜色变化但不显示背景
+ */
+export const LinkButton: Story = {
+  render: () => html`
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+      <nv-button link>默认链接</nv-button>
+      <nv-button type="primary" link>主要链接</nv-button>
+      <nv-button type="success" link>成功链接</nv-button>
+      <nv-button type="info" link>信息链接</nv-button>
+      <nv-button type="warning" link>警告链接</nv-button>
+      <nv-button type="danger" link>危险链接</nv-button>
     </div>
   `
 };
@@ -391,7 +453,6 @@ export const Plain: Story = {
       <nv-button type="success" plain>成功按钮</nv-button>
       <nv-button type="info" plain>信息按钮</nv-button>
       <nv-button type="warning" plain>警告按钮</nv-button>
-      <nv-button type="error" plain>错误按钮</nv-button>
       <nv-button type="danger" plain>危险按钮</nv-button>
     </div>
   `
@@ -422,7 +483,7 @@ export const Disabled: Story = {
       <nv-button type="primary" disabled>主要按钮</nv-button>
       <nv-button type="success" disabled>成功按钮</nv-button>
       <nv-button type="info" plain disabled>朴素按钮</nv-button>
-      <nv-button type="text" disabled>文本按钮</nv-button>
+      <nv-button text disabled>文本按钮</nv-button>
     </div>
   `
 };
@@ -466,7 +527,7 @@ export const Circle: Story = {
       <nv-button type="success" circle>✓</nv-button>
       <nv-button type="info" circle>i</nv-button>
       <nv-button type="warning" circle>!</nv-button>
-      <nv-button type="error" circle>×</nv-button>
+      <nv-button type="danger" circle>×</nv-button>
     </div>
   `
 };
@@ -481,7 +542,7 @@ export const WithIcon: Story = {
       <nv-button type="primary" icon="upload">上传</nv-button>
       <nv-button type="success" icon="check">确认</nv-button>
       <nv-button type="warning" icon="warning">警告</nv-button>
-      <nv-button type="error" icon="delete">删除</nv-button>
+      <nv-button type="danger" icon="delete">删除</nv-button>
       <nv-button type="info" icon="download">下载</nv-button>
     </div>
   `
@@ -500,7 +561,7 @@ export const CircleWithIcon: Story = {
         <nv-button size="mini" type="success" circle icon="check"></nv-button>
         <nv-button size="mini" type="info" circle icon="info"></nv-button>
         <nv-button size="mini" type="warning" circle icon="warning"></nv-button>
-        <nv-button size="mini" type="error" circle icon="delete"></nv-button>
+        <nv-button size="mini" type="danger" circle icon="delete"></nv-button>
         <nv-button size="mini" circle icon="plus"></nv-button>
         <nv-button size="mini" circle icon="close"></nv-button>
       </div>
@@ -512,7 +573,7 @@ export const CircleWithIcon: Story = {
         <nv-button size="small" type="success" circle icon="check"></nv-button>
         <nv-button size="small" type="info" circle icon="info"></nv-button>
         <nv-button size="small" type="warning" circle icon="warning"></nv-button>
-        <nv-button size="small" type="error" circle icon="delete"></nv-button>
+        <nv-button size="small" type="danger" circle icon="delete"></nv-button>
         <nv-button size="small" circle icon="plus"></nv-button>
         <nv-button size="small" circle icon="close"></nv-button>
       </div>
@@ -524,7 +585,7 @@ export const CircleWithIcon: Story = {
         <nv-button size="medium" type="success" circle icon="check"></nv-button>
         <nv-button size="medium" type="info" circle icon="info"></nv-button>
         <nv-button size="medium" type="warning" circle icon="warning"></nv-button>
-        <nv-button size="medium" type="error" circle icon="delete"></nv-button>
+        <nv-button size="medium" type="danger" circle icon="delete"></nv-button>
         <nv-button size="medium" circle icon="plus"></nv-button>
         <nv-button size="medium" circle icon="close"></nv-button>
       </div>
@@ -536,7 +597,7 @@ export const CircleWithIcon: Story = {
         <nv-button size="large" type="success" circle icon="check"></nv-button>
         <nv-button size="large" type="info" circle icon="info"></nv-button>
         <nv-button size="large" type="warning" circle icon="warning"></nv-button>
-        <nv-button size="large" type="error" circle icon="delete"></nv-button>
+        <nv-button size="large" type="danger" circle icon="delete"></nv-button>
         <nv-button size="large" circle icon="plus"></nv-button>
         <nv-button size="large" circle icon="close"></nv-button>
       </div>
@@ -548,7 +609,7 @@ export const CircleWithIcon: Story = {
         <nv-button size="huge" type="success" circle icon="check"></nv-button>
         <nv-button size="huge" type="info" circle icon="info"></nv-button>
         <nv-button size="huge" type="warning" circle icon="warning"></nv-button>
-        <nv-button size="huge" type="error" circle icon="delete"></nv-button>
+        <nv-button size="huge" type="danger" circle icon="delete"></nv-button>
         <nv-button size="huge" circle icon="plus"></nv-button>
         <nv-button size="huge" circle icon="close"></nv-button>
       </div>
@@ -647,7 +708,7 @@ export const ButtonGroups: Story = {
         <nv-button-group>
           <nv-button type="success">通过</nv-button>
           <nv-button type="warning">待定</nv-button>
-          <nv-button type="error">拒绝</nv-button>
+          <nv-button type="danger">拒绝</nv-button>
         </nv-button-group>
       </div>
     </div>
@@ -665,7 +726,7 @@ export const UsageScenarios: Story = {
         <div style="display: flex; gap: 8px;">
           <nv-button type="primary">提交</nv-button>
           <nv-button>取消</nv-button>
-          <nv-button type="text">重置</nv-button>
+          <nv-button text>重置</nv-button>
         </div>
       </div>
 
@@ -682,7 +743,7 @@ export const UsageScenarios: Story = {
         <div style="display: flex; gap: 8px;">
           <nv-button type="primary" icon="plus">新建</nv-button>
           <nv-button type="success" icon="edit">编辑</nv-button>
-          <nv-button type="error" icon="delete">删除</nv-button>
+          <nv-button type="danger" icon="delete">删除</nv-button>
           <nv-button type="info" icon="download">导出</nv-button>
         </div>
       </div>
@@ -710,7 +771,7 @@ export const UsageScenarios: Story = {
         <div style="display: flex; gap: 8px;">
           <nv-button type="primary" disabled>已禁用</nv-button>
           <nv-button type="success" disabled icon="check">已禁用</nv-button>
-          <nv-button type="text" disabled>已禁用</nv-button>
+          <nv-button text disabled>已禁用</nv-button>
         </div>
       </div>
     </div>
@@ -793,7 +854,7 @@ export const ActiveState: Story = {
           <nv-button type="success" active>Success</nv-button>
           <nv-button type="info" active>Info</nv-button>
           <nv-button type="warning" active>Warning</nv-button>
-          <nv-button type="error" active>Error</nv-button>
+          <nv-button type="danger" active>Danger</nv-button>
         </div>
       </div>
 
@@ -805,7 +866,7 @@ export const ActiveState: Story = {
           <nv-button type="success" plain active>Success</nv-button>
           <nv-button type="info" plain active>Info</nv-button>
           <nv-button type="warning" plain active>Warning</nv-button>
-          <nv-button type="error" plain active>Error</nv-button>
+          <nv-button type="danger" plain active>Danger</nv-button>
         </div>
       </div>
 

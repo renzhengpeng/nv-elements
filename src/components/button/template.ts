@@ -1,4 +1,4 @@
-﻿/*
+/*
  * @Descripttion: button组件html模板
  * @creater: zhengpeng.ren
  * @since: 2024-05-29 15:05:04
@@ -24,8 +24,9 @@ const template = function(this: NvButton, context: Context) {
     [classNamesConfig.modifiers.success]: this.type === 'success',
     [classNamesConfig.modifiers.info]: this.type === 'info',
     [classNamesConfig.modifiers.warning]: this.type === 'warning',
-    [classNamesConfig.modifiers.error]: this.type === 'error' || this.type === 'danger',
-    [classNamesConfig.modifiers.text]: this.type === 'text',
+    [classNamesConfig.modifiers.danger]: this.type === 'danger',
+    [classNamesConfig.modifiers.text]: this.text,
+    [classNamesConfig.modifiers.link]: this.link,
     [classNamesConfig.modifiers.plain]: this.plain,
     [classNamesConfig.modifiers.round]: this.round,
     [classNamesConfig.modifiers.circle]: this.circle,
@@ -51,14 +52,14 @@ const template = function(this: NvButton, context: Context) {
           : null
       }
       ${
-        // 圆形按钮且有图标时，不渲染 slot wrapper，让图标居中
-        this.circle && this.icon
-          ? null
-          : html`
+        // 仅有图标（或 loading）没有其他内容时，不渲染 slot wrapper，让图标居中
+        this._hasDefaultSlotContent
+          ? html`
             <span class="nv-button-slot-wrapper">
               <slot></slot>
             </span>
           `
+          : null
       }
     </button>
   `;

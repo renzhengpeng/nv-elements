@@ -329,7 +329,7 @@ export const WithTypes: Story = {
       </nv-button-group>
       <nv-button-group>
         <nv-button type="warning">警告</nv-button>
-        <nv-button type="error">危险</nv-button>
+        <nv-button type="danger">危险</nv-button>
       </nv-button-group>
     </div>
   `
@@ -537,7 +537,7 @@ export const PlainButtons: Story = {
       </nv-button-group>
       <nv-button-group>
         <nv-button type="warning" plain>警告</nv-button>
-        <nv-button type="error" plain>错误</nv-button>
+        <nv-button type="danger" plain>错误</nv-button>
         <nv-button type="danger" plain>危险</nv-button>
       </nv-button-group>
     </div>
@@ -674,7 +674,7 @@ export const Vertical: Story = {
               <nv-button type="primary">主要</nv-button>
               <nv-button type="success">成功</nv-button>
               <nv-button type="warning">警告</nv-button>
-              <nv-button type="error">危险</nv-button>
+              <nv-button type="danger">危险</nv-button>
             </nv-button-group>
           </div>
 
@@ -802,7 +802,7 @@ export const Vertical: Story = {
               <nv-button type="success" icon="download">下载</nv-button>
               <nv-button type="warning" icon="edit">重命名</nv-button>
               <nv-button type="info" icon="copy">复制</nv-button>
-              <nv-button type="error" icon="delete">删除</nv-button>
+              <nv-button type="danger" icon="delete">删除</nv-button>
             </nv-button-group>
           </div>
 
@@ -883,7 +883,7 @@ export const UsageScenarios: Story = {
           <nv-button type="primary" icon="edit">编辑</nv-button>
           <nv-button type="success" icon="check">通过</nv-button>
           <nv-button type="warning" icon="warning">待定</nv-button>
-          <nv-button type="error" icon="delete">拒绝</nv-button>
+          <nv-button type="danger" icon="delete">拒绝</nv-button>
         </nv-button-group>
       </div>
 

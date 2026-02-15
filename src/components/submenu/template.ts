@@ -35,8 +35,8 @@ const template = function(this: NvSubmenu, context: Context) {
       @mouseenter=${_handleMouseEnter}
       @mouseleave=${_handleMouseLeave}
     >
-      <div part="title" class="${classNamesConfig.elements.title}" @click=${_handleTitleClick}>
-        <span part="title-content" class="${classNamesConfig.elements.titleContent}">
+      <div part="label" class="${classNamesConfig.elements.title}" @click=${_handleTitleClick}>
+        <span part="label-content" class="${classNamesConfig.elements.titleContent}">
           ${this.icon || this.querySelector('[slot="icon"]') ? html`
             <span part="icon" class="${classNamesConfig.elements.icon}">
               <slot name="icon">

@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { marked } from 'marked';
@@ -539,13 +539,13 @@ export const WithSubmenu: Story = {
       @nv-open=${ (e: CustomEvent) => console.log('Opened:', e.detail) }
       @nv-close=${ (e: CustomEvent) => console.log('Closed:', e.detail) }
     >
-      <nv-submenu index="1" title="导航一">
+      <nv-submenu index="1" label="导航一">
         <nv-icon slot="icon" name="location"></nv-icon>
         <nv-menu-item index="1-1">选项1</nv-menu-item>
         <nv-menu-item index="1-2">选项2</nv-menu-item>
         <nv-menu-item index="1-3">选项3</nv-menu-item>
       </nv-submenu>
-      <nv-submenu index="2" title="导航二">
+      <nv-submenu index="2" label="导航二">
         <nv-icon slot="icon" name="setting"></nv-icon>
         <nv-menu-item index="2-1">选项1</nv-menu-item>
         <nv-menu-item index="2-2">选项2</nv-menu-item>
@@ -566,15 +566,15 @@ export const NestedSubmenu: Story = {
       .defaultOpeneds=${ ['1', '1-1'] }
       style="width: 240px;"
     >
-      <nv-submenu index="1" title="导航一">
+      <nv-submenu index="1" label="导航一">
         <nv-icon slot="icon" name="location"></nv-icon>
-        <nv-submenu index="1-1" title="选项1">
+        <nv-submenu index="1-1" label="选项1">
           <nv-menu-item index="1-1-1">子选项1</nv-menu-item>
           <nv-menu-item index="1-1-2">子选项2</nv-menu-item>
         </nv-submenu>
         <nv-menu-item index="1-2">选项2</nv-menu-item>
       </nv-submenu>
-      <nv-submenu index="2" title="导航二">
+      <nv-submenu index="2" label="导航二">
         <nv-icon slot="icon" name="setting"></nv-icon>
         <nv-menu-item index="2-1">选项1</nv-menu-item>
         <nv-menu-item index="2-2">选项2</nv-menu-item>
@@ -591,17 +591,17 @@ export const UniqueOpened: Story = {
       uniqueOpened
       style="width: 240px;"
     >
-      <nv-submenu index="1" title="导航一">
+      <nv-submenu index="1" label="导航一">
         <nv-icon slot="icon" name="location"></nv-icon>
         <nv-menu-item index="1-1">选项1</nv-menu-item>
         <nv-menu-item index="1-2">选项2</nv-menu-item>
       </nv-submenu>
-      <nv-submenu index="2" title="导航二">
+      <nv-submenu index="2" label="导航二">
         <nv-icon slot="icon" name="setting"></nv-icon>
         <nv-menu-item index="2-1">选项1</nv-menu-item>
         <nv-menu-item index="2-2">选项2</nv-menu-item>
       </nv-submenu>
-      <nv-submenu index="3" title="导航三">
+      <nv-submenu index="3" label="导航三">
         <nv-icon slot="icon" name="s-goods"></nv-icon>
         <nv-menu-item index="3-1">选项1</nv-menu-item>
         <nv-menu-item index="3-2">选项2</nv-menu-item>
@@ -617,17 +617,17 @@ export const HorizontalWithDropdown: Story = {
         <nv-icon slot="icon" name="s-home"></nv-icon>
         首页
       </nv-menu-item>
-      <nv-submenu index="2" title="产品">
+      <nv-submenu index="2" label="产品">
         <nv-icon slot="icon" name="s-goods"></nv-icon>
         <nv-menu-item index="2-1">产品 A</nv-menu-item>
         <nv-menu-item index="2-2">产品 B</nv-menu-item>
         <nv-menu-item index="2-3">产品 C</nv-menu-item>
-        <nv-submenu index="2-4" title="更多产品">
+        <nv-submenu index="2-4" label="更多产品">
           <nv-menu-item index="2-4-1">产品 D</nv-menu-item>
           <nv-menu-item index="2-4-2">产品 E</nv-menu-item>
         </nv-submenu>
       </nv-submenu>
-      <nv-submenu index="3" title="解决方案">
+      <nv-submenu index="3" label="解决方案">
         <nv-icon slot="icon" name="setting"></nv-icon>
         <nv-menu-item index="3-1">企业方案</nv-menu-item>
         <nv-menu-item index="3-2">个人方案</nv-menu-item>
@@ -652,7 +652,7 @@ export const HorizontalDropdownLarge: Story = {
         <nv-icon slot="icon" name="s-home"></nv-icon>
         首页
       </nv-menu-item>
-      <nv-submenu index="2" title="产品中心">
+      <nv-submenu index="2" label="产品中心">
         <nv-icon slot="icon" name="s-goods"></nv-icon>
         <nv-menu-item index="2-1">
           <nv-icon slot="icon" name="s-goods"></nv-icon>
@@ -667,14 +667,14 @@ export const HorizontalDropdownLarge: Story = {
           服务产品
         </nv-menu-item>
       </nv-submenu>
-      <nv-submenu index="3" title="解决方案">
+      <nv-submenu index="3" label="解决方案">
         <nv-icon slot="icon" name="setting"></nv-icon>
-        <nv-submenu index="3-1" title="行业方案">
+        <nv-submenu index="3-1" label="行业方案">
           <nv-menu-item index="3-1-1">金融行业</nv-menu-item>
           <nv-menu-item index="3-1-2">教育行业</nv-menu-item>
           <nv-menu-item index="3-1-3">医疗行业</nv-menu-item>
         </nv-submenu>
-        <nv-submenu index="3-2" title="企业规模">
+        <nv-submenu index="3-2" label="企业规模">
           <nv-menu-item index="3-2-1">大型企业</nv-menu-item>
           <nv-menu-item index="3-2-2">中小企业</nv-menu-item>
           <nv-menu-item index="3-2-3">初创企业</nv-menu-item>
@@ -797,13 +797,13 @@ export const Collapsed: Story = {
           <nv-icon slot="icon" name="s-home"></nv-icon>
           首页
         </nv-menu-item>
-        <nv-submenu index="2" title="产品">
+        <nv-submenu index="2" label="产品">
           <nv-icon slot="icon" name="s-goods"></nv-icon>
           <nv-menu-item index="2-1">产品 A</nv-menu-item>
           <nv-menu-item index="2-2">产品 B</nv-menu-item>
           <nv-menu-item index="2-3">产品 C</nv-menu-item>
         </nv-submenu>
-        <nv-submenu index="3" title="解决方案">
+        <nv-submenu index="3" label="解决方案">
           <nv-icon slot="icon" name="setting"></nv-icon>
           <nv-menu-item index="3-1">企业方案</nv-menu-item>
           <nv-menu-item index="3-2">个人方案</nv-menu-item>
@@ -846,9 +846,9 @@ export const CollapsedWithNestedMenu: Story = {
         <nv-icon slot="icon" name="s-home"></nv-icon>
         首页
       </nv-menu-item>
-      <nv-submenu index="2" title="导航一">
+      <nv-submenu index="2" label="导航一">
         <nv-icon slot="icon" name="location"></nv-icon>
-        <nv-submenu index="2-1" title="子导航1">
+        <nv-submenu index="2-1" label="子导航1">
           <nv-icon slot="icon" name="setting"></nv-icon>
           <nv-menu-item index="2-1-1">
             <nv-icon slot="icon" name="s-goods"></nv-icon>
@@ -864,7 +864,7 @@ export const CollapsedWithNestedMenu: Story = {
           选项3
         </nv-menu-item>
       </nv-submenu>
-      <nv-submenu index="3" title="导航二">
+      <nv-submenu index="3" label="导航二">
         <nv-icon slot="icon" name="s-goods"></nv-icon>
         <nv-menu-item index="3-1">
           <nv-icon slot="icon" name="s-cooperation"></nv-icon>
@@ -901,13 +901,13 @@ export const TriggerMode: Story = {
             <nv-icon slot="icon" name="s-home"></nv-icon>
             首页
           </nv-menu-item>
-          <nv-submenu index="2" title="产品中心">
+          <nv-submenu index="2" label="产品中心">
             <nv-icon slot="icon" name="s-goods"></nv-icon>
             <nv-menu-item index="2-1">硬件产品</nv-menu-item>
             <nv-menu-item index="2-2">软件产品</nv-menu-item>
             <nv-menu-item index="2-3">服务产品</nv-menu-item>
           </nv-submenu>
-          <nv-submenu index="3" title="解决方案">
+          <nv-submenu index="3" label="解决方案">
             <nv-icon slot="icon" name="setting"></nv-icon>
             <nv-menu-item index="3-1">金融行业</nv-menu-item>
             <nv-menu-item index="3-2">教育行业</nv-menu-item>
@@ -935,13 +935,13 @@ export const TriggerMode: Story = {
             <nv-icon slot="icon" name="s-home"></nv-icon>
             首页
           </nv-menu-item>
-          <nv-submenu index="2" title="产品中心">
+          <nv-submenu index="2" label="产品中心">
             <nv-icon slot="icon" name="s-goods"></nv-icon>
             <nv-menu-item index="2-1">硬件产品</nv-menu-item>
             <nv-menu-item index="2-2">软件产品</nv-menu-item>
             <nv-menu-item index="2-3">服务产品</nv-menu-item>
           </nv-submenu>
-          <nv-submenu index="3" title="解决方案">
+          <nv-submenu index="3" label="解决方案">
             <nv-icon slot="icon" name="setting"></nv-icon>
             <nv-menu-item index="3-1">金融行业</nv-menu-item>
             <nv-menu-item index="3-2">教育行业</nv-menu-item>
@@ -968,13 +968,13 @@ export const TriggerMode: Story = {
             <nv-icon slot="icon" name="s-home"></nv-icon>
             首页
           </nv-menu-item>
-          <nv-submenu index="2" title="产品中心">
+          <nv-submenu index="2" label="产品中心">
             <nv-icon slot="icon" name="s-goods"></nv-icon>
             <nv-menu-item index="2-1">硬件产品</nv-menu-item>
             <nv-menu-item index="2-2">软件产品</nv-menu-item>
             <nv-menu-item index="2-3">服务产品</nv-menu-item>
           </nv-submenu>
-          <nv-submenu index="3" title="解决方案">
+          <nv-submenu index="3" label="解决方案">
             <nv-icon slot="icon" name="setting"></nv-icon>
             <nv-menu-item index="3-1">金融行业</nv-menu-item>
             <nv-menu-item index="3-2">教育行业</nv-menu-item>
@@ -1001,13 +1001,13 @@ export const TriggerMode: Story = {
             <nv-icon slot="icon" name="s-home"></nv-icon>
             首页
           </nv-menu-item>
-          <nv-submenu index="2" title="产品中心">
+          <nv-submenu index="2" label="产品中心">
             <nv-icon slot="icon" name="s-goods"></nv-icon>
             <nv-menu-item index="2-1">硬件产品</nv-menu-item>
             <nv-menu-item index="2-2">软件产品</nv-menu-item>
             <nv-menu-item index="2-3">服务产品</nv-menu-item>
           </nv-submenu>
-          <nv-submenu index="3" title="解决方案">
+          <nv-submenu index="3" label="解决方案">
             <nv-icon slot="icon" name="setting"></nv-icon>
             <nv-menu-item index="3-1">金融行业</nv-menu-item>
             <nv-menu-item index="3-2">教育行业</nv-menu-item>

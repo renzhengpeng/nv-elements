@@ -43,7 +43,7 @@ const template = function(this: NvMenuItem, context: Context) {
         `
             : ''
         }
-        <span part="title" class="${ classNamesConfig.elements.title }">
+        <span part="label" class="${ classNamesConfig.elements.label }">
           <slot></slot>
         </span>
       </span>

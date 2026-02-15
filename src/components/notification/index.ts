@@ -12,12 +12,18 @@ import {
 } from '../../based-on/index.ts';
 import cssText from './style.scss?inline';
 import template from './template.ts';
+import { registerNotificationInstance, unregisterNotificationInstance } from './notification.ts';
 
 /**
  * notification组件
  *
  * @slot - 默认插槽，用于放置通知内容
- * @slot title - 标题插槽
+ * @slot label - 标题插槽
+ * @slot content - 内容插槽
+ * @slot icon - 图标插槽，用于自定义图标
+ * 
+ * @fires nv-close - 关闭通知时触发
+ * @fires nv-after-close - 关闭动画完成后触发
  */
 @customElement('nv-notification')
 export class NvNotification extends Component {
@@ -46,6 +52,12 @@ export class NvNotification extends Component {
   showIcon: boolean = true;
 
   /**
+   * 自定义图标名称
+   */
+  @property({ type: String })
+  icon: string = '';
+
+  /**
    * 是否可关闭
    */
   @property({ type: Boolean })
@@ -64,6 +76,18 @@ export class NvNotification extends Component {
   position: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' =
     'top-right';
 
+  /**
+   * 层级
+   */
+  @property({ type: Number })
+  zIndex: number = 2000;
+
+  /**
+   * 自定义关闭图标
+   */
+  @property({ type: String })
+  closeIcon: string = 'close';
+
   private _timer: number | null = null;
   private _remainingDuration: number = 0;
   private _startTime: number = 0;
@@ -77,7 +101,39 @@ export class NvNotification extends Component {
   }
 
   $mounted(): void {
-    this._updatePosition();
+    // 设置左右位置
+    const isRight = this.position.endsWith('right');
+    this.style.right = isRight ? '16px' : 'auto';
+    this.style.left = isRight ? 'auto' : '16px';
+    
+    // 设置 z-index
+    this.style.zIndex = String(this.zIndex);
+    
+    // 获取内部 .nv-notification 元素
+    const notificationEl = this.shadowRoot?.querySelector('.nv-notification') as HTMLElement;
+    
+    // 初始就添加 is-entering 类，让元素从隐藏+偏移状态开始
+    if (notificationEl) {
+      notificationEl.classList.add('is-entering');
+    }
+    
+    // 监听位置更新完成事件
+    this.addEventListener('position-updated', () => {
+      // 位置已正确设置，现在触发滑入动画
+      if (notificationEl) {
+        // 强制浏览器重排，确保 is-entering 初始样式生效
+        void notificationEl.offsetHeight;
+        
+        // 使用 setTimeout 让出主线程，然后移除 is-entering 触发滑入动画
+        setTimeout(() => {
+          notificationEl.classList.remove('is-entering');
+        }, 10);
+      }
+    }, { once: true });
+    
+    // 注册到全局位置管理（会在 RAF 中更新位置并触发 position-updated 事件）
+    registerNotificationInstance(this);
+    
     this._startTimer();
   }
 
@@ -100,6 +156,11 @@ export class NvNotification extends Component {
   protected updated(changedProperties: Map<PropertyKey, unknown>): void {
     super.updated(changedProperties);
     this._updatePosition();
+    
+    // 更新 z-index
+    if (changedProperties.has('zIndex')) {
+      this.style.zIndex = String(this.zIndex);
+    }
   }
 
   disconnectedCallback(): void {
@@ -112,12 +173,13 @@ export class NvNotification extends Component {
 
   /**
    * 更新位置
+   * - 左右位置：始终设置
+   * - 上下位置：由全局管理器负责设置
    */
   private _updatePosition(): void {
-    const isTop = this.position.startsWith('top');
     const isRight = this.position.endsWith('right');
-    this.style.top = isTop ? '20px' : 'auto';
-    this.style.bottom = isTop ? 'auto' : '20px';
+    
+    // 只设置左右位置
     this.style.right = isRight ? '16px' : 'auto';
     this.style.left = isRight ? 'auto' : '16px';
   }
@@ -161,13 +223,35 @@ export class NvNotification extends Component {
    * 关闭通知
    */
   close(): void {
+    // 派发 nv-close 事件
+    this.dispatchEvent(new CustomEvent('nv-close', {
+      bubbles: true,
+      composed: true,
+      detail: { instance: this }
+    }));
+    
     if (this._timer) {
       window.clearTimeout(this._timer);
       this._timer = null;
     }
-    this.style.opacity = '0';
-    this.style.transform = 'scale(0.8)';
+    
+    // 从全局位置管理中注销
+    unregisterNotificationInstance(this);
+    
+    const notificationEl = this.shadowRoot?.querySelector('.nv-notification') as HTMLElement;
+    
+    if (notificationEl) {
+      notificationEl.classList.add('is-closing');
+    }
+    
     setTimeout(() => {
+      // 派发 nv-after-close 事件
+      this.dispatchEvent(new CustomEvent('nv-after-close', {
+        bubbles: true,
+        composed: true,
+        detail: { instance: this }
+      }));
+      
       this.remove();
     }, 300);
   }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * @Descripttion: popconfirm组件模板
  * @creater: zhengpeng.ren
  * @since: 2024-12-19
@@ -21,7 +21,7 @@ const template = function(this: NvPopconfirm, context: Context) {
       .placement=${ this.placement }
       .arrow=${ this.arrow }
       .trigger=${ this.trigger }
-      .distance=${ 12 }
+      .distance=${ this.distance }
       .disabled=${ this.disabled }
     >
       <div part="trigger" slot="anchor">
@@ -35,6 +35,7 @@ const template = function(this: NvPopconfirm, context: Context) {
         <div part="actions" class=${ classNamesConfig.elements.actions }>
           <nv-button
             .type=${ this.cancelButtonType }
+            ?text=${ this.cancelTextButton }
             .size=${ this.cancelButtonSize }
             @click=${ _handleCancel }
           >
@@ -42,6 +43,7 @@ const template = function(this: NvPopconfirm, context: Context) {
           </nv-button>
           <nv-button
             .type=${ this.confirmButtonType }
+            ?text=${ this.confirmTextButton }
             .size=${ this.confirmButtonSize }
             @click=${ _handleConfirm }
           >

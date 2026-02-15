@@ -8,17 +8,19 @@ Button 组件提供了多种类型、尺寸和状态的按钮样式，支持图�
 
 ## 属性
 
-| 属性名   | 说明                         | 类型    | 可选值                                                               | 默认值  |
-| -------- | ---------------------------- | ------- | -------------------------------------------------------------------- | ------- |
-| type     | 按钮类型                     | string  | default / primary / success / info / warning / error / danger / text | default |
-| size     | 按钮尺寸                     | string  | mini / small / medium / large / huge                                 | medium  |
-| disabled | 是否禁用                     | boolean | —                                                                    | false   |
-| loading  | 是否加载中                   | boolean | —                                                                    | false   |
-| active   | 是否处于激活状态（选中状态） | boolean | —                                                                    | false   |
-| plain    | 是否朴素按钮                 | boolean | —                                                                    | false   |
-| round    | 是否圆角按钮                 | boolean | —                                                                    | false   |
-| circle   | 是否圆形按钮                 | boolean | —                                                                    | false   |
-| icon     | 图标名称                     | string  | —                                                                    | —       |
+| 属性名   | 说明                         | 类型    | 可选值                                                       | 默认值  |
+| -------- | ---------------------------- | ------- | ------------------------------------------------------------ | ------- |
+| type     | 按钮类型                     | string  | default / primary / success / info / warning / danger | default |
+| size     | 按钮尺寸                     | string  | mini / small / medium / large / huge                         | medium  |
+| disabled | 是否禁用                     | boolean | —                                                            | false   |
+| loading  | 是否加载中                   | boolean | —                                                            | false   |
+| active   | 是否处于激活状态（选中状态） | boolean | —                                                            | false   |
+| plain    | 是否朴素按钮                 | boolean | —                                                            | false   |
+| text     | 是否文字按钮                 | boolean | —                                                            | false   |
+| link     | 是否链接按钮                 | boolean | —                                                            | false   |
+| round    | 是否圆角按钮                 | boolean | —                                                            | false   |
+| circle   | 是否圆形按钮                 | boolean | —                                                            | false   |
+| icon     | 图标名称                     | string  | —                                                            | —       |
 
 ## 插槽
 
@@ -76,7 +78,7 @@ Button组件提供了丰富的CSS变量用于自定义样式，包括尺寸、�
 
 ### 颜色相关变量
 
-每种类型(default/primary/success/info/warning/error/danger/text)都有以下状态的颜色变量：
+每种类型(default/primary/success/info/warning/danger)都有以下状态的颜色变量：
 
 **default类型**
 
@@ -90,7 +92,7 @@ Button组件提供了丰富的CSS变量用于自定义样式，包括尺寸、�
 - `--nv-button-*-default-plain-active` (plain active状态)
 - `--nv-button-*-default-plain-disabled` (plain disabled状态)
 
-**primary/success/info/warning/error/danger/text类型**
+**primary/success/info/warning/danger类型**
 
 每种类型都有类似的变量结构：
 
@@ -105,7 +107,29 @@ Button组件提供了丰富的CSS变量用于自定义样式，包括尺寸、�
 - `--nv-button-*-{type}-plain-active`
 - `--nv-button-*-{type}-plain-disabled`
 
+**text按钮（text属性）**
+
+文字按钮也有对应的颜色变量：
+
+- `--nv-button-border-color-text` / `--nv-button-color-text` / `--nv-button-background-color-text`
+- `--nv-button-*-text-hover`
+- `--nv-button-*-text-active`
+- `--nv-button-*-text-disabled`
+- `--nv-button-*-text-plain`
+- `--nv-button-*-text-plain-hover`
+- `--nv-button-*-text-plain-active`
+- `--nv-button-*-text-plain-disabled`
+
 > 提示：`*` 代表 `border-color`、`color`、`background-color` 三个属性
+
+**link按钮（link属性）**
+
+链接按钮与 text 按钮类似，但有以下区别：
+
+- 文字颜色由 type 决定，使用对应主题色的 CSS 变量（如 primary 类型使用 `--nv-primary-color-1`）
+- hover 时颜色变浅（使用 `*-hover` 变量），但不显示背景色
+- active 时颜色变化（使用 `*-active` 变量），但不显示背景色
+- 始终保持透明背景，适合用作文本链接样式的按钮
 
 ## CSS Parts
 

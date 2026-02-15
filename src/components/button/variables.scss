@@ -257,71 +257,38 @@
   --nv-button-background-color-warning-plain-disabled: var(--nv-secondary-color-warning-4);
 
 
-  /**************** type:error ****************/
-  --nv-button-border-color-error: var(--nv-secondary-color-danger-1);
-  --nv-button-color-error: var(--nv-neutral-color-white);
-  --nv-button-background-color-error: var(--nv-secondary-color-danger-1);
-  // error.hover
-  --nv-button-border-color-error-hover: var(--nv-secondary-color-danger-1-hover);
-  --nv-button-color-error-hover: var(--nv-neutral-color-white);
-  --nv-button-background-color-error-hover: var(--nv-secondary-color-danger-1-hover);
-  // error.active
-  --nv-button-border-color-error-active: var(--nv-secondary-color-danger-1-active);
-  --nv-button-color-error-active: var(--nv-neutral-color-white);
-  --nv-button-background-color-error-active: var(--nv-secondary-color-danger-1-active);
-  // error.disabled
-  --nv-button-border-color-error-disabled: var(--nv-secondary-color-danger-1-disabled);
-  --nv-button-color-error-disabled: var(--nv-neutral-color-white);
-  --nv-button-background-color-error-disabled: var(--nv-secondary-color-danger-1-disabled);
-  /*** type:error.plain ***/
-  --nv-button-border-color-error-plain: var(--nv-secondary-color-danger-2);
-  --nv-button-color-error-plain: var(--nv-secondary-color-danger-1);
-  --nv-button-background-color-error-plain: var(--nv-secondary-color-danger-4);
-  // error.plain.hover
-  --nv-button-border-color-error-plain-hover: var(--nv-secondary-color-danger-1);
-  --nv-button-color-error-plain-hover: var(--nv-primary-color-white);
-  --nv-button-background-color-error-plain-hover: var(--nv-secondary-color-danger-1);
-  // error.plain.active
-  --nv-button-border-color-error-plain-active: var(--nv-secondary-color-danger-1-active);
-  --nv-button-color-error-plain-active: var(--nv-primary-color-white);
-  --nv-button-background-color-error-plain-active: var(--nv-secondary-color-danger-1-active);
-  // error.plain.disabled
-  --nv-button-border-color-error-plain-disabled: var(--nv-secondary-color-danger-3);
-  --nv-button-color-error-plain-disabled: var(--nv-secondary-color-danger-2-disabled);
-  --nv-button-background-color-error-plain-disabled: var(--nv-secondary-color-danger-4);
   /**************** type:danger ****************/
-  // danger 与 error 表现完全一致，使用相同的变量
-  --nv-button-border-color-danger: var(--nv-button-border-color-error);
-  --nv-button-color-danger: var(--nv-button-color-error);
-  --nv-button-background-color-danger: var(--nv-button-background-color-error);
+  --nv-button-border-color-danger: var(--nv-secondary-color-danger-1);
+  --nv-button-color-danger: var(--nv-neutral-color-white);
+  --nv-button-background-color-danger: var(--nv-secondary-color-danger-1);
   // danger.hover
-  --nv-button-border-color-danger-hover: var(--nv-button-border-color-error-hover);
-  --nv-button-color-danger-hover: var(--nv-button-color-error-hover);
-  --nv-button-background-color-danger-hover: var(--nv-button-background-color-error-hover);
+  --nv-button-border-color-danger-hover: var(--nv-secondary-color-danger-1-hover);
+  --nv-button-color-danger-hover: var(--nv-neutral-color-white);
+  --nv-button-background-color-danger-hover: var(--nv-secondary-color-danger-1-hover);
   // danger.active
-  --nv-button-border-color-danger-active: var(--nv-button-border-color-error-active);
-  --nv-button-color-danger-active: var(--nv-button-color-error-active);
-  --nv-button-background-color-danger-active: var(--nv-button-background-color-error-active);
+  --nv-button-border-color-danger-active: var(--nv-secondary-color-danger-1-active);
+  --nv-button-color-danger-active: var(--nv-neutral-color-white);
+  --nv-button-background-color-danger-active: var(--nv-secondary-color-danger-1-active);
   // danger.disabled
-  --nv-button-border-color-danger-disabled: var(--nv-button-border-color-error-disabled);
-  --nv-button-color-danger-disabled: var(--nv-button-color-error-disabled);
-  --nv-button-background-color-danger-disabled: var(--nv-button-background-color-error-disabled);
+  --nv-button-border-color-danger-disabled: var(--nv-secondary-color-danger-1-disabled);
+  --nv-button-color-danger-disabled: var(--nv-neutral-color-white);
+  --nv-button-background-color-danger-disabled: var(--nv-secondary-color-danger-1-disabled);
   /*** type:danger.plain ***/
-  --nv-button-border-color-danger-plain: var(--nv-button-border-color-error-plain);
-  --nv-button-color-danger-plain: var(--nv-button-color-error-plain);
-  --nv-button-background-color-danger-plain: var(--nv-button-background-color-error-plain);
+  --nv-button-border-color-danger-plain: var(--nv-secondary-color-danger-2);
+  --nv-button-color-danger-plain: var(--nv-secondary-color-danger-1);
+  --nv-button-background-color-danger-plain: var(--nv-secondary-color-danger-4);
   // danger.plain.hover
-  --nv-button-border-color-danger-plain-hover: var(--nv-button-border-color-error-plain-hover);
-  --nv-button-color-danger-plain-hover: var(--nv-button-color-error-plain-hover);
-  --nv-button-background-color-danger-plain-hover: var(--nv-button-background-color-error-plain-hover);
+  --nv-button-border-color-danger-plain-hover: var(--nv-secondary-color-danger-1);
+  --nv-button-color-danger-plain-hover: var(--nv-primary-color-white);
+  --nv-button-background-color-danger-plain-hover: var(--nv-secondary-color-danger-1);
   // danger.plain.active
-  --nv-button-border-color-danger-plain-active: var(--nv-button-border-color-error-plain-active);
-  --nv-button-color-danger-plain-active: var(--nv-button-color-error-plain-active);
-  --nv-button-background-color-danger-plain-active: var(--nv-button-background-color-error-plain-active);
+  --nv-button-border-color-danger-plain-active: var(--nv-secondary-color-danger-1-active);
+  --nv-button-color-danger-plain-active: var(--nv-primary-color-white);
+  --nv-button-background-color-danger-plain-active: var(--nv-secondary-color-danger-1-active);
   // danger.plain.disabled
-  --nv-button-border-color-danger-plain-disabled: var(--nv-button-border-color-error-plain-disabled);
-  --nv-button-color-danger-plain-disabled: var(--nv-button-color-error-plain-disabled);
-  --nv-button-background-color-danger-plain-disabled: var(--nv-button-background-color-error-plain-disabled);
+  --nv-button-border-color-danger-plain-disabled: var(--nv-secondary-color-danger-3);
+  --nv-button-color-danger-plain-disabled: var(--nv-secondary-color-danger-2-disabled);
+  --nv-button-background-color-danger-plain-disabled: var(--nv-secondary-color-danger-4);
   /**************** type:text ****************/
   --nv-button-border-color-text: transparent;
   --nv-button-color-text: var(--nv-primary-color-1);

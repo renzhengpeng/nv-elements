@@ -18,10 +18,10 @@ import template from './template.ts';
 @customElement('nv-button')
 export class NvButton extends Component {
   /**
-   * button类型，可选: default/primary/success/warning/info/error/danger/text
+   * button类型，可选: default/primary/success/warning/info/danger
    */
   @property({ type: String })
-  type: 'default' | 'primary' | 'success' | 'warning' | 'info' | 'error' | 'danger' | 'text' = 'default';
+  type: 'default' | 'primary' | 'success' | 'warning' | 'info' | 'danger' = 'default';
 
   /**
    * 是否禁用
@@ -34,6 +34,18 @@ export class NvButton extends Component {
    */
   @property({ type: Boolean })
   plain: boolean = false;
+
+  /**
+   * 文字按钮
+   */
+  @property({ type: Boolean })
+  text: boolean = false;
+
+  /**
+   * 链接按钮
+   */
+  @property({ type: Boolean })
+  link: boolean = false;
 
   /**
    * 圆角按钮
@@ -70,6 +82,19 @@ export class NvButton extends Component {
    */
   @property({ type: String })
   icon: string = '';
+
+  /**
+   * 是否有默认 slot 内容（非空文本或子元素）
+   */
+  protected get _hasDefaultSlotContent(): boolean {
+    const nodes = this.childNodes;
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      if (n.nodeType === Node.ELEMENT_NODE) return true;
+      if (n.nodeType === Node.TEXT_NODE && n.textContent && n.textContent.trim().length > 0) return true;
+    }
+    return false;
+  }
 
   render() {
     return template.call(this, { _handleClick: this._handleClick });

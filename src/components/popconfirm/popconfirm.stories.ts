@@ -29,13 +29,21 @@ const meta: Meta = {
     },
     confirmButtonType: {
       control: 'select',
-      options: ['primary', 'success', 'warning', 'danger', 'info', 'text'],
+      options: ['default', 'primary', 'success', 'warning', 'danger', 'info'],
       description: '确认按钮类型'
     },
     cancelButtonType: {
       control: 'select',
-      options: ['primary', 'success', 'warning', 'danger', 'info', 'text'],
+      options: ['default', 'primary', 'success', 'warning', 'danger', 'info'],
       description: '取消按钮类型'
+    },
+    confirmTextButton: {
+      control: 'boolean',
+      description: '确认按钮是否为文字按钮'
+    },
+    cancelTextButton: {
+      control: 'boolean',
+      description: '取消按钮是否为文字按钮'
     },
     confirmButtonSize: {
       control: 'select',
@@ -288,6 +296,8 @@ export const Default: Story = {
         .cancelButtonText="${ args.cancelButtonText }"
         .confirmButtonType="${ args.confirmButtonType }"
         .cancelButtonType="${ args.cancelButtonType }"
+        ?confirmTextButton=${ args.confirmTextButton }
+        ?cancelTextButton=${ args.cancelTextButton }
         .confirmButtonSize="${ args.confirmButtonSize }"
         .cancelButtonSize="${ args.cancelButtonSize }"
         .placement="${ args.placement }"
@@ -312,7 +322,9 @@ export const Default: Story = {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     confirmButtonType: 'primary',
-    cancelButtonType: 'text',
+    cancelButtonType: 'default',
+    confirmTextButton: false,
+    cancelTextButton: true,
     confirmButtonSize: 'small',
     cancelButtonSize: 'small',
     placement: 'top',
@@ -437,7 +449,7 @@ export const CustomButtons: Story = {
         .confirmButtonText="${ '确定执行' }"
         .cancelButtonText="${ '我再想想' }"
         .confirmButtonType="${ 'danger' }"
-        .cancelButtonType="${ 'text' }"
+        ?cancelTextButton=${ true }
         @confirm="${ () => Message.success({ message: '已执行危险操作', duration: 2000 }) }"
         @cancel="${ () => Message.info({ message: '已取消', duration: 2000 }) }"
       >
@@ -449,7 +461,7 @@ export const CustomButtons: Story = {
         .confirmButtonText="${ '保存' }"
         .cancelButtonText="${ '放弃' }"
         .confirmButtonType="${ 'success' }"
-        .cancelButtonType="${ 'text' }"
+        ?cancelTextButton=${ true }
         @confirm="${ () => Message.success({ message: '保存成功', duration: 2000 }) }"
         @cancel="${ () => Message.warning({ message: '已放弃更改', duration: 2000 }) }"
       >
@@ -461,7 +473,7 @@ export const CustomButtons: Story = {
         .confirmButtonText="${ '提交' }"
         .cancelButtonText="${ '取消' }"
         .confirmButtonType="${ 'warning' }"
-        .cancelButtonType="${ 'text' }"
+        ?cancelTextButton=${ true }
         @confirm="${ () => Message.success({ message: '提交成功', duration: 2000 }) }"
         @cancel="${ () => Message.info({ message: '已取消', duration: 2000 }) }"
       >
@@ -554,12 +566,12 @@ export const InTable: Story = {
               <td style="padding: 12px; border: 1px solid #dcdfe6;">数据项 ${id}</td>
               <td style="padding: 12px; border: 1px solid #dcdfe6;">正常</td>
               <td style="padding: 12px; border: 1px solid #dcdfe6; text-align: center;">
-                <nv-button type="text" size="small">编辑</nv-button>
+                <nv-button text size="small">编辑</nv-button>
                 <nv-popconfirm
                   .label="${ `确定要删除数据项 ${id} 吗？` }"
                   @confirm="${ () => Message.success({ message: `已删除数据项 ${id}`, duration: 2000 }) }"
                 >
-                  <nv-button type="text" size="small" style="color: #f56c6c;">删除</nv-button>
+                  <nv-button text size="small" style="color: #f56c6c;">删除</nv-button>
                 </nv-popconfirm>
               </td>
             </tr>

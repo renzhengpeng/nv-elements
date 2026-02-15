@@ -43,6 +43,12 @@ export class NvPagination extends Component {
   size: 'mini' | 'small' | 'medium' | 'large' | 'huge' = 'medium';
 
   /**
+   * 页码按钮类型.default: default. options: default/link
+   */
+  @property({ type: String })
+  type: 'default' | 'link' = 'default';
+
+  /**
    * 是否禁用
    */
   @property({ type: Boolean, reflect: true })

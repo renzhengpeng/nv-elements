@@ -17,7 +17,7 @@ const classNames = {
   },
   elements: {
     group: `${ BLOCK }__group`,
-    title: `${ BLOCK }__title`,
+    label: `${ BLOCK }__label`,
     content: `${ BLOCK }__content`,
     icon: `${ BLOCK }__icon`,
     closeBtn: `${ BLOCK }__closeBtn`,

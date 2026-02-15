@@ -1,4 +1,4 @@
-﻿/*
+/*
  * @Descripttion: pagination组件模板
  * @creater: zhengpeng.ren
  * @since: 2024-12-19
@@ -50,6 +50,7 @@ const template = function(this: NvPagination) {
         class="${ classNamesConfig.elements.btnPrev }"
         .size=${ this.size }
         .disabled=${ prevDisabled || this.disabled }
+        ?link=${ this.type === 'link' }
         @click=${ this._handlePrev }
       >
         <nv-icon name="arrow-left"></nv-icon>
@@ -72,6 +73,7 @@ const template = function(this: NvPagination) {
               .size=${ this.size }
               .disabled=${ this.disabled }
               ?active=${ isActive }
+              ?link=${ this.type === 'link' }
               @click=${ () => this._handlePageClick(page) }
             >
               ${ page }
@@ -84,6 +86,7 @@ const template = function(this: NvPagination) {
         class="${ classNamesConfig.elements.btnNext }"
         .size=${ this.size }
         .disabled=${ nextDisabled || this.disabled }
+        ?link=${ this.type === 'link' }
         @click=${ this._handleNext }
       >
         <nv-icon name="arrow-right"></nv-icon>

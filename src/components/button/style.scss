@@ -179,7 +179,6 @@
     .nv-button--success:not(.is-plain),
     .nv-button--warning:not(.is-plain),
     .nv-button--info:not(.is-plain),
-    .nv-button--error:not(.is-plain),
     .nv-button--danger:not(.is-plain) {
       border-right-color: rgba(255, 255, 255, 0.5);
     }
@@ -191,7 +190,6 @@
     .nv-button--success:not(.is-plain),
     .nv-button--warning:not(.is-plain),
     .nv-button--info:not(.is-plain),
-    .nv-button--error:not(.is-plain),
     .nv-button--danger:not(.is-plain) {
       border-left-color: rgba(255, 255, 255, 0.5);
     }
@@ -203,7 +201,6 @@
     .nv-button--success:not(.is-plain),
     .nv-button--warning:not(.is-plain),
     .nv-button--info:not(.is-plain),
-    .nv-button--error:not(.is-plain),
     .nv-button--danger:not(.is-plain) {
       border-left-color: rgba(255, 255, 255, 0.5);
       border-right-color: rgba(255, 255, 255, 0.5);
@@ -264,7 +261,6 @@
     .nv-button--success:not(.is-plain),
     .nv-button--warning:not(.is-plain),
     .nv-button--info:not(.is-plain),
-    .nv-button--error:not(.is-plain),
     .nv-button--danger:not(.is-plain) {
       border-bottom-color: rgba(255, 255, 255, 0.5);
     }
@@ -276,7 +272,6 @@
     .nv-button--success:not(.is-plain),
     .nv-button--warning:not(.is-plain),
     .nv-button--info:not(.is-plain),
-    .nv-button--error:not(.is-plain),
     .nv-button--danger:not(.is-plain) {
       border-top-color: rgba(255, 255, 255, 0.5);
     }
@@ -288,7 +283,6 @@
     .nv-button--success:not(.is-plain),
     .nv-button--warning:not(.is-plain),
     .nv-button--info:not(.is-plain),
-    .nv-button--error:not(.is-plain),
     .nv-button--danger:not(.is-plain) {
       border-top-color: rgba(255, 255, 255, 0.5);
       border-bottom-color: rgba(255, 255, 255, 0.5);
@@ -430,24 +424,188 @@
   // .nv-button--warning
   @include stylesOfType(warning);
 
-  /*****************************************************error*********************************************************/
-  // .nv-button--error
-  @include stylesOfType(error);
-
   /*****************************************************danger*********************************************************/
-  // .nv-button--danger (与 error 表现完全一致)
+  // .nv-button--danger
   @include stylesOfType(danger);
 
   /*****************************************************text*********************************************************/
   // .nv-button--text
-  @include stylesOfType(text);
-  // text 类型特殊处理：无边框、无背景色，只有文字颜色变化
+  // text 按钮：无边框、默认透明背景，文字颜色由 type 决定，hover 时显示浅灰色背景
   &--text {
     border: none !important;
     background-color: transparent !important;
     padding-left: 0;
     padding-right: 0;
 
+    // 覆盖各类型的颜色，让文本按钮使用主题色作为文字颜色
+    &.nv-button--primary {
+      color: var(--nv-primary-color-1) !important;
+      
+      &:hover {
+        color: var(--nv-primary-color-3) !important;
+      }
+      
+      &:active {
+        color: var(--nv-primary-color-1-active) !important;
+      }
+    }
+
+    &.nv-button--success {
+      color: var(--nv-secondary-color-success-1) !important;
+      
+      &:hover {
+        color: var(--nv-secondary-color-success-1-hover) !important;
+      }
+      
+      &:active {
+        color: var(--nv-secondary-color-success-1-active) !important;
+      }
+    }
+
+    &.nv-button--info {
+      color: var(--nv-secondary-color-info-1) !important;
+      
+      &:hover {
+        color: var(--nv-secondary-color-info-1-hover) !important;
+      }
+      
+      &:active {
+        color: var(--nv-secondary-color-info-1-active) !important;
+      }
+    }
+
+    &.nv-button--warning {
+      color: var(--nv-secondary-color-warning-1) !important;
+      
+      &:hover {
+        color: var(--nv-secondary-color-warning-1-hover) !important;
+      }
+      
+      &:active {
+        color: var(--nv-secondary-color-warning-1-active) !important;
+      }
+    }
+
+    &.nv-button--danger {
+      color: var(--nv-secondary-color-danger-1) !important;
+      
+      &:hover {
+        color: var(--nv-secondary-color-danger-1-hover) !important;
+      }
+      
+      &:active {
+        color: var(--nv-secondary-color-danger-1-active) !important;
+      }
+    }
+
+    &:hover {
+      border: none !important;
+      background-color: var(--nv-neutral-color-bg-2, #f5f7fa) !important;
+    }
+
+    &:active {
+      border: none !important;
+      background-color: var(--nv-neutral-color-bg-3, #ebeef5) !important;
+    }
+
+    &.is-plain {
+      border: none !important;
+      background-color: transparent !important;
+
+      &:hover {
+        border: none !important;
+        background-color: var(--nv-neutral-color-bg-2, #f5f7fa) !important;
+      }
+
+      &:active {
+        border: none !important;
+        background-color: var(--nv-neutral-color-bg-3, #ebeef5) !important;
+      }
+    }
+
+    &.is-disabled {
+      border: none !important;
+      background-color: transparent !important;
+
+      &:hover,
+      &:active {
+        border: none !important;
+        background-color: transparent !important;
+      }
+    }
+  }
+
+  /*****************************************************link*********************************************************/
+  // .nv-button--link
+  // link 按钮：无边框、始终透明背景，文字颜色由 type 决定，hover 和 active 时只改变颜色不添加背景
+  &--link {
+    border: none !important;
+    background-color: transparent !important;
+    padding-left: 0;
+    padding-right: 0;
+
+    // 覆盖各类型的颜色，让链接按钮使用主题色作为文字颜色
+    &.nv-button--primary {
+      color: var(--nv-primary-color-1) !important;
+      
+      &:hover {
+        color: var(--nv-primary-color-3) !important;
+      }
+      
+      &:active {
+        color: var(--nv-primary-color-1-active) !important;
+      }
+    }
+
+    &.nv-button--success {
+      color: var(--nv-secondary-color-success-1) !important;
+      
+      &:hover {
+        color: var(--nv-secondary-color-success-1-hover) !important;
+      }
+      
+      &:active {
+        color: var(--nv-secondary-color-success-1-active) !important;
+      }
+    }
+
+    &.nv-button--info {
+      color: var(--nv-secondary-color-info-1) !important;
+      
+      &:hover {
+        color: var(--nv-secondary-color-info-1-hover) !important;
+      }
+      
+      &:active {
+        color: var(--nv-secondary-color-info-1-active) !important;
+      }
+    }
+
+    &.nv-button--warning {
+      color: var(--nv-secondary-color-warning-1) !important;
+      
+      &:hover {
+        color: var(--nv-secondary-color-warning-1-hover) !important;
+      }
+      
+      &:active {
+        color: var(--nv-secondary-color-warning-1-active) !important;
+      }
+    }
+
+    &.nv-button--danger {
+      color: var(--nv-secondary-color-danger-1) !important;
+      
+      &:hover {
+        color: var(--nv-secondary-color-danger-1-hover) !important;
+      }
+      
+      &:active {
+        color: var(--nv-secondary-color-danger-1-active) !important;
+      }
+    }
+
+    // link 按钮 hover 和 active 时不添加背景色
     &:hover {
       border: none !important;
       background-color: transparent !important;
@@ -476,6 +634,7 @@
     &.is-disabled {
       border: none !important;
       background-color: transparent !important;
+      opacity: 0.4;
 
       &:hover,
       &:active {

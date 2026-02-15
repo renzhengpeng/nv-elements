@@ -19,8 +19,8 @@ const classNames = {
     jumperText: `${ BLOCK }__jumper-text`
   },
   modifiers: {
-    disabled: 'is-disabled',
-    background: 'is-background'
+    disabled: 'disabled',
+    background: 'background'
   }
 };
 

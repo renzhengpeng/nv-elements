@@ -125,26 +125,32 @@
     border-radius: var(--nv-submenu-border-radius, 4px);
     box-shadow: var(--nv-submenu-box-shadow, 0 2px 12px 0 rgba(0, 0, 0, 0.1));
     z-index: 1000;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity var(--nv-submenu-transition-duration, 0.3s) ease,
+                transform var(--nv-submenu-transition-duration, 0.3s) ease,
+                visibility var(--nv-submenu-transition-duration, 0.3s) ease;
   }
 
   .nv-submenu.is-opened > .nv-submenu__list {
-    display: block;
-    animation: nvSubmenuFadeIn var(--nv-submenu-transition-duration, 0.3s) ease;
-  }
-}
-
-// 水平模式下拉菜单的淡入动画
-@keyframes nvSubmenuFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
   }
 }
+
+// 水平模式下拉菜单的淡入动画（已废弃，现在使用 transition）
+// @keyframes nvSubmenuFadeIn {
+//   from {
+//     opacity: 0;
+//     transform: translateY(-10px);
+//   }
+//   to {
+//     opacity: 1;
+//     transform: translateY(0);
+//   }
+// }
 
 // 水平模式下，第一层下拉菜单内的子菜单项样式
 :host-context(.nv-nav-menu.is-horizontal) {
@@ -211,11 +217,17 @@
     border-radius: var(--nv-submenu-border-radius, 4px);
     box-shadow: var(--nv-submenu-box-shadow, 0 2px 12px 0 rgba(0, 0, 0, 0.1));
     z-index: 1000;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity var(--nv-submenu-transition-duration, 0.3s) ease,
+                transform var(--nv-submenu-transition-duration, 0.3s) ease,
+                visibility var(--nv-submenu-transition-duration, 0.3s) ease;
   }
 
   .nv-submenu.is-opened > .nv-submenu__list {
-    display: block;
-    animation: nvSubmenuFadeIn var(--nv-submenu-transition-duration, 0.3s) ease;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 }

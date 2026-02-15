@@ -9,14 +9,18 @@ const classNames = {
   block: BLOCK,
   elements: {
     header: `${ BLOCK }__header`,
-    title: `${ BLOCK }__title`,
+    label: `${ BLOCK }__label`,
+    icons: `${ BLOCK }__icons`,
     icon: `${ BLOCK }__icon`,
+    loading: `${ BLOCK }__loading`,
     wrapper: `${ BLOCK }__wrapper`,
-    content: `${ BLOCK }__content`
+    content: `${ BLOCK }__content`,
+    contentError: `${ BLOCK }__content-error`
   },
   modifiers: {
     active: 'is-active',
-    disabled: 'is-disabled'
+    disabled: 'is-disabled',
+    loading: 'is-loading'
   }
 };
 

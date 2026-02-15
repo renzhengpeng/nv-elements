@@ -12,7 +12,7 @@ import { PropertyValues } from 'lit';
  * collapse-item组件
  *
  * @slot - 默认插槽，面板内容
- * @slot title - 标题插槽
+ * @slot label - 标题插槽
  */
 @customElement('nv-collapse-item')
 export class NvCollapseItem extends Component {
@@ -39,6 +39,25 @@ export class NvCollapseItem extends Component {
    */
   @property({ type: Boolean })
   isActive: boolean = false;
+
+  /**
+   * 异步加载后展示的内容（由父组件在 nv-before-expand 的 resolve/reject 中设置）
+   * 为空时展示默认 slot 内容
+   */
+  @property({ type: String, attribute: 'loaded-content' })
+  loadedContent: string = '';
+
+  /**
+   * 当前展示的 loadedContent 是否为错误态（reject 传入字符串时为 true，以醒目错误样式包裹）
+   */
+  @property({ type: Boolean, attribute: 'content-is-error' })
+  contentIsError: boolean = false;
+
+  /**
+   * 是否处于加载中（异步展开时由父组件在等待 resolve/reject 期间设置）
+   */
+  @property({ type: Boolean })
+  loading: boolean = false;
 
   /**
    * wrapper元素引用
@@ -70,16 +89,23 @@ export class NvCollapseItem extends Component {
       return;
     }
 
+    const duration = 300;
+
     if (this.isActive) {
       // 展开：先设置为实际高度，然后设置为auto
       const contentHeight = this._wrapperElement.scrollHeight;
       this._wrapperElement.style.height = `${ contentHeight }px`;
-      // 等待过渡完成后设置为auto，以便内容变化时能自适应
+      // 等待过渡完成后设置为auto，并派发展开后事件
       setTimeout(() => {
         if (this._wrapperElement && this.isActive) {
           this._wrapperElement.style.height = 'auto';
+          this.dispatchEvent(new CustomEvent('nv-item-expand-after', {
+            detail: { name: this.name },
+            bubbles: true,
+            composed: true
+          }));
         }
-      }, 300);
+      }, duration);
     } else {
       // 收起：先设置为实际高度，然后设置为0
       const currentHeight = this._wrapperElement.scrollHeight;
@@ -89,20 +115,26 @@ export class NvCollapseItem extends Component {
       requestAnimationFrame(() => {
         if (this._wrapperElement && !this.isActive) {
           this._wrapperElement.style.height = '0px';
+          // 过渡结束后派发收起后事件
+          setTimeout(() => {
+            this.dispatchEvent(new CustomEvent('nv-item-collapse-after', {
+              detail: { name: this.name },
+              bubbles: true,
+              composed: true
+            }));
+          }, duration);
         }
       });
     }
   }
 
   /**
-   * 检查是否有title slot内容
-   * 直接检查 Light DOM 中的内容
+   * 是否有 label slot 内容（检查 Light DOM 中 slot="label" 的子节点）
    */
-  protected _hasTitleSlot(): boolean {
-    const titleSlotElements = Array.from(this.children).filter(
-      (child) => child.getAttribute('slot') === 'title'
+  protected get _hasLabelSlot(): boolean {
+    return Array.from(this.children).some(
+      (child) => child.getAttribute('slot') === 'label'
     );
-    return titleSlotElements.length > 0;
   }
 
   protected updated(changedProperties: PropertyValues): void {

@@ -247,7 +247,7 @@ const withSourceCode = (story: any, context: any) => {
       </div>
       <div class="story-source" data-raw-code-promise="${ JSON.stringify({ sourceCode, parser: langInfo.parser }) }">
         <div class="story-source__toolbar">
-          <nv-button type="text" class="story-source__btn" @click="${ async(e: Event) => {
+          <nv-button text class="story-source__btn" @click="${ async(e: Event) => {
             const btn = e.currentTarget as HTMLElement;
             const wrapper = btn.closest('.story-source') as HTMLElement;
             const isExpanded = wrapper.classList.toggle('is-expanded');
@@ -258,7 +258,7 @@ const withSourceCode = (story: any, context: any) => {
             <nv-icon name="arrow-down"></nv-icon>
             显示代码
           </nv-button>
-          <nv-button type="text" class="story-source__btn" @click="${ async(e: Event) => {
+          <nv-button text class="story-source__btn" @click="${ async(e: Event) => {
             const btn = e.currentTarget as HTMLElement;
             const wrapper = btn.closest('.story-source') as HTMLElement;
             const dataStr = wrapper.getAttribute('data-raw-code-promise') || '';

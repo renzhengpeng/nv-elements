@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { marked } from 'marked';
@@ -80,6 +80,12 @@ export const Overview: Story = {
       <h3>基础用法</h3>
       <p>Dropdown 下拉菜单的基本使用</p>
       ${ Basic.render?.(Basic.args as any, {} as any) }
+    </div>
+    <nv-divider></nv-divider>
+    <div class="story-section">
+      <h3>事件</h3>
+      <p>监听 nv-command、nv-menu-item-click、nv-visible-change 等事件</p>
+      ${ Events.render?.(Events.args as any, {} as any) }
     </div>
     <nv-divider></nv-divider>
     <div class="story-section">
@@ -173,6 +179,41 @@ export const Basic: Story = {
       </div>
     </nv-dropdown>
   `
+};
+
+export const Events: Story = {
+  render: () => {
+    const logElId = 'dropdown-events-log';
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <nv-dropdown
+          @nv-command=${ (e: CustomEvent<string>) => {
+            const log = document.getElementById(logElId);
+            if (log) log.innerHTML += `<div>nv-command: ${ e.detail }</div>`;
+          } }
+          @nv-menu-item-click=${ (e: CustomEvent<{ target: HTMLElement; command: string | null }>) => {
+            const log = document.getElementById(logElId);
+            if (log) log.innerHTML += `<div>nv-menu-item-click: command=${ e.detail.command ?? 'null' }</div>`;
+          } }
+          @nv-visible-change=${ (e: CustomEvent<boolean>) => {
+            const log = document.getElementById(logElId);
+            if (log) log.innerHTML += `<div>nv-visible-change: ${ e.detail ? '展开' : '收起' }</div>`;
+          } }
+        >
+          <nv-button slot="trigger" type="primary">操作菜单（查看下方事件日志）</nv-button>
+          <div slot="menu">
+            <nv-option value="edit" label="编辑" command="edit"></nv-option>
+            <nv-option value="delete" label="删除" command="delete"></nv-option>
+            <nv-option value="share" label="分享" command="share"></nv-option>
+          </div>
+        </nv-dropdown>
+        <div>
+          <div style="margin-bottom: 8px; color: #666; font-size: 14px;">事件日志：</div>
+          <div id=${ logElId } style="padding: 12px; background: #f5f5f5; border-radius: 4px; font-size: 13px; font-family: monospace; min-height: 60px;"></div>
+        </div>
+      </div>
+    `;
+  }
 };
 
 export const TriggerTypes: Story = {

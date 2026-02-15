@@ -10,7 +10,12 @@
   display: block;
   position: fixed;
   width: var(--nv-notification-width);
-  z-index: 3000;
+  transition: top 0.15s ease-out, bottom 0.15s ease-out;
+
+  // 初始化时禁用过渡，避免首次渲染时的位置跳动
+  &.no-transition {
+    transition: none;
+  }
 }
 
 // .nv-notification
@@ -22,11 +27,37 @@
   border: 1px solid var(--nv-notification-border-color);
   background-color: var(--nv-notification-background-color);
   box-shadow: var(--nv-notification-box-shadow);
-  transition: opacity 0.3s, transform 0.3s, top 0.4s, bottom 0.4s;
+  transition: opacity 0.2s, transform 0.2s, top 0.2s, bottom 0.2s;
   overflow-wrap: anywhere;
   position: relative;
   display: flex;
   align-items: flex-start;
+
+  // 入场动画初始状态 - 从侧边滑入
+  &.is-entering {
+    opacity: 0;
+  }
+  
+  &.is-right.is-entering {
+    transform: translateX(100%);
+  }
+  
+  &.is-left.is-entering {
+    transform: translateX(-100%);
+  }
+
+  // 关闭动画状态 - 滑出到侧边
+  &.is-closing {
+    opacity: 0;
+  }
+  
+  &.is-right.is-closing {
+    transform: translateX(100%);
+  }
+  
+  &.is-left.is-closing {
+    transform: translateX(-100%);
+  }
 
   // 图标
   &__icon {
@@ -53,13 +84,19 @@
   }
 
   // 标题
-  &__title {
-    font-size: var(--nv-notification-title-font-size);
+  &__label {
+    font-size: var(--nv-notification-label-font-size);
     font-weight: 400;
-    color: var(--nv-notification-title-font-color);
-    margin: 0 0 var(--nv-notification-title-margin-bottom) 0;
+    color: var(--nv-notification-label-font-color);
+    margin: 0 0 var(--nv-notification-label-margin-bottom) 0;
     padding: 0;
-    line-height: var(--nv-notification-title-line-height);
+    line-height: var(--nv-notification-label-line-height);
+
+    // 当标题为空时隐藏（避免占用空间）
+    &:empty {
+      display: none;
+      margin: 0;
+    }
   }
 
   // 内容

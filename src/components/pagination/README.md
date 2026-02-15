@@ -16,6 +16,7 @@ Pagination 分页组件用于展示和切换大量数据的不同页面。内部
 | page-sizes   | 每页显示个数选择器的选项设置 | number[] | —                                    | [10, 20, 30, 40, 50, 100] |
 | pager-count  | 页码按钮的数量               | number   | —                                    | 7                         |
 | size         | 分页尺寸                     | string   | mini / small / medium / large / huge | medium                    |
+| type         | 页码按钮类型                 | string   | default / link                       | default                   |
 | background   | 是否为分页按钮添加背景色     | boolean  | —                                    | false                     |
 | disabled     | 是否禁用                     | boolean  | —                                    | false                     |
 | show-jumper  | 是否显示快速跳转器           | boolean  | —                                    | false                     |
@@ -40,6 +41,9 @@ Pagination 分页组件用于展示和切换大量数据的不同页面。内部
 | --nv-pagination-jumper-text-color     | 跳转器文本颜色           | #606266 |
 | --nv-pagination-jumper-text-font-size | 跳转器文本字体大小       | 14px    |
 | --nv-pagination-jumper-input-width    | 跳转器输入框宽度         | 50px    |
+| --nv-pagination-background-color     | background 为 true 时分页条背景色 | #f5f7fa |
+| --nv-pagination-background-padding    | background 为 true 时分页条内边距 | 4px 8px |
+| --nv-pagination-background-radius    | background 为 true 时分页条圆角   | 4px     |
 
 **注意**：按钮、选择器和输入框的尺寸、字体等样式由 `nv-button`、`nv-select` 和 `nv-input` 组件的 CSS 变量控制。
 

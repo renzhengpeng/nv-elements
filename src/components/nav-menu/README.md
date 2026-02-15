@@ -63,8 +63,8 @@ NavMenu 组件由三个子组件组成：
 | Name          | Description    | CSS Selector            |
 | ------------- | -------------- | ----------------------- |
 | base          | 根属性容器     | `::part(base)`          |
-| title         | 标题容器       | `::part(title)`         |
-| title-content | 标题内容       | `::part(title-content)` |
+| label         | 标题容器       | `::part(label)`         |
+| label-content | 标题内容       | `::part(label-content)` |
 | icon          | 图标容器       | `::part(icon)`          |
 | arrow         | 展开箭头       | `::part(arrow)`         |
 | list          | 子菜单列表容器 | `::part(list)`          |
@@ -76,14 +76,14 @@ NavMenu 组件由三个子组件组成：
 | base    | 根容器元素  | `::part(base)`    |
 | content | 内容包装器  | `::part(content)` |
 | icon    | 图标容器    | `::part(icon)`    |
-| title   | 标题容器    | `::part(title)`   |
+| label   | 标题容器    | `::part(label)`   |
 
 ## Submenu 属性
 
 | 属性     | 说明                                | 类型    | 可选值        | 默认值                        |
 | -------- | ----------------------------------- | ------- | ------------- | ----------------------------- |
 | index    | 唯一标识符                          | string  | —             | ''                            |
-| title    | 标题                                | string  | —             | ''                            |
+| label    | 标题                                | string  | —             | ''                            |
 | disabled | 是否禁用                            | boolean | —             | false                         |
 | opened   | 是否展开                            | boolean | —             | false                         |
 | icon     | 图标（可以是图标类名或 SVG 字符串） | string  | —             | ''                            |

@@ -29,7 +29,8 @@ const template = function(this: NvNotification, context: Context) {
       this.position === 'top-left' || this.position === 'bottom-left'
   });
 
-  const iconName =
+  // 确定使用的图标名称：优先使用自定义 icon，否则根据 type 映射
+  const defaultIconName =
     this.type === 'success'
       ? 'success'
       : this.type === 'warning'
@@ -39,6 +40,8 @@ const template = function(this: NvNotification, context: Context) {
           : this.type === 'error'
             ? 'error'
             : 'info';
+  
+  const iconName = this.icon || defaultIconName;
 
   return html`
     <div
@@ -50,7 +53,9 @@ const template = function(this: NvNotification, context: Context) {
       ${ this.showIcon
         ? html`
             <div part="icon" class=${ classNamesConfig.elements.icon }>
-              <nv-icon name=${ iconName }></nv-icon>
+              <slot name="icon">
+                <nv-icon name=${ iconName }></nv-icon>
+              </slot>
             </div>
           `
         : null }
@@ -58,13 +63,13 @@ const template = function(this: NvNotification, context: Context) {
         <div part="main" class=${ classNamesConfig.elements.main }>
           ${ this.label
             ? html`
-                <div part="title" class=${ classNamesConfig.elements.title }>
-                  <slot name="title">${ this.label }</slot>
+                <div part="label" class=${ classNamesConfig.elements.label }>
+                  <slot name="label">${ this.label }</slot>
                 </div>
               `
-            : html`<slot name="title"></slot>` }
+            : html`<slot name="label"></slot>` }
           <div part="content" class=${ classNamesConfig.elements.content }>
-            <slot>${ this.message }</slot>
+            <slot name="content">${ this.message }</slot>
           </div>
         </div>
         ${ this.closable
@@ -74,7 +79,7 @@ const template = function(this: NvNotification, context: Context) {
                 class=${ classNamesConfig.elements.closeBtn }
                 @click=${ _handleClose }
               >
-                <nv-icon name="close"></nv-icon>
+                <nv-icon name=${ this.closeIcon }></nv-icon>
               </div>
             `
           : null }

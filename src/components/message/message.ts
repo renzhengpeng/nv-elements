@@ -184,12 +184,12 @@ export const message = Object.assign(
      * 关闭所有消息
      */
     closeAll: () => {
-      instances.forEach(instance => {
+      const instancesToClose = instances.slice();
+      instancesToClose.forEach(instance => {
         if (instance.isConnected) {
           instance.close();
         }
       });
-      instances.length = 0;
     },
 
     /**

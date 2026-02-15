@@ -120,8 +120,8 @@ submenu.addEventListener("submenu-open", (e) => {
 | Name          | Description    | CSS Selector            |
 | ------------- | -------------- | ----------------------- |
 | base          | 根属性容器     | `::part(base)`          |
-| title         | 标题容器       | `::part(title)`         |
-| title-content | 标题内容       | `::part(title-content)` |
+| label         | 标题容器       | `::part(label)`         |
+| label-content | 标题内容       | `::part(label-content)` |
 | icon          | 图标容器       | `::part(icon)`          |
 | arrow         | 展开箭头       | `::part(arrow)`         |
 | list          | 子菜单列表容器 | `::part(list)`          |

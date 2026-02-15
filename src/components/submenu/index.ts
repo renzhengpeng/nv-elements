@@ -453,6 +453,19 @@ export class NvSubmenu extends Component {
       this.nested = true;
     }
 
+    // 监听子菜单项点击事件，点击后关闭浮层
+    this.addEventListener('nv-menu-item-select', () => {
+      // 在水平模式或折叠模式下，点击子菜单项后关闭浮层
+      if (this.opened && (this._isHorizontalMode() || this.collapsed)) {
+        this.opened = false;
+        this.dispatchEvent(new CustomEvent('nv-submenu-close', {
+          detail: this.index,
+          bubbles: true,
+          composed: true
+        }));
+      }
+    });
+
     // 使用 nextTick 确保 shadowRoot 已渲染
     requestAnimationFrame(() => {
       this._listElement = this.shadowRoot?.querySelector('.nv-submenu__list') as HTMLElement;

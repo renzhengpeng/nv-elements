@@ -34,6 +34,11 @@ const meta: Meta = {
       options: ['mini', 'small', 'medium', 'large', 'huge'],
       description: '分页尺寸'
     },
+    type: {
+      control: 'select',
+      options: ['default', 'link'],
+      description: '页码按钮类型'
+    },
     disabled: {
       control: 'boolean',
       description: '是否禁用'
@@ -70,6 +75,16 @@ export const Overview: Story = {
       </nv-divider>
 
       <div class="examples-section">
+        <div class="example-item">
+          <h3 class="example-title">按钮类型</h3>
+          <p class="example-desc">支持 default（默认有边框）和 link（无边框和背景色）两种类型</p>
+          <div class="example-demo">
+            ${ ButtonTypes.render?.({} as any, {} as any) }
+          </div>
+        </div>
+
+        <nv-divider></nv-divider>
+
         <div class="example-item">
           <h3 class="example-title">带背景色</h3>
           <p class="example-desc">设置 background 属性可以显示背景色</p>
@@ -221,6 +236,7 @@ export const Default: Story = {
       total="${ args.total }"
       pagerCount="${ args.pagerCount }"
       size="${ args.size }"
+      type="${ args.type }"
       ?disabled="${ args.disabled }"
       ?background="${ args.background }"
       ?show-jumper="${ args.showJumper }"
@@ -234,10 +250,26 @@ export const Default: Story = {
     total: 100,
     pagerCount: 7,
     size: 'medium',
+    type: 'default',
     disabled: false,
     background: false,
     showJumper: false
   }
+};
+
+export const ButtonTypes: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <div>
+        <h4 style="margin: 0 0 12px 0; color: #666;">默认类型（有边框）</h4>
+        <nv-pagination currentPage="3" pageSize="10" total="100" type="default"></nv-pagination>
+      </div>
+      <div>
+        <h4 style="margin: 0 0 12px 0; color: #666;">链接类型（无边框和背景色）</h4>
+        <nv-pagination currentPage="3" pageSize="10" total="100" type="link"></nv-pagination>
+      </div>
+    </div>
+  `
 };
 
 export const WithBackground: Story = {
