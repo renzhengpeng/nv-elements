@@ -5,6 +5,7 @@ import { marked } from 'marked';
 import './index';
 import '../divider/index';
 import '../button/index';
+import '../icon/index';
 import { Message } from '../message/message';
 import readmeMd from './README.md?raw';
 
@@ -69,6 +70,10 @@ const meta: Meta = {
       control: 'boolean',
       description: '是否显示箭头'
     },
+    distance: {
+      control: { type: 'number', min: 0, max: 32, step: 2 },
+      description: '弹出层与触发元素的距离（像素）'
+    },
     disabled: {
       control: 'boolean',
       description: '是否禁用（禁用后无法通过触发器激活）'
@@ -105,6 +110,25 @@ export const Overview: Story = {
           </div>
         </div>
 
+        <nv-divider></nv-divider>
+
+        <div class="example-item">
+          <h3 class="example-title">Label 插槽</h3>
+          <p class="example-desc">使用 label 插槽自定义标题（富文本、图标等）</p>
+          <div class="example-demo">
+            ${ LabelSlot.render?.({} as any, {} as any) }
+          </div>
+        </div>
+
+        <nv-divider></nv-divider>
+
+        <div class="example-item">
+          <h3 class="example-title">Distance</h3>
+          <p class="example-desc">弹出层与触发元素的距离（distance 属性）</p>
+          <div class="example-demo">
+            ${ DistanceExample.render?.({} as any, {} as any) }
+          </div>
+        </div>
 
         <nv-divider></nv-divider>
 
@@ -142,8 +166,8 @@ export const Overview: Story = {
         <nv-divider></nv-divider>
 
         <div class="example-item">
-          <h3 class="example-title">Long Title</h3>
-          <p class="example-desc">Long Title 示例</p>
+          <h3 class="example-title">Long Label</h3>
+          <p class="example-desc">Long Label 示例</p>
           <div class="example-demo">
             ${ LongTitle.render?.({} as any, {} as any) }
           </div>
@@ -291,7 +315,7 @@ export const Default: Story = {
   render: (args) => html`
     <div style="padding: 100px; text-align: center;">
       <nv-popconfirm
-        .label="${ args.title }"
+        .label="${ args.label }"
         .confirmButtonText="${ args.confirmButtonText }"
         .cancelButtonText="${ args.cancelButtonText }"
         .confirmButtonType="${ args.confirmButtonType }"
@@ -303,6 +327,7 @@ export const Default: Story = {
         .placement="${ args.placement }"
         .trigger="${ args.trigger }"
         .arrow="${ args.arrow }"
+        .distance=${ args.distance }
         .disabled="${ args.disabled }"
         @confirm="${ () => {
           console.log('✅ 确认事件触发');
@@ -330,8 +355,94 @@ export const Default: Story = {
     placement: 'top',
     trigger: 'click',
     arrow: true,
+    distance: 8,
     disabled: false
   }
+};
+
+export const LabelSlot: Story = {
+  render: () => html`
+    <div style="padding: 100px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; align-items: center;">
+      <nv-popconfirm
+        @confirm="${ () => Message.success({ message: '已确认', duration: 2000 }) }"
+        @cancel="${ () => Message.info({ message: '已取消', duration: 2000 }) }"
+      >
+        <nv-button type="danger">删除</nv-button>
+        <span slot="label">
+          <strong>确认删除？</strong> 此操作不可恢复。
+        </span>
+      </nv-popconfirm>
+
+      <nv-popconfirm
+        @confirm="${ () => Message.success({ message: '已确认', duration: 2000 }) }"
+        @cancel="${ () => Message.info({ message: '已取消', duration: 2000 }) }"
+      >
+        <nv-button type="primary">提交</nv-button>
+        <span slot="label" style="display: inline-flex; align-items: center; gap: 6px;">
+          <nv-icon name="warning" style="color: #e6a23c;"></nv-icon>
+          确定要提交当前表单吗？
+        </span>
+      </nv-popconfirm>
+
+      <nv-popconfirm
+        @confirm="${ () => Message.success({ message: '已保存', duration: 2000 }) }"
+        @cancel="${ () => Message.info({ message: '已取消', duration: 2000 }) }"
+      >
+        <nv-button type="success">保存</nv-button>
+        <div slot="label" style="line-height: 1.5;">
+          <div style="font-weight: 600; margin-bottom: 4px;">保存前确认</div>
+          <div style="font-size: 13px; color: #909399;">未保存的修改将会丢失</div>
+        </div>
+      </nv-popconfirm>
+    </div>
+  `
+};
+
+export const DistanceExample: Story = {
+  render: () => html`
+    <div style="padding: 100px; display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; align-items: center;">
+      <div style="text-align: center;">
+        <nv-popconfirm
+          .label="${ 'distance=4' }"
+          .distance=${ 4 }
+          @confirm="${ () => Message.success({ message: '已确认', duration: 2000 }) }"
+        >
+          <nv-button>4px</nv-button>
+        </nv-popconfirm>
+        <div style="margin-top: 8px; font-size: 12px; color: #909399;">distance: 4</div>
+      </div>
+      <div style="text-align: center;">
+        <nv-popconfirm
+          .label="${ 'distance=8（默认）' }"
+          .distance=${ 8 }
+          @confirm="${ () => Message.success({ message: '已确认', duration: 2000 }) }"
+        >
+          <nv-button>8px</nv-button>
+        </nv-popconfirm>
+        <div style="margin-top: 8px; font-size: 12px; color: #909399;">distance: 8（默认）</div>
+      </div>
+      <div style="text-align: center;">
+        <nv-popconfirm
+          .label="${ 'distance=16' }"
+          .distance=${ 16 }
+          @confirm="${ () => Message.success({ message: '已确认', duration: 2000 }) }"
+        >
+          <nv-button>16px</nv-button>
+        </nv-popconfirm>
+        <div style="margin-top: 8px; font-size: 12px; color: #909399;">distance: 16</div>
+      </div>
+      <div style="text-align: center;">
+        <nv-popconfirm
+          .label="${ 'distance=24' }"
+          .distance=${ 24 }
+          @confirm="${ () => Message.success({ message: '已确认', duration: 2000 }) }"
+        >
+          <nv-button>24px</nv-button>
+        </nv-popconfirm>
+        <div style="margin-top: 8px; font-size: 12px; color: #909399;">distance: 24</div>
+      </div>
+    </div>
+  `
 };
 
 export const Placements: Story = {

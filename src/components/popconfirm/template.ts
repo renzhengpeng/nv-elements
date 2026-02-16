@@ -29,8 +29,8 @@ const template = function(this: NvPopconfirm, context: Context) {
       </div>
 
       <div part="body" class=${ classNamesConfig.block }>
-        <div part="title" class=${ classNamesConfig.elements.title }>
-          ${ this.label }
+        <div part="label" class=${ classNamesConfig.elements.label }>
+          <slot name="label">${ this.label }</slot>
         </div>
         <div part="actions" class=${ classNamesConfig.elements.actions }>
           <nv-button

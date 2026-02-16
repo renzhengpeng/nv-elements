@@ -22,7 +22,7 @@ import '../popup/index';
 @customElement('nv-popconfirm')
 export class NvPopconfirm extends Component {
   /**
-   * 标题
+   * 标题（未使用 label 插槽时生效）
    */
   @property({ type: String, reflect: true })
   label: string = '确定要删除吗？';

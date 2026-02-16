@@ -10,7 +10,7 @@ Popconfirm 气泡确认框组件基于 Popover 组件实现，提供简单的确
 
 | 属性名              | 说明                                                                                                                            | 类型    | 可选值                                                                                                                          | 默认值  |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| label               | 标题                                                                                                                            | string  | —                                                                                                                               | 确定要删除吗？ |
+| label               | 标题（未使用 label 插槽时生效）                                                                                                 | string  | —                                                                                                                               | 确定要删除吗？ |
 | confirm-button-text | 确认按钮文字                                                                                                                    | string  | —                                                                                                                               | 确定    |
 | cancel-button-text  | 取消按钮文字                                                                                                                    | string  | —                                                                                                                               | 取消    |
 | confirm-button-type | 确认按钮类型（对应 nv-button 的 type，不含 text）                                                                               | string  | default / primary / success / warning / danger / info                                                                          | primary |
@@ -34,10 +34,11 @@ Popconfirm 气泡确认框组件基于 Popover 组件实现，提供简单的确
 
 ## 插槽
 
-| 插槽名    | 说明                       |
-| --------- | -------------------------- |
-| default   | 触发 Popconfirm 显示的元素 |
-| reference | 同 default                 |
+| 插槽名    | 说明                                                                 |
+| --------- | -------------------------------------------------------------------- |
+| default   | 触发 Popconfirm 显示的元素                                          |
+| reference | 同 default                                                          |
+| label     | 自定义标题内容（支持富文本、图标等）；未提供时使用 `label` 属性文本 |
 
 ## CSS 变量
 
@@ -52,5 +53,5 @@ Popconfirm 气泡确认框组件基于 Popover 组件实现，提供简单的确
 | base    | 根属性容器（Popup） | `::part(base)`    |
 | trigger | 触发器容器          | `::part(trigger)` |
 | body    | 内容容器            | `::part(body)`    |
-| title   | 标题文本            | `::part(title)`   |
+| label   | 标题文本            | `::part(label)`   |
 | actions | 按钮区域            | `::part(actions)` |
