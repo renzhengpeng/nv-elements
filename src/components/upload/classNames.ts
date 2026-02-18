@@ -23,7 +23,9 @@ const classNames = {
     disabled: 'is-disabled',
     drag: 'is-drag',
     fileNameSuccess: `${ BLOCK }__file-name--success`,
-    fileNameFail: `${ BLOCK }__file-name--fail`
+    fileNameFail: `${ BLOCK }__file-name--fail`,
+    fileItemRemoving: `${ BLOCK }__file-item--removing`,
+    fileItemEntering: `${ BLOCK }__file-item--entering`
   }
 };
 

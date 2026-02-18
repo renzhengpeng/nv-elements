@@ -113,10 +113,27 @@ export class NvUpload extends Component {
   required: boolean = false;
 
   /**
+   * 用于为每个文件项分配唯一 id，供列表 key 使用，避免删除时 Lit 复用 DOM 导致下方项跳动
+   */
+  private _fileIdCounter: number = 0;
+
+  /**
+   * 刚加入列表、正在播放进入过渡的文件项 id 集合，一帧后移除 class 以触发过渡
+   */
+  private _enteringIds: Set<number> = new Set();
+
+  /**
+   * 正在执行删除过渡的项索引，过渡结束后再真正从列表移除
+   */
+  @state()
+  private _removingIndex: number | null = null;
+
+  /**
    * 文件列表
    */
   @state()
   private _fileList: Array<{
+    id: number;
     name: string;
     url?: string;
     thumbUrl?: string;
@@ -164,11 +181,21 @@ export class NvUpload extends Component {
    */
   private _addFile(file: File): void {
     const fileItem = {
+      id: ++this._fileIdCounter,
       name: file.name,
       status: 'ready' as const,
       file
     };
     this._fileList = [...this._fileList, fileItem];
+    this._enteringIds.add(fileItem.id);
+    this.requestUpdate();
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this._enteringIds.delete(fileItem.id);
+        this.requestUpdate();
+      });
+    });
 
     // 如果是图片文件，生成缩略图
     if (this._isImageFile(file)) {
@@ -313,26 +340,39 @@ export class NvUpload extends Component {
   }
 
   /**
-   * 处理文件删除
+   * 删除项过渡时长（与 CSS 一致）
+   */
+  private static readonly _REMOVE_TRANSITION_MS = 220;
+
+  /**
+   * 处理文件删除（先播删除过渡，再真正移除并派发事件）
    */
   protected _handleRemove(index: number): void {
+    if (this._removingIndex !== null) return;
     const removedFile = this._fileList[index];
-    this._fileList.splice(index, 1);
-    this._fileList = [...this._fileList];
-    this.dispatchEvent(new CustomEvent('nv-remove', {
-      detail: { file: removedFile, fileList: this._fileList },
-      bubbles: true,
-      composed: true
-    }));
-    this.dispatchEvent(new CustomEvent('nv-change', {
-      detail: { file: removedFile, fileList: this._fileList },
-      bubbles: true,
-      composed: true
-    }));
-    if (!this.autoUpload) {
-      this._updateFormValue();
-      this._updateValidity();
-    }
+    this._removingIndex = index;
+    this.requestUpdate();
+
+    setTimeout(() => {
+      this._fileList.splice(index, 1);
+      this._fileList = [...this._fileList];
+      this._removingIndex = null;
+      this.dispatchEvent(new CustomEvent('nv-remove', {
+        detail: { file: removedFile, fileList: this._fileList },
+        bubbles: true,
+        composed: true
+      }));
+      this.dispatchEvent(new CustomEvent('nv-change', {
+        detail: { file: removedFile, fileList: this._fileList },
+        bubbles: true,
+        composed: true
+      }));
+      if (!this.autoUpload) {
+        this._updateFormValue();
+        this._updateValidity();
+      }
+      this.requestUpdate();
+    }, NvUpload._REMOVE_TRANSITION_MS);
   }
 
   /**
@@ -450,7 +490,9 @@ export class NvUpload extends Component {
       _handleDragOver: this._handleDragOver.bind(this),
       _handleDrop: this._handleDrop.bind(this),
       _handleDragAreaClick: this._handleDragAreaClick.bind(this),
-      _fileList: this._fileList
+      _fileList: this._fileList,
+      _removingIndex: this._removingIndex,
+      _enteringIds: this._enteringIds
     });
   }
 

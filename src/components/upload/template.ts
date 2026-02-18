@@ -16,16 +16,19 @@ interface Context {
   _handleDrop: (event: DragEvent) => void;
   _handleDragAreaClick: () => void;
   _fileList: Array<{
+    id: number;
     name: string;
     url?: string;
     thumbUrl?: string;
     status: 'ready' | 'uploading' | 'success' | 'fail';
     file?: File;
   }>;
+  _removingIndex: number | null;
+  _enteringIds: Set<number>;
 }
 
 const template = function(this: NvUpload, context: Context) {
-  const { _handleFileSelect, _handleRemove, _handleDragOver, _handleDrop, _handleDragAreaClick, _fileList } = context;
+  const { _handleFileSelect, _handleRemove, _handleDragOver, _handleDrop, _handleDragAreaClick, _fileList, _removingIndex, _enteringIds } = context;
 
   const classMapResult = classMap({
     [classNamesConfig.block]: true,
@@ -71,12 +74,15 @@ const template = function(this: NvUpload, context: Context) {
       ${ _fileList.length > 0
         ? html`
             <ul part="list" class=${ classNamesConfig.elements.fileList }>
-              ${ litRepeat(_fileList, (_item, i) => i, (item, i) => {
+              ${ litRepeat(_fileList, (item) => item.id, (item, i) => {
                 const isImage = item.thumbUrl || (item.url && /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(item.name));
                 const imageUrl = item.thumbUrl || item.url;
 
                 return html`
-                  <li part="item" class=${ classNamesConfig.elements.fileItem }>
+                  <li
+                    part="item"
+                    class="${ classNamesConfig.elements.fileItem }${ _removingIndex === i ? ` ${ classNamesConfig.modifiers.fileItemRemoving }` : '' }${ _enteringIds.has(item.id) ? ` ${ classNamesConfig.modifiers.fileItemEntering }` : '' }"
+                  >
                     ${ isImage && imageUrl
                       ? html`
                           <div part="thumb" class=${ classNamesConfig.elements.fileThumb }>

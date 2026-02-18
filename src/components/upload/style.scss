@@ -77,11 +77,35 @@
     border-radius: var(--nv-upload-file-item-border-radius, 2px);
     margin-bottom: var(--nv-upload-file-item-margin-bottom, 4px);
     position: relative;
-    transition: background-color 0.3s ease;
+    max-height: 80px;
+    overflow: hidden;
+    transition: background-color 0.3s ease,
+      opacity var(--nv-upload-file-item-remove-duration, 0.22s) ease,
+      max-height var(--nv-upload-file-item-remove-duration, 0.22s) ease,
+      margin-bottom var(--nv-upload-file-item-remove-duration, 0.22s) ease,
+      padding-top var(--nv-upload-file-item-remove-duration, 0.22s) ease,
+      padding-bottom var(--nv-upload-file-item-remove-duration, 0.22s) ease;
 
     &:hover {
       cursor: pointer;
       background-color: var(--nv-upload-file-item-background-color-hover, #eef1f6);
+    }
+
+    &--entering {
+      opacity: 0;
+      max-height: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &--removing {
+      opacity: 0;
+      max-height: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      pointer-events: none;
     }
   }
 
