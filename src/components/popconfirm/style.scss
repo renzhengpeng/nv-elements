@@ -20,11 +20,11 @@
   // 不需要容器样式，直接使用 popup 提供的背景、边框、阴影等
   // 只定义内部元素的样式
   
-  &__title {
-    margin-bottom: var(--nv-popconfirm-title-margin-bottom, 12px);
-    color: var(--nv-popconfirm-title-color, #606266);
-    font-size: var(--nv-popconfirm-title-font-size, 14px);
-    line-height: var(--nv-popconfirm-title-line-height, 1.5);
+  &__label {
+    margin-bottom: var(--nv-popconfirm-label-margin-bottom, 12px);
+    color: var(--nv-popconfirm-label-color, #606266);
+    font-size: var(--nv-popconfirm-label-font-size, 14px);
+    line-height: var(--nv-popconfirm-label-line-height, 1.5);
   }
 
   &__actions {

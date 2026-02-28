@@ -64,7 +64,20 @@
     transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
                 background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
 
-    // 选中状态的对勾
+    // 半选横条（独立 ::before，半选→未选时只淡出横条，不触发勾的动画）
+    &::before {
+      content: '';
+      position: absolute;
+      left: var(--nv-checkbox-indeterminate-left);
+      top: var(--nv-checkbox-indeterminate-top);
+      width: var(--nv-checkbox-indeterminate-width);
+      height: var(--nv-checkbox-indeterminate-height);
+      background-color: var(--nv-checkbox-indeterminate-background-color);
+      opacity: 0;
+      transition: opacity 0.12s ease-out;
+    }
+
+    // 选中状态的对勾（仅用于全选，半选时由 .is-indeterminate 隐藏）
     &::after {
       box-sizing: content-box;
       content: '';
@@ -107,22 +120,20 @@
     }
   }
 
-  // .nv-checkbox.is-indeterminate（半选状态）
+  // .nv-checkbox.is-indeterminate（半选状态：横条用 ::before，隐藏 ::after 勾避免过渡时出现旋转勾）
   &.is-indeterminate {
     .nv-checkbox__input {
       background-color: var(--nv-checkbox-input-background-color-checked);
       border-color: var(--nv-checkbox-input-border-color-checked);
 
+      &::before {
+        opacity: 1;
+      }
+
       &::after {
-        content: '';
-        position: absolute;
-        left: var(--nv-checkbox-indeterminate-left);
-        top: var(--nv-checkbox-indeterminate-top);
-        width: var(--nv-checkbox-indeterminate-width);
-        height: var(--nv-checkbox-indeterminate-height);
-        background-color: var(--nv-checkbox-indeterminate-background-color);
-        transform: scale(1);
-        border: none;
+        opacity: 0;
+        transform: rotate(45deg) scaleY(0);
+        pointer-events: none;
       }
     }
 
@@ -169,7 +180,7 @@
         background-color: var(--nv-checkbox-input-background-color-disabled-indeterminate);
         border-color: var(--nv-checkbox-input-border-color-disabled);
 
-        &::after {
+        &::before {
           background-color: var(--nv-checkbox-indeterminate-background-color-disabled);
         }
       }

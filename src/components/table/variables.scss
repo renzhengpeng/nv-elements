@@ -1,0 +1,62 @@
+/*
+ * @Descripttion: table 组件变量
+ * @creater: zhengpeng.ren
+ * @since: 2025-02-18
+ */
+:root {
+  --nv-table-row-height: 40px;
+  --nv-table-header-height: 40px;
+  --nv-table-border-color: #ebeef5;
+  --nv-table-border-width: 1px;
+  --nv-table-header-background-color: #f5f7fa;
+  --nv-table-header-text-color: #909399;
+  --nv-table-header-font-size: 14px;
+  --nv-table-header-font-weight: 500;
+  --nv-table-cell-padding: 12px 0;
+  --nv-table-cell-text-color: #606266;
+  --nv-table-cell-font-size: 14px;
+  --nv-table-row-background-color: #fff;
+  --nv-table-row-background-color-stripe: #fafafa;
+  --nv-table-row-background-color-hover: #f5f7fa;
+  --nv-table-row-background-color-current: #ecf5ff;
+  --nv-table-empty-text-color: #909399;
+  --nv-table-empty-text-font-size: 14px;
+
+  /***************************************************** size start *********************************************************/
+  --nv-table-row-height-mini: 28px;
+  --nv-table-row-height-small: 32px;
+  --nv-table-row-height-medium: 40px;
+  --nv-table-row-height-large: 48px;
+  --nv-table-row-height-huge: 56px;
+
+  --nv-table-header-height-mini: 28px;
+  --nv-table-header-height-small: 32px;
+  --nv-table-header-height-medium: 40px;
+  --nv-table-header-height-large: 48px;
+  --nv-table-header-height-huge: 56px;
+
+  --nv-table-header-font-size-mini: var(--nv-font-size-mini);
+  --nv-table-header-font-size-small: var(--nv-font-size-small);
+  --nv-table-header-font-size-medium: var(--nv-font-size-medium);
+  --nv-table-header-font-size-large: var(--nv-font-size-large);
+  --nv-table-header-font-size-huge: var(--nv-font-size-huge);
+
+  --nv-table-cell-padding-mini: var(--nv-padding-mini) 0;
+  --nv-table-cell-padding-small: var(--nv-padding-small) 0;
+  --nv-table-cell-padding-medium: var(--nv-padding-medium) 0;
+  --nv-table-cell-padding-large: var(--nv-padding-large) 0;
+  --nv-table-cell-padding-huge: var(--nv-padding-huge) 0;
+
+  --nv-table-cell-font-size-mini: var(--nv-font-size-mini);
+  --nv-table-cell-font-size-small: var(--nv-font-size-small);
+  --nv-table-cell-font-size-medium: var(--nv-font-size-medium);
+  --nv-table-cell-font-size-large: var(--nv-font-size-large);
+  --nv-table-cell-font-size-huge: var(--nv-font-size-huge);
+
+  --nv-table-empty-text-font-size-mini: var(--nv-font-size-mini);
+  --nv-table-empty-text-font-size-small: var(--nv-font-size-small);
+  --nv-table-empty-text-font-size-medium: var(--nv-font-size-medium);
+  --nv-table-empty-text-font-size-large: var(--nv-font-size-large);
+  --nv-table-empty-text-font-size-huge: var(--nv-font-size-huge);
+  /***************************************************** size end *********************************************************/
+}

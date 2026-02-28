@@ -8,7 +8,7 @@ const BLOCK = 'nv-popconfirm';
 const classNames = {
   block: BLOCK,
   elements: {
-    title: `${ BLOCK }__title`,
+    label: `${ BLOCK }__label`,
     actions: `${ BLOCK }__actions`
   },
   modifiers: {}

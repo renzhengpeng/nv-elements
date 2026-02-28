@@ -69,14 +69,12 @@
   &__icon {
     font-size: var(--nv-rate-icon-size-medium);
     color: var(--nv-rate-icon-color, #c0c4cc);
-    transition: color var(--nv-rate-icon-transition-duration, 0.2s), transform var(--nv-rate-icon-transition-duration, 0.2s);
+    transition: color var(--nv-rate-icon-transition-duration, 0.2s);
     display: block;
     line-height: 1;
 
     &.is-active {
       color: var(--nv-rate-icon-color-active, #f7ba2a);
-      // 实心星图标路径通常比空心星内收，放大后视觉上与空心星一致或略大
-      transform: scale(var(--nv-rate-icon-active-scale, 1.15));
     }
   }
 

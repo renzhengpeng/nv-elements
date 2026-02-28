@@ -1,4 +1,4 @@
-﻿/*
+/*
  * @Descripttion: radio组件html模板
  * @creater: zhengpeng.ren
  * @since: 2024-12-19
@@ -53,10 +53,13 @@ const template = function(this: NvRadio, context: Context) {
         ? html`<span part="input" class="${ classNamesConfig.block }__input"></span>`
         : null
       }
-      <span part="label" class="${ classNamesConfig.block }__label">
-        <slot></slot>
-        ${ this.label ? html`${ this.label }` : null }
-      </span>
+      ${ this.label != null && this.label !== ''
+        ? html`<span part="label" class="${ classNamesConfig.block }__label">
+            <slot></slot>
+            ${ this.label }
+          </span>`
+        : html`<slot></slot>`
+      }
     </label>
   `;
 };
