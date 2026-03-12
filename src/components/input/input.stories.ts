@@ -51,6 +51,11 @@ const meta: Meta = {
       control: 'boolean',
       description: '是否显示字数统计'
     },
+    wordLimitPosition: {
+      control: 'select',
+      options: ['inside', 'outside'],
+      description: '字数统计显示位置'
+    },
     max: {
       control: 'number',
       description: '数字输入框的最大值（仅当type为number时有效）'
@@ -193,7 +198,7 @@ export const Overview: Story = {
 
       <div class="story-section">
         <h3>密码框</h3>
-        <p>使用 show-password 属性即可得到一个可切换显示隐藏的密码框</p>
+        <p>使用 show-password-toggle 属性即可得到一个可切换显示隐藏的密码框</p>
         ${ Password.render?.(Password.args as any, {} as any) }
       </div>
 
@@ -257,7 +262,7 @@ export const Default: Story = {
       ?readonly="${ args.readonly }"
       type="${ args.type }"
       ?clearable="${ args.clearable }"
-      ?show-password="${ args.showPassword }"
+      .showPasswordToggle="${ args.showPasswordToggle }"
       maxlength="${ args.maxlength }"
       ?show-word-limit="${ args.showWordLimit }"
       prefix-icon="${ args.prefixIcon }"
@@ -274,7 +279,7 @@ export const Default: Story = {
     readonly: false,
     type: 'text',
     clearable: false,
-    showPassword: false,
+    showPasswordToggle: false,
     maxlength: undefined,
     showWordLimit: false,
     prefixIcon: '',
@@ -316,7 +321,7 @@ export const Clearable: Story = {
 export const Password: Story = {
   render: () => html`
     <div style="display: flex; flex-direction: column; gap: 16px; width: 300px;">
-      <nv-input type="password" placeholder="请输入密码" show-password></nv-input>
+      <nv-input type="password" placeholder="请输入密码" show-password-toggle></nv-input>
     </div>
   `
 };
@@ -332,8 +337,22 @@ export const Textarea: Story = {
 export const WordLimit: Story = {
   render: () => html`
     <div style="display: flex; flex-direction: column; gap: 16px; width: 300px;">
-      <nv-input maxlength="20" show-word-limit placeholder="最多输入20个字符"></nv-input>
-      <nv-input type="textarea" maxlength="100" show-word-limit placeholder="最多输入100个字符" rows="4"></nv-input>
+      <div>
+        <div style="margin-bottom: 8px; color: #666; font-size: 12px;">外部显示（默认）</div>
+        <nv-input maxlength="20" show-word-limit placeholder="最多输入20个字符"></nv-input>
+      </div>
+      <div>
+        <div style="margin-bottom: 8px; color: #666; font-size: 12px;">内部显示</div>
+        <nv-input maxlength="20" show-word-limit word-limit-position="inside" placeholder="最多输入20个字符"></nv-input>
+      </div>
+      <div>
+        <div style="margin-bottom: 8px; color: #666; font-size: 12px;">Textarea 外部显示</div>
+        <nv-input type="textarea" maxlength="100" show-word-limit placeholder="最多输入100个字符" rows="4"></nv-input>
+      </div>
+      <div>
+        <div style="margin-bottom: 8px; color: #666; font-size: 12px;">Textarea 内部显示</div>
+        <nv-input type="textarea" maxlength="100" show-word-limit word-limit-position="inside" placeholder="最多输入100个字符" rows="4"></nv-input>
+      </div>
     </div>
   `
 };
@@ -423,7 +442,7 @@ export const CombinedFeatures: Story = {
       <nv-input
         placeholder="密码输入框"
         type="password"
-        show-password
+        show-password-toggle
         prefix-icon="lock"
       ></nv-input>
       <nv-input
@@ -481,6 +500,180 @@ export const FormAssociated: Story = {
         </div>
       </form>
       <p style="font-size: 12px; color: #909399; margin: 0;">支持 name、form、required；提交时参与 form.reportValidity()，重置时通过 formResetCallback 恢复默认值。</p>
+    </div>
+  `
+};
+
+/** 综合测试：多功能叠加使用 */
+export const ComprehensiveTest: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 24px; width: 400px;">
+      <h3 style="margin: 0; font-size: 16px; color: #303133;">综合功能测试</h3>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">前缀图标 + 清空 + 字数限制（外部）</label>
+        <nv-input
+          placeholder="请输入用户名"
+          prefix-icon="user"
+          clearable
+          maxlength="20"
+          show-word-limit
+          word-limit-position="outside"
+          value="测试用户"
+        ></nv-input>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">后缀图标 + 清空 + 字数限制（内部）</label>
+        <nv-input
+          placeholder="请输入邮箱"
+          suffix-icon="message"
+          clearable
+          maxlength="30"
+          show-word-limit
+          word-limit-position="inside"
+          value="test@example.com"
+        ></nv-input>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">密码框 + 前缀图标 + 清空 + 字数限制</label>
+        <nv-input
+          type="password"
+          placeholder="请输入密码"
+          prefix-icon="lock"
+          .showPassword="${true}"
+          clearable
+          maxlength="16"
+          show-word-limit
+          word-limit-position="outside"
+          value="password123"
+        ></nv-input>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">前置内容 + 前缀图标 + 清空</label>
+        <nv-input
+          placeholder="请输入网址"
+          prefix-icon="link"
+          clearable
+          value="example.com"
+        >
+          <span slot="prepend">https://</span>
+        </nv-input>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">后置内容 + 后缀图标 + 清空</label>
+        <nv-input
+          placeholder="请输入价格"
+          suffix-icon="money"
+          clearable
+          value="99.99"
+        >
+          <span slot="append">.00</span>
+        </nv-input>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">前后置按钮 + 清空</label>
+        <nv-input
+          placeholder="请输入搜索内容"
+          clearable
+          value="搜索关键词"
+        >
+          <nv-button slot="prepend" size="small">选择</nv-button>
+          <nv-button slot="append" size="small" type="primary">搜索</nv-button>
+        </nv-input>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">文本域 + 清空 + 字数限制（外部）</label>
+        <nv-input
+          type="textarea"
+          placeholder="请输入描述信息"
+          rows="4"
+          clearable
+          maxlength="200"
+          show-word-limit
+          word-limit-position="outside"
+          value="这是一段测试文本，用于展示文本域的多功能叠加效果。"
+        ></nv-input>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">文本域 + 清空 + 字数限制（内部）</label>
+        <nv-input
+          type="textarea"
+          placeholder="请输入备注"
+          rows="3"
+          clearable
+          maxlength="100"
+          show-word-limit
+          word-limit-position="inside"
+          value="内部字数统计示例"
+        ></nv-input>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">禁用状态 + 多功能</label>
+        <nv-input
+          placeholder="禁用状态"
+          prefix-icon="user"
+          suffix-icon="message"
+          clearable
+          maxlength="20"
+          show-word-limit
+          disabled
+          value="禁用状态测试"
+        ></nv-input>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">只读状态 + 多功能</label>
+        <nv-input
+          placeholder="只读状态"
+          prefix-icon="lock"
+          clearable
+          maxlength="20"
+          show-word-limit
+          readonly
+          value="只读状态测试"
+        ></nv-input>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 14px; color: #606266;">不同尺寸 + 多功能</label>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <nv-input
+            size="small"
+            placeholder="小尺寸"
+            prefix-icon="user"
+            clearable
+            maxlength="15"
+            show-word-limit
+            value="小尺寸"
+          ></nv-input>
+          <nv-input
+            size="medium"
+            placeholder="中等尺寸"
+            prefix-icon="user"
+            clearable
+            maxlength="15"
+            show-word-limit
+            value="中等尺寸"
+          ></nv-input>
+          <nv-input
+            size="large"
+            placeholder="大尺寸"
+            prefix-icon="user"
+            clearable
+            maxlength="15"
+            show-word-limit
+            value="大尺寸"
+          ></nv-input>
+        </div>
+      </div>
     </div>
   `
 };

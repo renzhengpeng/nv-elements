@@ -807,7 +807,7 @@ export const Events: Story = {
             });
 
             notification.addEventListener('nv-close', (e) => {
-              console.log('🔔 nv-close 事件触发', e.detail);
+              console.log('🔔 nv-close 事件触发', (e as CustomEvent).detail);
               const log = document.getElementById('event-log');
               if (log) {
                 log.innerHTML += '<div style="color: #409eff;">✓ nv-close 事件触发</div>';
@@ -815,7 +815,7 @@ export const Events: Story = {
             });
 
             notification.addEventListener('nv-after-close', (e) => {
-              console.log('✅ nv-after-close 事件触发', e.detail);
+              console.log('✅ nv-after-close 事件触发', (e as CustomEvent).detail);
               const log = document.getElementById('event-log');
               if (log) {
                 log.innerHTML += '<div style="color: #67c23a;">✓ nv-after-close 事件触发（动画完成）</div>';

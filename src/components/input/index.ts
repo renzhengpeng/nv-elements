@@ -78,14 +78,14 @@ export class NvInput extends Component {
   /**
    * 是否显示密码切换按钮（仅当type为password时有效），默认false
    */
-  @property({ type: Boolean })
-  showPassword: boolean = false;
+  @property({ type: Boolean, attribute: 'show-password-toggle' })
+  showPasswordToggle: boolean = false;
 
   /**
-   * 是否显示密码（仅当type为password且showPassword为true时有效），默认false
+   * 密码是否可见（内部状态）
    */
-  @property({ type: Boolean })
-  showPasswordIcon: boolean = false;
+  @state()
+  protected _passwordVisible: boolean = false;
 
   /**
    * 是否处于焦点状态
@@ -120,8 +120,14 @@ export class NvInput extends Component {
   /**
    * 是否显示字数统计（仅当maxlength存在时有效），默认false
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'show-word-limit' })
   showWordLimit: boolean = false;
+
+  /**
+   * 字数统计显示位置，默认outside（外部）。options: inside/outside
+   */
+  @property({ type: String, attribute: 'word-limit-position' })
+  wordLimitPosition: 'inside' | 'outside' = 'outside';
 
   /**
    * 前置图标名称
@@ -315,7 +321,12 @@ export class NvInput extends Component {
    * @protected
    */
   protected _handlePasswordToggle() {
-    this.showPasswordIcon = !this.showPasswordIcon;
+    this._passwordVisible = !this._passwordVisible;
+    this.dispatchEvent(new CustomEvent('nv-password-visible-change', {
+      detail: this._passwordVisible,
+      bubbles: true,
+      composed: true
+    }));
   }
 
   protected _handlePrependSlotChange() {

@@ -32,13 +32,13 @@
 
 @include b(popup) {
   display: inline-flex;
-  flex: 1;
+  // flex: 1;
   align-items: center;
   justify-content: center;
 
   &__anchor {
     display: inline-flex;
-    flex: 1;
+    // flex: 1;
   }
 
   /* --- Positioner (Wrapper) --- */

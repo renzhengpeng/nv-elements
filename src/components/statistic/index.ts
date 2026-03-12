@@ -55,34 +55,19 @@ export class NvStatistic extends Component {
    * 格式化数�?
    */
   protected _formatValue(): string {
-    if (this.precision > 0) {
-      return this.value.toFixed(this.precision);
+    const val = Number(this.value);
+    if (!isNaN(val) && this.precision > 0) {
+      return val.toFixed(this.precision);
     }
     return String(this.value);
   }
 
-  /**
-   * 检查是否有prefix slot内容
-   */
   protected _hasPrefixSlot(): boolean {
-    const slot = this.shadowRoot?.querySelector('slot[name="prefix"]');
-    if (!slot) {
-      return false;
-    }
-    const assignedNodes = (slot as HTMLSlotElement).assignedNodes({ flatten: true });
-    return assignedNodes.length > 0;
+    return !!this.querySelector('[slot="prefix"]');
   }
 
-  /**
-   * 检查是否有suffix slot内容
-   */
   protected _hasSuffixSlot(): boolean {
-    const slot = this.shadowRoot?.querySelector('slot[name="suffix"]');
-    if (!slot) {
-      return false;
-    }
-    const assignedNodes = (slot as HTMLSlotElement).assignedNodes({ flatten: true });
-    return assignedNodes.length > 0;
+    return !!this.querySelector('[slot="suffix"]');
   }
 
   render() {

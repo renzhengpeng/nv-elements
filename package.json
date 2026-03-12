@@ -23,7 +23,7 @@
     "url": "https://github.com/renzhengpeng/nv-elements/issues"
   },
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "browser": "./dist/index.js",
   "main": "./lib/index.cjs",
   "module": "./es/index.mjs",
@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "@lit-labs/virtualizer": "^2.1.1",
+    "@tanstack/lit-virtual": "^3.13.20",
     "lit": "3.2.0",
     "prismjs": "^1.30.0"
   },

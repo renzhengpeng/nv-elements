@@ -6,6 +6,7 @@
 import { html, classMap } from '../../based-on';
 import classNamesConfig from './classNames';
 import { NvSlider } from './index.ts';
+import '../input/index.ts';
 
 interface Context {
   _handleMouseDown: (event: MouseEvent) => void;
@@ -78,10 +79,9 @@ const template = function(this: NvSlider, context: Context) {
               <nv-input
                 type="number"
                 .value=${ this.value.toString() }
-                :min=${ this.min }
-                :max=${ this.max }
-                :step=${ this.step }
-                @input=${ _handleInput }
+                .min=${ this.min }
+                .max=${ this.max }
+                @nv-input=${ _handleInput }
               ></nv-input>
             </div>
           `

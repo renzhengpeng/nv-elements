@@ -64,7 +64,7 @@ const updatePositions = (position: 'top-right' | 'top-left' | 'bottom-right' | '
   const isTop = position.startsWith('top');
   let offset = defaultConfig.offset;
 
-  instances.forEach((instance, idx) => {
+  instances.forEach((instance) => {
     if (instance.isConnected) {
       if (isTop) {
         instance.style.top = `${offset}px`;

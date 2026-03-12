@@ -8,7 +8,7 @@ import classNamesConfig from './classNames';
 import { NvBackTop } from './index.ts';
 
 interface Context {
-  _handleClick: () => void;
+  _handleClick: (event: Event) => void;
   _visible: boolean;
 }
 

@@ -4,6 +4,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { marked } from 'marked';
 import './index';
 import '../divider/index';
+import '../icon/index';
 import readmeMd from './README.md?raw';
 
 // 解析 README
@@ -58,43 +59,46 @@ export const Overview: Story = {
 
       <div class="examples-section">
         <div class="example-item">
-          <h3 class="example-title">With Prefix</h3>
-          <p class="example-desc">With Prefix 示例</p>
+          <h3 class="example-title">With Prefix/Suffix</h3>
+          <p class="example-desc">使用 prefix 和 suffix 属性添加简单的文本前后缀。</p>
           <div class="example-demo">
-            ${ WithPrefix.render?.({} as any, {} as any) }
+            <div style="display: flex; gap: 40px;">
+              ${ WithPrefix.render?.({} as any, {} as any) }
+              ${ WithSuffix.render?.({} as any, {} as any) }
+            </div>
           </div>
         </div>
-
 
         <nv-divider></nv-divider>
 
         <div class="example-item">
-          <h3 class="example-title">With Suffix</h3>
-          <p class="example-desc">With Suffix 示例</p>
+          <h3 class="example-title">With Slots</h3>
+          <p class="example-desc">使用 prefix 和 suffix 插槽添加图标或其他复杂内容。</p>
           <div class="example-demo">
-            ${ WithSuffix.render?.({} as any, {} as any) }
+            ${ WithSlots.render?.({} as any, {} as any) }
           </div>
         </div>
-
 
         <nv-divider></nv-divider>
 
         <div class="example-item">
           <h3 class="example-title">With Precision</h3>
-          <p class="example-desc">With Precision 示例</p>
+          <p class="example-desc">通过 precision 属性设置数值的小数精度。</p>
           <div class="example-demo">
             ${ WithPrecision.render?.({} as any, {} as any) }
           </div>
         </div>
 
-
         <nv-divider></nv-divider>
 
         <div class="example-item">
           <h3 class="example-title">Custom Style</h3>
-          <p class="example-desc">Custom Style 示例</p>
+          <p class="example-desc">使用 valueStyle 属性自定义数值的 CSS 样式。</p>
           <div class="example-demo">
-            ${ CustomStyle.render?.({} as any, {} as any) }
+            <div style="display: flex; gap: 40px;">
+              ${ CustomStyle.render?.({} as any, {} as any) }
+              ${ StatusStyles.render?.({} as any, {} as any) }
+            </div>
           </div>
         </div>
       </div>
@@ -210,7 +214,7 @@ export const Default: Story = {
       precision="${ args.precision }"
       prefix="${ args.prefix }"
       suffix="${ args.suffix }"
-      label="${ args.title }"
+      label="${ args.label }"
     ></nv-statistic>
   `,
   args: {
@@ -230,13 +234,26 @@ export const WithPrefix: Story = {
 
 export const WithSuffix: Story = {
   render: () => html`
-    <nv-statistic value="1128" suffix="元" label="总销售额"></nv-statistic>
+    <nv-statistic value="1128" suffix="元" label="应收金额"></nv-statistic>
+  `
+};
+
+export const WithSlots: Story = {
+  render: () => html`
+    <div style="display: flex; gap: 48px;">
+      <nv-statistic value="1128" label="反馈量">
+        <nv-icon slot="prefix" name="chat" style="color: #409EFF; font-size: 20px; vertical-align: -3px;"></nv-icon>
+      </nv-statistic>
+      <nv-statistic value="93" suffix="/ 100" label="活跃度">
+        <nv-icon slot="prefix" name="user" style="color: #67C23A; font-size: 20px; vertical-align: -3px; margin-right: 4px;"></nv-icon>
+      </nv-statistic>
+    </div>
   `
 };
 
 export const WithPrecision: Story = {
   render: () => html`
-    <nv-statistic value="1128.88" precision="2" prefix="¥" label="总销售额"></nv-statistic>
+    <nv-statistic value="1128.88" precision="2" prefix="¥" label="净利润"></nv-statistic>
   `
 };
 
@@ -245,8 +262,33 @@ export const CustomStyle: Story = {
     <nv-statistic
       value="1128"
       prefix="¥"
-      label="总销售额"
-      valueStyle="color: #409EFF;"
+      label="总金额"
+      valueStyle="color: #409EFF; font-size: 32px;"
     ></nv-statistic>
+  `
+};
+
+export const StatusStyles: Story = {
+  render: () => html`
+    <div style="display: flex; gap: 48px;">
+      <nv-statistic
+        value="11.28"
+        precision="2"
+        suffix="%"
+        label="涨幅"
+        valueStyle="color: #67C23A;"
+      >
+        <nv-icon slot="prefix" name="arrow-up" style="color: #67C23A; font-size: 16px;"></nv-icon>
+      </nv-statistic>
+      <nv-statistic
+        value="5.62"
+        precision="2"
+        suffix="%"
+        label="跌幅"
+        valueStyle="color: #F56C6C;"
+      >
+        <nv-icon slot="prefix" name="arrow-down" style="color: #F56C6C; font-size: 16px;"></nv-icon>
+      </nv-statistic>
+    </div>
   `
 };

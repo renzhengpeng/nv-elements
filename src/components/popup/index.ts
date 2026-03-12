@@ -799,9 +799,9 @@ export class NvPopup extends Component {
    * 显示 popup
    */
   public show(): void {
-    // 禁用状态下不允许显示
     if (this.disabled) return;
     this.active = true;
+    this.dispatch('nv-show', {});
   }
 
   /**
@@ -809,6 +809,7 @@ export class NvPopup extends Component {
    */
   public hide(): void {
     this.active = false;
+    this.dispatch('nv-hide', {});
   }
 
   /**

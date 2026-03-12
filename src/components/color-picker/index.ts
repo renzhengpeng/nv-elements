@@ -32,13 +32,13 @@ export class NvColorPicker extends Component {
   /**
    * 是否显示alpha通道
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'show-alpha' })
   showAlpha: boolean = false;
 
   /**
    * 颜色格式，可选: hex/rgb/hsl/hsv
    */
-  @property({ type: String })
+  @property({ type: String, attribute: 'color-format' })
   colorFormat: 'hex' | 'rgb' | 'hsl' | 'hsv' = 'hex';
 
   /**
@@ -80,7 +80,7 @@ export class NvColorPicker extends Component {
   /**
    * 是否支持取色器（EyeDropper API）
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'eye-dropper' })
   eyeDropper: boolean = true;
 
   /**
@@ -216,7 +216,7 @@ export class NvColorPicker extends Component {
    */
   protected _getColorString(): string {
     const { h, s, v, a } = this._color;
-    
+
     switch (this._displayFormat) {
       case 'hex':
         return this._hsvToHex(h, s, v, a).toUpperCase();
@@ -257,7 +257,7 @@ export class NvColorPicker extends Component {
       const eyeDropper = new EyeDropper();
       // @ts-ignore
       const result = await eyeDropper.open();
-      
+
       if (result && result.sRGBHex) {
         const color = this._hexToHsv(result.sRGBHex);
         this._handleColorChange(color.h, color.s, color.v, color.a);
@@ -281,9 +281,9 @@ export class NvColorPicker extends Component {
         colorStr = (target as any).value.trim();
       }
     }
-    
+
     if (!colorStr) return;
-    
+
     try {
       // 尝试解析输入的颜色
       const color = this._parseColorString(colorStr);
@@ -301,12 +301,12 @@ export class NvColorPicker extends Component {
    */
   private _parseColorString(colorStr: string): { h: number; s: number; v: number; a: number } | null {
     colorStr = colorStr.trim().toLowerCase();
-    
+
     // Hex格式
     if (colorStr.startsWith('#')) {
       return this._hexToHsv(colorStr);
     }
-    
+
     // RGB/RGBA格式
     const rgbMatch = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
     if (rgbMatch) {
@@ -314,12 +314,12 @@ export class NvColorPicker extends Component {
       const g = parseInt(rgbMatch[2]) / 255;
       const b = parseInt(rgbMatch[3]) / 255;
       const a = rgbMatch[4] ? parseFloat(rgbMatch[4]) : 1;
-      
+
       // RGB转HSV
       const max = Math.max(r, g, b);
       const min = Math.min(r, g, b);
       const delta = max - min;
-      
+
       let h = 0;
       if (delta !== 0) {
         if (max === r) {
@@ -332,13 +332,13 @@ export class NvColorPicker extends Component {
       }
       h = Math.round(h * 60);
       if (h < 0) h += 360;
-      
+
       const s = max === 0 ? 0 : Math.round((delta / max) * 100);
       const v = Math.round(max * 100);
-      
+
       return { h, s, v, a };
     }
-    
+
     // HSL/HSLA格式
     const hslMatch = colorStr.match(/hsla?\((\d+),\s*(\d+)%,\s*(\d+)%(?:,\s*([\d.]+))?\)/);
     if (hslMatch) {
@@ -346,14 +346,14 @@ export class NvColorPicker extends Component {
       const sl = parseInt(hslMatch[2]) / 100;
       const l = parseInt(hslMatch[3]) / 100;
       const a = hslMatch[4] ? parseFloat(hslMatch[4]) : 1;
-      
+
       // HSL转HSV
       const v = l + sl * Math.min(l, 1 - l);
       const s = v === 0 ? 0 : 2 * (1 - l / v);
-      
+
       return { h, s: Math.round(s * 100), v: Math.round(v * 100), a };
     }
-    
+
     // HSV/HSVA格式
     const hsvMatch = colorStr.match(/hsva?\((\d+),\s*(\d+)%,\s*(\d+)%(?:,\s*([\d.]+))?\)/);
     if (hsvMatch) {
@@ -364,7 +364,7 @@ export class NvColorPicker extends Component {
         a: hsvMatch[4] ? parseFloat(hsvMatch[4]) : 1
       };
     }
-    
+
     return null;
   }
 
@@ -385,17 +385,17 @@ export class NvColorPicker extends Component {
     this._isInternalUpdate = true;
     this._color = { h, s, v, a };
     const newValue = this._hsvToHex(h, s, v, a);
-    
+
     // 触发 active-change 事件（面板中颜色实时变化）
     this.dispatchEvent(new CustomEvent('nv-active-change', {
       detail: newValue,
       bubbles: true,
       composed: true
     }));
-    
+
     this.value = newValue;
     this._isInternalUpdate = false;
-    
+
     // 触发 change 事件（绑定值变化）
     this.dispatchEvent(new CustomEvent('nv-change', {
       detail: this.value,
@@ -427,22 +427,22 @@ export class NvColorPicker extends Component {
     if (this.disabled) return;
     e.preventDefault();
     this._isDraggingSaturation = true;
-    
+
     const target = e.currentTarget as HTMLElement;
     this._updateSaturation(e, target);
-    
+
     const handleMouseMove = (e: MouseEvent) => {
       if (this._isDraggingSaturation) {
         this._updateSaturation(e, target);
       }
     };
-    
+
     const handleMouseUp = () => {
       this._isDraggingSaturation = false;
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-    
+
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
   }
@@ -454,10 +454,10 @@ export class NvColorPicker extends Component {
     const rect = target.getBoundingClientRect();
     const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
     const y = Math.max(0, Math.min(e.clientY - rect.top, rect.height));
-    
+
     const s = Math.round((x / rect.width) * 100);
     const v = Math.round((1 - y / rect.height) * 100);
-    
+
     this._handleColorChange(this._color.h, s, v, this._color.a);
   }
 
@@ -468,22 +468,22 @@ export class NvColorPicker extends Component {
     if (this.disabled) return;
     e.preventDefault();
     this._isDraggingHue = true;
-    
+
     const target = e.currentTarget as HTMLElement;
     this._updateHue(e, target);
-    
+
     const handleMouseMove = (e: MouseEvent) => {
       if (this._isDraggingHue) {
         this._updateHue(e, target);
       }
     };
-    
+
     const handleMouseUp = () => {
       this._isDraggingHue = false;
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-    
+
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
   }
@@ -494,9 +494,9 @@ export class NvColorPicker extends Component {
   private _updateHue(e: MouseEvent, target: HTMLElement): void {
     const rect = target.getBoundingClientRect();
     const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
-    
+
     const h = Math.round((x / rect.width) * 360);
-    
+
     this._handleColorChange(h, this._color.s, this._color.v, this._color.a);
   }
 
@@ -507,22 +507,22 @@ export class NvColorPicker extends Component {
     if (this.disabled) return;
     e.preventDefault();
     this._isDraggingAlpha = true;
-    
+
     const target = e.currentTarget as HTMLElement;
     this._updateAlpha(e, target);
-    
+
     const handleMouseMove = (e: MouseEvent) => {
       if (this._isDraggingAlpha) {
         this._updateAlpha(e, target);
       }
     };
-    
+
     const handleMouseUp = () => {
       this._isDraggingAlpha = false;
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-    
+
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
   }
@@ -533,9 +533,9 @@ export class NvColorPicker extends Component {
   private _updateAlpha(e: MouseEvent, target: HTMLElement): void {
     const rect = target.getBoundingClientRect();
     const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
-    
+
     const a = Math.round((x / rect.width) * 100) / 100;
-    
+
     this._handleColorChange(this._color.h, this._color.s, this._color.v, a);
   }
 
@@ -560,13 +560,13 @@ export class NvColorPicker extends Component {
     if (this.value) {
       this._color = this._hexToHsv(this.value);
     }
-    
+
     // 设置初始显示格式
     this._displayFormat = this.colorFormat;
-    
+
     // 检查是否支持 EyeDropper API
     this._supportsEyeDropper = 'EyeDropper' in window;
-    
+
     // 添加全局点击事件监听，点击外部关闭面板
     document.addEventListener('click', this._handleDocumentClick.bind(this));
   }
@@ -576,10 +576,10 @@ export class NvColorPicker extends Component {
    */
   private _handleDocumentClick(e: MouseEvent): void {
     if (!this._visible) return;
-    
+
     const target = e.target as HTMLElement;
     const host = this.shadowRoot?.host as HTMLElement;
-    
+
     // 检查点击是否在组件内部
     if (!host.contains(target) && !this.shadowRoot?.contains(target)) {
       this._visible = false;
@@ -618,4 +618,3 @@ declare global {
     'nv-color-picker': NvColorPicker
   }
 }
-

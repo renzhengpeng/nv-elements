@@ -11,7 +11,7 @@ const readmeHtml = marked.parse(readmeMd) as string;
 
 const meta: Meta = {
   title: 'Components/ColorPicker',
-  component: 'nv-color-picker', 
+  component: 'nv-color-picker',
   argTypes: {
     value: {
       control: 'color',
@@ -43,6 +43,10 @@ const meta: Meta = {
     bordered: {
       control: 'boolean',
       description: '是否显示边框'
+    },
+    eyeDropper: {
+      control: 'boolean',
+      description: '是否启用吸管工具'
     }
   }
 };
@@ -76,7 +80,7 @@ export const Overview: Story = {
           </div>
         </div>
 
-        
+
         <nv-divider></nv-divider>
 
         <div class="example-item">
@@ -87,7 +91,7 @@ export const Overview: Story = {
           </div>
         </div>
 
-        
+
         <nv-divider></nv-divider>
 
         <div class="example-item">
@@ -135,6 +139,16 @@ export const Overview: Story = {
           <p class="example-desc">颜色格式切换和输入</p>
           <div class="example-demo">
             ${ ColorFormats.render?.({} as any, {} as any) }
+          </div>
+        </div>
+
+        <nv-divider></nv-divider>
+
+        <div class="example-item">
+          <h3 class="example-title">Eye Dropper</h3>
+          <p class="example-desc">吸管工具（需要浏览器支持 EyeDropper API）</p>
+          <div class="example-demo">
+            ${ EyeDropper.render?.({} as any, {} as any) }
           </div>
         </div>
       </div>
@@ -197,7 +211,7 @@ export const Overview: Story = {
           font-size: 13px;
           font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
         }
-        
+
         .examples-section {
           background: #fff;
           border-radius: 4px;
@@ -248,9 +262,9 @@ export const Default: Story = {
     <nv-color-picker
       value="${ args.value }"
       ?disabled="${ args.disabled }"
-      ?showAlpha="${ args.showAlpha }"
+      ?show-alpha="${ args.showAlpha }"
       ?bordered="${ args.bordered }"
-      colorFormat="${ args.colorFormat }"
+      color-format="${ args.colorFormat }"
       size="${ args.size }"
       shape="${ args.shape }"
       @change="${ (e: CustomEvent) => console.log('Color changed:', e.detail) }"
@@ -269,7 +283,7 @@ export const Default: Story = {
 
 export const WithAlpha: Story = {
   render: () => html`
-    <nv-color-picker value="#409EFF" showAlpha></nv-color-picker>
+    <nv-color-picker value="#409EFF" show-alpha></nv-color-picker>
   `
 };
 
@@ -346,10 +360,10 @@ export const ColorFormats: Story = {
         </ul>
       </div>
       <div style="display: flex; gap: 20px;">
-        <nv-color-picker value="#409EFF" colorFormat="hex"></nv-color-picker>
-        <nv-color-picker value="#67C23A" colorFormat="rgb"></nv-color-picker>
-        <nv-color-picker value="#E6A23C" colorFormat="hsl"></nv-color-picker>
-        <nv-color-picker value="#F56C6C" colorFormat="hsv"></nv-color-picker>
+        <nv-color-picker value="#409EFF" color-format="hex"></nv-color-picker>
+        <nv-color-picker value="#67C23A" color-format="rgb"></nv-color-picker>
+        <nv-color-picker value="#E6A23C" color-format="hsl"></nv-color-picker>
+        <nv-color-picker value="#F56C6C" color-format="hsv"></nv-color-picker>
       </div>
     </div>
   `
@@ -383,7 +397,7 @@ export const Shapes: Story = {
           </div>
         </div>
       </div>
-      
+
       <div>
         <h4 style="margin: 0 0 16px 0; color: #303133;">Square (正方形)</h4>
         <div style="display: flex; align-items: center; gap: 20px;">
@@ -409,7 +423,7 @@ export const Shapes: Story = {
           </div>
         </div>
       </div>
-      
+
       <div>
         <h4 style="margin: 0 0 16px 0; color: #303133;">Rectangle (矩形)</h4>
         <div style="display: flex; align-items: center; gap: 20px;">
@@ -439,3 +453,27 @@ export const Shapes: Story = {
   `
 };
 
+export const EyeDropper: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div>
+        <p style="margin: 0 0 12px 0; color: #606266;">
+          吸管工具允许你从屏幕上任意位置取色。点击颜色面板中的吸管图标即可使用。
+        </p>
+        <p style="margin: 0 0 12px 0; color: #909399; font-size: 14px;">
+          注意：此功能需要浏览器支持 EyeDropper API（Chrome 95+, Edge 95+）
+        </p>
+      </div>
+      <div style="display: flex; gap: 20px; align-items: center;">
+        <div style="text-align: center;">
+          <nv-color-picker value="#409EFF" .eyeDropper="${true}"></nv-color-picker>
+          <div style="margin-top: 8px; font-size: 12px; color: #909399;">启用吸管（默认）</div>
+        </div>
+        <div style="text-align: center;">
+          <nv-color-picker value="#67C23A" .eyeDropper="${false}"></nv-color-picker>
+          <div style="margin-top: 8px; font-size: 12px; color: #909399;">禁用吸管</div>
+        </div>
+      </div>
+    </div>
+  `
+};

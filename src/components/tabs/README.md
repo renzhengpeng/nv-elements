@@ -28,9 +28,6 @@ Tabs 组件由两个子组件组成：
 | closable | 标签是否可关闭         | boolean | —                           | false  |
 | addable  | 标签是否可增加         | boolean | —                           | false  |
 | editable | 标签是否可编辑         | boolean | —                           | false  |
-| closable         | 标签是否可关闭                     | boolean | —                           | false  |
-| addable          | 是否可增加标签                     | boolean | —                           | false  |
-| editable         | 标签是否可编辑（双击标签编辑名称） | boolean | —                           | false  |
 
 ## Tabs 事件
 
@@ -45,12 +42,11 @@ Tabs 组件由两个子组件组成：
 
 ## TabPane 属性
 
-| 属性     | 说明                                            | 类型    | 可选值 | 默认值     |
-| -------- | ----------------------------------------------- | ------- | ------ | ---------- |
-| tabKey   | 标签页的唯一标识                                | string  | —      | ''         |
-| label    | 标签页显示的文本                                | string  | —      | ''         |
-| disabled | 是否禁用该标签页                                | boolean | —      | false      |
-| closable | 该标签是否可关闭（优先级高于 Tabs 的 closable） | boolean | —      | 继承父组件 |
+| 属性     | 说明             | 类型    | 可选值 | 默认值 |
+| -------- | ---------------- | ------- | ------ | ------ |
+| name     | 标签页的唯一标识 | string  | —      | ''     |
+| label    | 标签页显示的文本 | string  | —      | ''     |
+| disabled | 是否禁用该标签页 | boolean | —      | false  |
 
 ## TabPane 插槽
 

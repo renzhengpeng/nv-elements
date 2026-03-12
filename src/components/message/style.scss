@@ -11,41 +11,10 @@
   position: fixed;
   left: 50%;
   top: 20px;
-  align-items: center;
-  background-color: var(--nv-message-background-color-info);
-  min-width: var(--nv-message-min-width);
-  box-sizing: border-box;
-  border-radius: var(--nv-message-border-radius);
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--nv-message-border-color-info);
-  padding: var(--nv-message-padding);
   transition: opacity 0.3s, transform 0.3s, top 0.3s;
-  overflow-wrap: anywhere;
   z-index: 3000;
   opacity: 0;
   transform: translateX(-50%) translateY(-100%);
-}
-
-// 根据 type 属性设置不同的背景色和边框色
-:host([type="success"]) {
-  background-color: var(--nv-message-background-color-success);
-  border-color: var(--nv-message-border-color-success);
-}
-
-:host([type="info"]) {
-  background-color: var(--nv-message-background-color-info);
-  border-color: var(--nv-message-border-color-info);
-}
-
-:host([type="warning"]) {
-  background-color: var(--nv-message-background-color-warning);
-  border-color: var(--nv-message-border-color-warning);
-}
-
-:host([type="error"]) {
-  background-color: var(--nv-message-background-color-error);
-  border-color: var(--nv-message-border-color-error);
 }
 
 // .nv-message
@@ -55,6 +24,14 @@
   align-items: center;
   overflow-wrap: anywhere;
   width: 100%;
+  background-color: var(--nv-message-background-color-info);
+  min-width: var(--nv-message-min-width);
+  box-sizing: border-box;
+  border-radius: var(--nv-message-border-radius);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--nv-message-border-color-info);
+  padding: var(--nv-message-padding);
 
   // 图标
   &__icon {
@@ -98,6 +75,8 @@
 
   // 类型变体
   &--success {
+    background-color: var(--nv-message-background-color-success);
+    border-color: var(--nv-message-border-color-success);
     color: var(--nv-message-font-color-success);
 
     .nv-message__icon {
@@ -106,6 +85,8 @@
   }
 
   &--info {
+    background-color: var(--nv-message-background-color-info);
+    border-color: var(--nv-message-border-color-info);
     color: var(--nv-message-font-color-info);
 
     .nv-message__icon {
@@ -114,6 +95,8 @@
   }
 
   &--warning {
+    background-color: var(--nv-message-background-color-warning);
+    border-color: var(--nv-message-border-color-warning);
     color: var(--nv-message-font-color-warning);
 
     .nv-message__icon {
@@ -122,6 +105,8 @@
   }
 
   &--error {
+    background-color: var(--nv-message-background-color-error);
+    border-color: var(--nv-message-border-color-error);
     color: var(--nv-message-font-color-error);
 
     .nv-message__icon {

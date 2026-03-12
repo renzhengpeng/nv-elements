@@ -80,7 +80,7 @@ export class NvModal extends Component {
   /**
    * 对话框的自定义类名
    */
-  @property({ type: String })
+  @property({ type: String, attribute: 'custom-class' })
   customClass: string = '';
 
   /**
@@ -107,15 +107,12 @@ export class NvModal extends Component {
   private _keydownHandler: ((event: KeyboardEvent) => void) | null = null;
 
   /**
-   * 过渡完成监听器
-   */
-  private _transitionEndHandler: ((event: Event) => void) | null = null;
-
-  /**
    * 设置渲染态并同步到 host attribute
    *
    * @remarks
    * 使用 data-rendered 控制 :host 的 display，从而实现“关闭时不占文档流”。
+   * - 值为 true 且设置 attribute 时，:host { display: block }
+   * - 值为 false 且移除 attribute 时，:host { display: none }
    */
   private _setRendered(rendered: boolean): void {
     if (this._rendered === rendered) {
@@ -216,11 +213,12 @@ export class NvModal extends Component {
 
   /**
    * 处理过渡结束事件
+   * 该方法在 template 中直接绑定到 .nv-modal__dialog 的 @transitionend 上
    */
-  private _handleTransitionEnd(event: Event): void {
+  protected _handleTransitionEnd(event: TransitionEvent): void {
     const target = event.target as HTMLElement;
-    // 只处理对话框的过渡结束事件
-    if (!target.classList.contains('nv-modal__dialog')) {
+    // 只处理对话框（panel）自身的过渡结束事件，忽略内部元素的冒泡或非主要属性动画
+    if (!target.classList.contains('nv-modal__dialog') || event.propertyName !== 'transform') {
       return;
     }
 
@@ -270,15 +268,6 @@ export class NvModal extends Component {
         this._lockBodyScroll();
         this._keydownHandler = this._handleKeydown.bind(this);
         document.addEventListener('keydown', this._keydownHandler);
-
-        // 添加过渡结束监听器
-        if (!this._transitionEndHandler) {
-          this._transitionEndHandler = this._handleTransitionEnd.bind(this);
-          const dialog = this.shadowRoot?.querySelector('.nv-modal__dialog');
-          if (dialog) {
-            dialog.addEventListener('transitionend', this._transitionEndHandler);
-          }
-        }
       } else {
         this.toggleAttribute('data-open', false);
         this._emitHideEvent();
@@ -304,13 +293,6 @@ export class NvModal extends Component {
       document.removeEventListener('keydown', this._keydownHandler);
       this._keydownHandler = null;
     }
-    if (this._transitionEndHandler) {
-      const dialog = this.shadowRoot?.querySelector('.nv-modal__dialog');
-      if (dialog) {
-        dialog.removeEventListener('transitionend', this._transitionEndHandler);
-      }
-      this._transitionEndHandler = null;
-    }
   }
 
   render() {
@@ -322,6 +304,7 @@ export class NvModal extends Component {
     return template.call(this, {
       _handleClose: this._handleClose.bind(this),
       _handleModalClick: this._handleModalClick.bind(this),
+      _handleTransitionEnd: this._handleTransitionEnd.bind(this),
       _hasHeaderSlot: this._hasHeaderSlot.bind(this),
       _hasFooterSlot: this._hasFooterSlot.bind(this)
     });

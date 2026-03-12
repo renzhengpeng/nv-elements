@@ -181,7 +181,7 @@ const createInfiniteScrollExample = (args: any) => {
         ?disabled="${ args.disabled }"
         ?immediate="${ args.immediate }"
         distance="${ args.distance }"
-        @load="${ handleLoad }"
+        @nv-load="${ handleLoad }"
       >
         ${ items.map(i => html`<div style="padding: 8px; border-bottom: 1px solid #f0f0f0;">项目 ${ i }</div>`) }
       </nv-infinite-scroll>

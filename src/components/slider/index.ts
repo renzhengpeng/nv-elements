@@ -63,19 +63,19 @@ export class NvSlider extends Component {
   /**
    * 是否显示输入框
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'show-input' })
   showInput: boolean = false;
 
   /**
    * 是否显示间断点
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'show-stops' })
   showStops: boolean = false;
 
   /**
    * 是否显示 tooltip
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'show-tooltip' })
   showTooltip: boolean = true;
 
   /**
@@ -111,13 +111,13 @@ export class NvSlider extends Component {
 
     // 检查是否点击在按钮上，如果是则不处理
     const target = event.target as HTMLElement;
-    if (target.classList.contains('nv-slider__button') || 
+    if (target.classList.contains('nv-slider__button') ||
         target.classList.contains('nv-slider__button-wrapper')) {
       return;
     }
 
     event.preventDefault();
-    
+
     const runway = this.shadowRoot?.querySelector('.nv-slider__runway') as HTMLElement;
     if (!runway) return;
 
@@ -221,8 +221,9 @@ export class NvSlider extends Component {
    * 处理输入框输入事件
    */
   private _handleInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const newValue = Number(input.value);
+    const customEvent = event as CustomEvent;
+    const detail = customEvent.detail;
+    const newValue = Number(detail.value);
     if (!isNaN(newValue)) {
       this.value = Math.max(this.min, Math.min(this.max, newValue));
       this.dispatchEvent(

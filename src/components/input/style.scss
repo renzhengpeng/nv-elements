@@ -21,6 +21,17 @@
   vertical-align: middle;
   align-items: center;
 
+  // textarea 类型时，容器高度自适应
+  &:has(textarea) {
+    height: auto;
+    align-items: flex-start;
+  }
+
+  // 当有字数统计时，添加底部间距
+  &:has(.nv-input__count) {
+    margin-bottom: 24px;
+  }
+
   // 输入框包装器
   &__wrapper {
     display: inline-flex;
@@ -88,11 +99,38 @@
       resize: vertical;
       padding: var(--nv-padding-small) var(--nv-padding-medium);
       vertical-align: top;
-      overflow-y: auto;
       line-height: 1.5;
       // 确保占位符可见，调整 padding-top 和 padding-bottom
       padding-top: calc(var(--nv-padding-small) - 1px);
       padding-bottom: calc(var(--nv-padding-small) - 1px);
+      // 只在内容超出时显示滚动条，hidden会导致无法滚动
+      overflow: auto;
+      // 确保 box-sizing 为 border-box，避免拖拽时顶部上升
+      box-sizing: border-box;
+
+      // 自定义滚动条样式，避免与resize handle冲突
+      &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 3px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--nv-neutral-color-border-3, #dcdfe6);
+        border-radius: 3px;
+
+        &:hover {
+          background: var(--nv-neutral-color-border-2, #c0c4cc);
+        }
+      }
+
+      // Firefox 滚动条样式
+      scrollbar-width: thin;
+      scrollbar-color: var(--nv-neutral-color-border-3, #dcdfe6) transparent;
     }
   }
 
@@ -205,6 +243,11 @@
     .nv-input__wrapper:has(.nv-input__suffix) & {
       right: calc(var(--nv-padding-medium) + 24px + 8px); // padding + icon width + spacing
     }
+
+    // 如果同时有 suffix 图标和密码图标，需要更多偏移
+    .nv-input__wrapper:has(.nv-input__suffix):has(.nv-input__password-icon) & {
+      right: calc(var(--nv-padding-medium) + 24px + 32px + 8px); // suffix + password + spacing
+    }
   }
 
   // 密码显示图标
@@ -224,11 +267,6 @@
       color: var(--nv-input-icon-color-hover);
     }
 
-    // 如果有清除图标，放在清除图标左侧
-    .nv-input__wrapper:has(.nv-input__clear) & {
-      right: 32px;
-    }
-
     // 如果有 suffix 图标，放在 suffix 图标左侧
     .nv-input__wrapper:has(.nv-input__suffix) & {
       right: calc(var(--nv-padding-medium) + 24px + 8px); // padding + icon width + spacing
@@ -242,14 +280,79 @@
 
   // 字数统计
   &__count {
-    height: 100%;
     line-height: 1.5;
     font-size: var(--nv-input-font-size-mini);
     color: var(--nv-neutral-color-font-3);
+    text-align: right;
+
+    // 默认外部显示：在输入框下方
     position: absolute;
     right: 8px;
     bottom: -20px;
-    text-align: right;
+
+    // inside 位置：显示在输入框内部
+    &--inside {
+      position: absolute;
+      bottom: auto;
+      right: 8px;
+      z-index: 1;
+      pointer-events: none;
+      background: transparent;
+
+      // 普通 input：垂直居中
+      top: 50%;
+      transform: translateY(-50%);
+
+      // textarea 时显示在右下角内部
+      .nv-input:has(textarea) & {
+        top: auto;
+        bottom: 8px;
+        transform: none;
+      }
+
+      // 如果有后缀图标，需要向左偏移
+      .nv-input__wrapper:has(.nv-input__suffix) & {
+        right: calc(var(--nv-padding-medium) + 24px + 12px); // padding + icon width + spacing
+      }
+
+      // 如果有清除图标，需要向左偏移
+      .nv-input__wrapper:has(.nv-input__clear):not(:has(.nv-input__password-icon)) & {
+        right: 36px;
+      }
+
+      // 如果有密码图标，需要向左偏移
+      .nv-input__wrapper:has(.nv-input__password-icon):not(:has(.nv-input__clear)) & {
+        right: 36px;
+      }
+
+      // 如果同时有清除和密码图标，需要更多偏移
+      .nv-input__wrapper:has(.nv-input__clear):has(.nv-input__password-icon) & {
+        right: 60px; // 两个图标的宽度
+      }
+
+      // 如果同时有后缀图标和清除/密码图标，需要更多偏移
+      .nv-input__wrapper:has(.nv-input__suffix):has(.nv-input__clear):not(:has(.nv-input__password-icon)) &,
+      .nv-input__wrapper:has(.nv-input__suffix):has(.nv-input__password-icon):not(:has(.nv-input__clear)) & {
+        right: calc(var(--nv-padding-medium) + 24px + 32px + 12px); // suffix + clear/password + spacing
+      }
+
+      // 如果同时有后缀图标、清除图标和密码图标，需要最多偏移
+      .nv-input__wrapper:has(.nv-input__suffix):has(.nv-input__clear):has(.nv-input__password-icon) & {
+        right: calc(var(--nv-padding-medium) + 24px + 56px + 12px); // suffix + clear + password + spacing
+      }
+    }
+  }
+
+  // 当字数统计在内部时，输入框需要留出右侧空间
+  &.word-limit-inside {
+    .nv-input__inner:not(textarea) {
+      padding-right: 70px; // 为字数统计留出空间
+    }
+
+    .nv-input__inner:is(textarea) {
+      padding-right: 70px; // textarea 也需要右侧空间
+      padding-bottom: 24px; // 底部留出空间给字数统计
+    }
   }
 
   // 禁用状态
@@ -334,7 +437,7 @@
       border-bottom-right-radius: 0 !important;
     }
   }
-  
+
   // 焦点状态下，即使有前置/后置内容，也要显示边框
   &.is-focus:not(.is-disabled):has(.nv-input__prepend:not(:empty)) {
     .nv-input__wrapper {
@@ -349,7 +452,7 @@
       border-left: 1px solid var(--nv-input-border-color-focus) !important;
     }
   }
-  
+
   &.is-focus:not(.is-disabled):has(.nv-input__append:not(:empty)) {
     .nv-input__wrapper {
       border-top-right-radius: 0;
@@ -363,7 +466,7 @@
       border-right: 1px solid var(--nv-input-border-color-focus) !important;
     }
   }
-  
+
   // hover 状态时，prepend 和 append 的边框颜色也要变化
   &:hover:not(.is-disabled):has(.nv-input__prepend:not(:empty)) {
     .nv-input__prepend {
@@ -490,6 +593,12 @@
     height: var(--nv-input-height-mini);
     box-sizing: border-box;
 
+    // textarea 类型时，容器高度自适应
+    &:has(textarea) {
+      height: auto;
+      min-height: var(--nv-input-height-mini);
+    }
+
     .nv-input__wrapper {
       padding: 0;
       min-height: 100%;
@@ -512,8 +621,8 @@
         padding-top: calc(var(--nv-padding-mini) - 1px);
         padding-bottom: calc(var(--nv-padding-mini) - 1px);
         height: auto;
-        min-height: var(--nv-input-height-mini); // 设置绝对最小高度
-        overflow-y: auto;
+        // 确保最小高度能容纳单行内容：line-height * 1 + padding-top + padding-bottom
+        min-height: calc(1.5em + var(--nv-padding-mini) * 2 - 2px);
       }
     }
 
@@ -535,6 +644,12 @@
     font-size: var(--nv-input-font-size-small);
     height: var(--nv-input-height-small);
     box-sizing: border-box;
+
+    // textarea 类型时，容器高度自适应
+    &:has(textarea) {
+      height: auto;
+      min-height: var(--nv-input-height-small);
+    }
 
     .nv-input__wrapper {
       padding: 0;
@@ -559,8 +674,8 @@
         padding-top: calc(var(--nv-padding-small) - 1px);
         padding-bottom: calc(var(--nv-padding-small) - 1px);
         height: auto;
-        min-height: var(--nv-input-height-small); // 设置绝对最小高度
-        overflow-y: auto;
+        // 确保最小高度能容纳单行内容：line-height * 1 + padding-top + padding-bottom
+        min-height: calc(1.5em + var(--nv-padding-small) * 2 - 2px);
       }
     }
 
@@ -582,6 +697,12 @@
     font-size: var(--nv-input-font-size-medium);
     height: var(--nv-input-height-medium);
     box-sizing: border-box;
+
+    // textarea 类型时，容器高度自适应
+    &:has(textarea) {
+      height: auto;
+      min-height: var(--nv-input-height-medium);
+    }
 
     .nv-input__wrapper {
       padding: 0;
@@ -606,8 +727,8 @@
         padding-top: calc(var(--nv-padding-small) - 1px);
         padding-bottom: calc(var(--nv-padding-small) - 1px);
         height: auto;
-        min-height: var(--nv-input-height-medium); // 设置绝对最小高度
-        overflow-y: auto;
+        // 确保最小高度能容纳单行内容：line-height * 1 + padding-top + padding-bottom
+        min-height: calc(1.5em + var(--nv-padding-small) * 2 - 2px);
       }
     }
 
@@ -629,6 +750,12 @@
     font-size: var(--nv-input-font-size-large);
     height: var(--nv-input-height-large);
     box-sizing: border-box;
+
+    // textarea 类型时，容器高度自适应
+    &:has(textarea) {
+      height: auto;
+      min-height: var(--nv-input-height-large);
+    }
 
     .nv-input__wrapper {
       padding: 0;
@@ -653,8 +780,8 @@
         padding-top: calc(var(--nv-padding-medium) - 1px);
         padding-bottom: calc(var(--nv-padding-medium) - 1px);
         height: auto;
-        min-height: var(--nv-input-height-large); // 设置绝对最小高度
-        overflow-y: auto;
+        // 确保最小高度能容纳单行内容：line-height * 1 + padding-top + padding-bottom
+        min-height: calc(1.5em + var(--nv-padding-medium) * 2 - 2px);
       }
     }
 
@@ -676,6 +803,12 @@
     font-size: var(--nv-input-font-size-huge);
     height: var(--nv-input-height-huge);
     box-sizing: border-box;
+
+    // textarea 类型时，容器高度自适应
+    &:has(textarea) {
+      height: auto;
+      min-height: var(--nv-input-height-huge);
+    }
 
     .nv-input__wrapper {
       padding: 0;
@@ -700,8 +833,8 @@
         padding-top: calc(var(--nv-padding-medium) - 1px);
         padding-bottom: calc(var(--nv-padding-medium) - 1px);
         height: auto;
-        min-height: var(--nv-input-height-huge); // 设置绝对最小高度
-        overflow-y: auto;
+        // 确保最小高度能容纳单行内容：line-height * 1 + padding-top + padding-bottom
+        min-height: calc(1.5em + var(--nv-padding-medium) * 2 - 2px);
       }
     }
 
@@ -719,4 +852,3 @@
     }
   }
 }
-

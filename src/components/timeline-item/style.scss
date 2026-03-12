@@ -45,6 +45,22 @@
       /* 圆心与竖线对齐：左移半宽差，使竖线仍从圆心穿过 */
       left: calc(var(--nv-timeline-item-tail-left) - (var(--nv-timeline-item-node-width-has-icon, 24px) / 2));
     }
+
+    &--primary {
+      background-color: var(--nv-primary-color-1);
+    }
+    &--success {
+      background-color: var(--nv-secondary-color-success-1);
+    }
+    &--warning {
+      background-color: var(--nv-secondary-color-warning-1);
+    }
+    &--error {
+      background-color: var(--nv-secondary-color-danger-1);
+    }
+    &--info {
+      background-color: var(--nv-secondary-color-info-1);
+    }
   }
 
   // 包装器

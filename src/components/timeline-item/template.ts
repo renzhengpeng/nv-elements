@@ -17,7 +17,8 @@ const template = function(this: NvTimelineItem) {
 
   const nodeClassMap = classMap({
     [classNamesConfig.elements.node]: true,
-    [classNamesConfig.modifiers.nodeHasIcon]: !!this.icon
+    [classNamesConfig.modifiers.nodeHasIcon]: !!this.icon,
+    [`nv-timeline-item__node--${this.type}`]: !!this.type,
   });
 
   const wrapperClassMap = classMap({
@@ -35,7 +36,7 @@ const template = function(this: NvTimelineItem) {
   return html`
     <li part="base" class=${ classMapResult }>
       <div part="tail" class=${ classNamesConfig.elements.tail }></div>
-      <div part="node" class=${ nodeClassMap }>
+      <div part="node" class=${ nodeClassMap } style="${ this.color ? `background-color: ${this.color};` : '' }">
         ${ this.icon ? html`<nv-icon name=${ this.icon }></nv-icon>` : null }
       </div>
       <div part="wrapper" class=${ wrapperClassMap }>

@@ -11,12 +11,13 @@ import '../icon/index';
 interface Context {
   _handleClose: () => void;
   _handleModalClick: (event: Event) => void;
+  _handleTransitionEnd: (event: TransitionEvent) => void;
   _hasHeaderSlot: () => boolean;
   _hasFooterSlot: () => boolean;
 }
 
 const template = function(this: NvModal, context: Context) {
-  const { _handleClose, _handleModalClick, _hasHeaderSlot } = context;
+  const { _handleClose, _handleModalClick, _handleTransitionEnd, _hasHeaderSlot } = context;
 
   const hasHeaderSlot = _hasHeaderSlot();
 
@@ -30,6 +31,7 @@ const template = function(this: NvModal, context: Context) {
         [classNamesConfig.elements.dialog]: true,
         [this.customClass]: !!this.customClass
       }) }"
+           @transitionend=${ _handleTransitionEnd }
            style="width: ${ this.width };">
         ${ hasHeaderSlot
           ? html`

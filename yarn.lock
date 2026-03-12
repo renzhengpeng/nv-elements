@@ -703,6 +703,18 @@
     tiny-invariant "^1.3.1"
     ts-dedent "^2.0.0"
 
+"@tanstack/lit-virtual@^3.13.20":
+  version "3.13.20"
+  resolved "https://registry.yarnpkg.com/@tanstack/lit-virtual/-/lit-virtual-3.13.20.tgz#43a576c939e487b249afe7dee030d6895a05bd7a"
+  integrity sha512-yn4tJEvnx1T4Qeed1cCfzaz3hy/9kz4+HQ8NNtbaL8gudE82ROEr98wdkrBxgqJfvcMqqZfcm99+hdtR84s8Aw==
+  dependencies:
+    "@tanstack/virtual-core" "3.13.19"
+
+"@tanstack/virtual-core@3.13.19":
+  version "3.13.19"
+  resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.19.tgz#ab7b5de0b7ba17f22530f4efda5bf2b771fbda9d"
+  integrity sha512-/BMP7kNhzKOd7wnDeB8NrIRNLwkf5AhCYCvtfZV2GXWbBieFm/el0n6LOAXlTi6ZwHICSNnQcIxRCWHrLzDY+g==
+
 "@testing-library/jest-dom@^6.6.3":
   version "6.9.1"
   resolved "https://registry.npmjs.org/@testing-library/jest-dom/-/jest-dom-6.9.1.tgz"

@@ -8,22 +8,22 @@ Popconfirm 气泡确认框组件基于 Popover 组件实现，提供简单的确
 
 ## 属性
 
-| 属性名              | 说明                                                                                                                            | 类型    | 可选值                                                                                                                          | 默认值  |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| label               | 标题（未使用 label 插槽时生效）                                                                                                 | string  | —                                                                                                                               | 确定要删除吗？ |
-| confirm-button-text | 确认按钮文字                                                                                                                    | string  | —                                                                                                                               | 确定    |
-| cancel-button-text  | 取消按钮文字                                                                                                                    | string  | —                                                                                                                               | 取消    |
-| confirm-button-type | 确认按钮类型（对应 nv-button 的 type，不含 text）                                                                               | string  | default / primary / success / warning / danger / info                                                                          | primary |
-| cancel-button-type  | 取消按钮类型（对应 nv-button 的 type，不含 text）                                                                               | string  | default / primary / success / warning / danger / info                                                                           | default |
-| confirm-text-button | 确认按钮是否为文字按钮（对应 nv-button 的 text 属性）                                                                          | boolean | —                                                                                                                               | false   |
-| cancel-text-button  | 取消按钮是否为文字按钮（对应 nv-button 的 text 属性）                                                                          | boolean | —                                                                                                                               | true    |
-| confirm-button-size | 确认按钮尺寸                                                                                                                    | string  | large / default / small                                                                                                         | small   |
-| cancel-button-size  | 取消按钮尺寸                                                                                                                    | string  | large / default / small                                                                                                         | small   |
-| placement           | 出现位置                                                                                                                        | string  | top / top-start / top-end / bottom / bottom-start / bottom-end / left / left-start / left-end / right / right-start / right-end | top     |
-| trigger             | 触发方式                                                                                                                        | string  | click / hover / manual                                                                                                          | click   |
-| arrow               | 是否显示箭头                                                                                                                    | boolean | —                                                                                                                               | true    |
-| distance            | 弹出层与触发元素的距离（像素）                                                                                                  | number  | —                                                                                                                               | 8       |
-| disabled            | 是否禁用                                                                                                                        | boolean | —                                                                                                                               | false   |
+| 属性名            | 说明                                                  | 类型    | 可选值                                                                                                                          | 默认值         |
+| ----------------- | ----------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| label             | 标题（未使用 label 插槽时生效）                       | string  | —                                                                                                                               | 确定要删除吗？ |
+| confirmButtonText | 确认按钮文字                                          | string  | —                                                                                                                               | 确定           |
+| cancelButtonText  | 取消按钮文字                                          | string  | —                                                                                                                               | 取消           |
+| confirmButtonType | 确认按钮类型（对应 nv-button 的 type，不含 text）     | string  | default / primary / success / warning / danger / info                                                                           | primary        |
+| cancelButtonType  | 取消按钮类型（对应 nv-button 的 type，不含 text）     | string  | default / primary / success / warning / danger / info                                                                           | default        |
+| confirmTextButton | 确认按钮是否为文字按钮（对应 nv-button 的 text 属性） | boolean | —                                                                                                                               | false          |
+| cancelTextButton  | 取消按钮是否为文字按钮（对应 nv-button 的 text 属性） | boolean | —                                                                                                                               | true           |
+| confirmButtonSize | 确认按钮尺寸                                          | string  | large / default / small                                                                                                         | small          |
+| cancelButtonSize  | 取消按钮尺寸                                          | string  | large / default / small                                                                                                         | small          |
+| placement         | 出现位置                                              | string  | top / top-start / top-end / bottom / bottom-start / bottom-end / left / left-start / left-end / right / right-start / right-end | top            |
+| trigger           | 触发方式                                              | string  | click / hover / manual                                                                                                          | click          |
+| arrow             | 是否显示箭头                                          | boolean | —                                                                                                                               | true           |
+| distance          | 弹出层与触发元素的距离（像素）                        | number  | —                                                                                                                               | 8              |
+| disabled          | 是否禁用                                              | boolean | —                                                                                                                               | false          |
 
 ## 事件
 
@@ -34,8 +34,8 @@ Popconfirm 气泡确认框组件基于 Popover 组件实现，提供简单的确
 
 ## 插槽
 
-| 插槽名    | 说明                                                                 |
-| --------- | -------------------------------------------------------------------- |
+| 插槽名    | 说明                                                                |
+| --------- | ------------------------------------------------------------------- |
 | default   | 触发 Popconfirm 显示的元素                                          |
 | reference | 同 default                                                          |
 | label     | 自定义标题内容（支持富文本、图标等）；未提供时使用 `label` 属性文本 |

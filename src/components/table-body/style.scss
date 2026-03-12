@@ -1,0 +1,167 @@
+:host {
+  display: block;
+  overflow: hidden;
+  height: 100%;
+}
+
+.nv-table-body {
+  width: 100%;
+  height: 100%;
+  // body 同时负责 X、Y 轴滚动：Y 滚动条始终在可视区右边缘，X 滚动通过 JS 同步 header.scrollLeft
+  // scrollbar-gutter: stable 使 Y 轴滚动条占位恒定，避免出现时产生二次 X 溢出
+  overflow: auto;
+  scrollbar-gutter: stable;
+
+  &__row {
+    display: flex;
+    box-sizing: border-box;
+    transition: background-color 0.15s ease;
+    position: relative;
+
+    &:hover {
+      background-color: var(--nv-table-row-hover-background-color, #f5f7fa);
+    }
+
+    &.is-stripe {
+      background-color: var(--nv-table-row-stripe-background-color, #fafafa);
+
+      &:hover {
+        background-color: var(--nv-table-row-hover-background-color, #f5f7fa);
+      }
+    }
+
+    &.is-current {
+      background-color: var(--nv-table-row-current-background-color, #ecf5ff);
+    }
+  }
+
+  &__cell {
+    box-sizing: border-box;
+    padding: var(--nv-table-cell-padding, 0 12px);
+    display: flex;
+    align-items: center;
+    font-size: inherit;
+    color: var(--nv-table-font-color, #606266);
+    flex-shrink: 0;
+    height: 100%;
+    position: relative;
+    // 固定列默认背景（继承行背景）
+    background-color: inherit;
+
+    &.is-border {
+      border-right: 1px solid var(--nv-table-border-color, #ebeef5);
+
+      &:last-child {
+        border-right: none;
+        flex: 1;
+      }
+    }
+
+    // 最后一个左固定列阴影
+    &.is-last-fixed-left {
+      &::after {
+        content: '';
+        position: absolute;
+        right: -9px;
+        top: 0;
+        bottom: 0;
+        width: 9px;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+        pointer-events: none;
+      }
+    }
+
+    // 第一个右固定列阴影
+    &.is-first-fixed-right {
+      &::before {
+        content: '';
+        position: absolute;
+        left: -9px;
+        top: 0;
+        bottom: 0;
+        width: 9px;
+        background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__cell-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  // overflow-tooltip 模式：单元格文字截断辅助类
+  &__cell-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  &__tree-expand-icon {
+    &.is-loading nv-icon {
+      animation: rotating 2s linear infinite;
+    }
+  }
+
+  // 行展开
+  &__expand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--nv-table-sort-icon-color, #c0c4cc);
+    transition: transform 0.2s ease, color 0.15s ease;
+    transform: rotate(0);
+
+    &:hover {
+      color: var(--nv-table-sort-active-color, #409eff);
+    }
+
+    &.is-expanded {
+      transform: rotate(90deg);
+      color: var(--nv-table-sort-active-color, #409eff);
+    }
+  }
+
+  &__expand-row {
+    // grid-template-rows 过渡：0fr → 1fr 实现高度 0 到 auto 的平滑动画
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: var(--nv-table-background-color, #ffffff);
+    border-bottom: 1px solid var(--nv-table-border-color, #ebeef5);
+
+    &.is-expanded {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  &__expand-content {
+    // overflow hidden 是 grid 0fr → 1fr 过渡的必要条件
+    overflow: hidden;
+    min-height: 0;
+    padding: 0;
+
+    // 内容使用伪元素撑开，避免直接给 padding 影响收起动画
+    > * {
+      padding: 16px 20px;
+      box-sizing: border-box;
+      color: var(--nv-table-font-color, #606266);
+    }
+  }
+
+  // expand 列单元格居中
+  &__cell--expand {
+    justify-content: center;
+  }
+
+}
+
+@keyframes rotating {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

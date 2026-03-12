@@ -71,3 +71,6 @@ export * from './transfer';
 export * from './cascader';
 export * from './breadcrumb';
 export * from './breadcrumb-item';
+export * from './table';
+export * from './table-header';
+export * from './table-body';

@@ -65,7 +65,14 @@ export class NvBackTop extends Component {
   /**
    * 处理点击事件
    */
-  protected _handleClick(): void {
+  protected _handleClick(event: Event): void {
+    this.dispatchEvent(
+      new CustomEvent('nv-click', {
+        bubbles: true,
+        composed: true,
+        detail: event
+      })
+    );
     if (this._container instanceof Window) {
       window.scrollTo({
         top: 0,

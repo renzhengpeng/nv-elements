@@ -8,12 +8,12 @@ Empty 空状态组件用于数据为空时的占位提示。
 
 ## 属性
 
-| 属性名      | 说明           | 类型   | 可选值                               | 默认值   |
-| ----------- | -------------- | ------ | ------------------------------------ | -------- |
-| description | 文本描述       | string | —                                    | 暂无数据 |
-| image       | 图片地址       | string | —                                    | —        |
+| 属性名      | 说明            | 类型   | 可选值                               | 默认值   |
+| ----------- | --------------- | ------ | ------------------------------------ | -------- |
+| description | 文本描述        | string | —                                    | 暂无数据 |
+| image       | 图片地址        | string | —                                    | —        |
 | image-size  | 图片大小(CSS值) | string | —                                    | —        |
-| size        | 尺寸           | string | mini / small / medium / large / huge | medium   |
+| size        | 尺寸            | string | mini / small / medium / large / huge | medium   |
 
 ## 插槽
 

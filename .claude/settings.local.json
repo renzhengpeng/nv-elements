@@ -1,0 +1,19 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://anyrouter.top",
+    "ANTHROPIC_AUTH_TOKEN": "sk-p3HbGiyfTj61XthN2PNoPnV8cX49EeT5CsqzWvge7N7rlAw0"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "WebFetch(domain:element-plus.org)",
+      "Bash(grep -r \"import.*popup\" /d/repository/nv-elements/src/components/*/index.ts)",
+      "Bash(npx storybook dev -p 6006)",
+      "Bash(npx storybook dev -p 6007)",
+      "Bash(npx tsc --noEmit)",
+      "WebFetch(domain:localhost)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:6007/)",
+      "Bash(curl -s http://localhost:6007/iframe.html?id=components-table--basic)"
+    ]
+  }
+}

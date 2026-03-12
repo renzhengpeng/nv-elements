@@ -1,0 +1,341 @@
+@import '../../styles/mixins/bem.mixin.scss';
+
+:host {
+  display: block;
+}
+
+.nv-table-header {
+  &__row {
+    display: flex;
+
+    // 清除挨着 gutter 的最右侧一溜表头的 border-right，防止跟容器边框重叠
+    > *:last-child {
+      border-right: none !important;
+      flex: 1;
+
+      > .nv-table-header__group-title { 
+        border-right: none !important; 
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 100%;
+          bottom: -1px;
+          width: var(--nv-table-scrollbar-width, 0px);
+          height: 1px;
+          background-color: var(--nv-table-border-color, #ebeef5);
+          z-index: 3;
+          pointer-events: none;
+        }
+      }
+      
+      > .nv-table-header__group-children > *:last-child {
+        border-right: none !important;
+
+        > .nv-table-header__group-title { 
+          border-right: none !important; 
+
+          &::after {
+            content: '';
+            position: absolute;
+            left: 100%;
+            bottom: -1px;
+            width: var(--nv-table-scrollbar-width, 0px);
+            height: 1px;
+            background-color: var(--nv-table-border-color, #ebeef5);
+            z-index: 3;
+            pointer-events: none;
+          }
+        }
+
+        > .nv-table-header__group-children > *:last-child {
+          border-right: none !important;
+
+          > .nv-table-header__group-title { 
+            border-right: none !important; 
+
+            &::after {
+              content: '';
+              position: absolute;
+              left: 100%;
+              bottom: -1px;
+              width: var(--nv-table-scrollbar-width, 0px);
+              height: 1px;
+              background-color: var(--nv-table-border-color, #ebeef5);
+              z-index: 3;
+              pointer-events: none;
+            }
+          }
+
+          > .nv-table-header__group-children > *:last-child {
+            border-right: none !important;
+            > .nv-table-header__group-title { 
+              border-right: none !important; 
+
+              &::after {
+                content: '';
+                position: absolute;
+                left: 100%;
+                bottom: -1px;
+                width: var(--nv-table-scrollbar-width, 0px);
+                height: 1px;
+                background-color: var(--nv-table-border-color, #ebeef5);
+                z-index: 3;
+                pointer-events: none;
+              }
+            }
+        }
+      }
+    }
+  }
+
+  }
+
+  &__group {
+    flex-direction: column;
+    padding: 0 !important;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    &.is-border {
+      // 容器不能有向内的 right-border，否则会因为内部 children 总宽度占据满额（导致子级 overflow 1px 并引发 border 重叠错位）。
+      // group 的右边框由其最后的子元素 right-border 顶上。
+      border-right: none !important;
+
+      // 为上半截 group 补上必要的右边线
+      > .nv-table-header__group-title {
+        border-right: 1px solid var(--nv-table-border-color, #ebeef5);
+      }
+    }
+
+    &-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--nv-table-cell-padding, 0 12px);
+      min-height: var(--nv-table-header-height, 48px);
+      border-bottom: 1px solid var(--nv-table-border-color, #ebeef5);
+      box-sizing: border-box;
+      width: 100%;
+      position: relative;
+    }
+
+    // 用伪元素延伸最后元素的下边框，填补右侧 gutter 的水平空白
+    // (逻辑已移至最上方的右边缘层叠判断中，此处不需要独立的 last-child)
+    
+    &-children {
+      display: flex;
+      flex: 1;
+      align-items: stretch;
+    }
+  }
+
+  &__cell {
+    box-sizing: border-box;
+    padding: var(--nv-table-cell-padding, 0 12px);
+    min-height: var(--nv-table-header-height, 48px);
+    background-color: var(--nv-table-header-background-color, #f5f7fa);
+    color: var(--nv-table-header-font-color, #606266);
+    font-weight: 500;
+    font-size: inherit;
+    flex-shrink: 0;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &.is-sortable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--nv-table-header-hover-background-color, #eaecef);
+      }
+    }
+
+    &.is-border {
+      border-right: 1px solid var(--nv-table-border-color, #ebeef5);
+    }
+
+    // 固定列背景色（sticky 时需要不透明背景遮住下层内容）
+    &.is-fixed-left,
+    &.is-fixed-right {
+      background-color: var(--nv-table-header-background-color, #f5f7fa);
+    }
+
+    // 最后一个左固定列阴影
+    &.is-last-fixed-left {
+      &::after {
+        content: '';
+        position: absolute;
+        right: -9px;
+        top: 0;
+        bottom: 0;
+        width: 9px;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+        pointer-events: none;
+      }
+    }
+
+    // 第一个右固定列阴影
+    &.is-first-fixed-right {
+      &::before {
+        content: '';
+        position: absolute;
+        left: -9px;
+        top: 0;
+        bottom: 0;
+        width: 9px;
+        background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__cell-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+  }
+
+  // 列宽拖拽手柄
+  &__resize-handle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 100%;
+    cursor: col-resize;
+    z-index: 3;
+    user-select: none;
+
+    // hover / active 时在右边缘显示半透明阴影线，无刺眼颜色
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -1px;
+      width: 2px;
+      height: 100%;
+      background-color: transparent;
+      border-radius: 1px;
+      transition: background-color 0.15s;
+    }
+
+    &:hover::after {
+      background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0));
+    }
+
+    &:active::after {
+      background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0));
+    }
+  }
+
+  // 排序图标容器
+  &__sort-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 4px;
+    flex-shrink: 0;
+    line-height: 1;
+
+    nv-icon {
+      height: 8px; // 强制高度小于图标 size(12px)，利用 overflow 裁剪或靠拢以减小间距
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  // 过滤图标
+  &__filter-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.15s;
+    position: relative;
+    z-index: 4; // 确保在 resize-handle 之上
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+
+    &.is-active nv-icon {
+      color: var(--nv-table-sort-active-color, #409eff);
+    }
+  }
+
+  // 过滤面板（nv-popup 已提供 box-shadow，此处只设尺寸和背景）
+  &__filter-panel {
+    background: #fff;
+    min-width: 160px;
+    overflow: hidden;
+  }
+
+  &__filter-list {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  &__filter-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #606266;
+    user-select: none;
+    transition: background-color 0.15s;
+
+    &:hover {
+      background-color: #f5f7fa;
+    }
+
+    &.is-selected {
+      color: var(--nv-table-sort-active-color, #409eff);
+      font-weight: 500;
+    }
+  }
+
+  &__filter-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-top: 1px solid #ebeef5;
+    gap: 8px;
+  }
+
+  &__filter-btn {
+    flex: 1;
+    height: 28px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.15s;
+
+    &--reset {
+      background: #f5f7fa;
+      color: #606266;
+      &:hover { background: #e4e7ed; }
+    }
+
+    &--confirm {
+      background: var(--nv-table-sort-active-color, #409eff);
+      color: #fff;
+      &:hover { background: #66b1ff; }
+    }
+  }
+
+}

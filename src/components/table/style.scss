@@ -1,0 +1,298 @@
+@import './variables.scss';
+
+:host {
+  display: block;
+  font-size: 14px;
+  color: var(--nv-table-font-color, #606266);
+}
+
+// ======= 顶部操作栏 =======
+.nv-table__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--nv-table-border-color, #ebeef5);
+  background: var(--nv-table-background-color, #fff);
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.nv-table__toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.nv-table__toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.nv-table__toolbar-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--nv-table-font-color, #303133);
+  margin-right: 4px;
+}
+
+.nv-table__toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--nv-table-font-color, #606266);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  font-size: 16px;
+
+  &:hover, &.is-active {
+    background: var(--nv-table-border-color, #ebeef5);
+    color: var(--nv-primary-color, #409eff);
+  }
+}
+
+.nv-table__dropdown-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.nv-table__dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 100;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+  border-radius: 8px;
+  min-width: 140px;
+  padding: 6px 0;
+  overflow: hidden;
+  // 动画
+  animation: nv-dropdown-in 0.15s ease;
+}
+
+@keyframes nv-dropdown-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// 列设置面板
+.nv-table__col-setting-panel {
+  min-width: 160px;
+  padding: 8px 0;
+  background: #fff;
+  // box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.nv-table__col-setting-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 12px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #303133;
+  border-bottom: 1px solid #ebeef5;
+  margin-bottom: 4px;
+}
+
+.nv-table__col-setting-reset {
+  border: none;
+  background: none;
+  color: var(--nv-primary-color, #409eff);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
+
+  &:hover { text-decoration: underline; }
+}
+
+.nv-table__col-setting-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.12s;
+
+  &:hover { background: #f5f7fa; }
+
+  span { flex: 1; }
+}
+
+// 密度切换面板
+.nv-table__density-panel {
+  min-width: 120px;
+  padding: 8px 0;
+  background: #fff;
+  // box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  border-radius: 8px;
+}
+
+.nv-table__density-header {
+  padding: 4px 12px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #303133;
+  border-bottom: 1px solid #ebeef5;
+  margin-bottom: 4px;
+}
+
+.nv-table__density-item {
+  padding: 7px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+
+  &:hover { background: #f0f7ff; color: var(--nv-primary-color, #409eff); }
+  &.is-active { color: var(--nv-primary-color, #409eff); font-weight: 600; background: #ecf5ff; }
+}
+
+.nv-table {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--nv-table-background-color, #ffffff);
+    border: 1px solid var(--nv-table-border-color, #ebeef5);
+    box-sizing: border-box;
+
+    &.is-border {
+      .nv-table__header-wrapper {
+        border-bottom: 1px solid var(--nv-table-border-color, #ebeef5);
+      }
+    }
+  }
+
+  // header 横向由 JS 同步，overflow-x: hidden 防止出现 header 自己的滚动条
+  // display: flex 使 header-inner + header-gutter 横排
+  &__header-wrapper {
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+  }
+
+  // header 内层：撑开到列宽总和，保证 header 单元格宽度与 body 对齐
+  &__header-inner {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  // Y 轴滚动条占位块：宽度由 JS 动态设置，背景与表头一致
+  // 作用：使 header 最大可滚动距离 = body 最大可滚动距离，消除最右侧错位
+  &__header-gutter {
+    flex-shrink: 0;
+    background-color: var(--nv-table-header-background-color, #f5f7fa);
+    position: sticky;
+    right: 0;
+    z-index: 2;
+  }
+
+  &__body-wrapper {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    color: var(--nv-table-empty-font-color, #909399);
+  }
+
+  &__pagination {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 12px 16px;
+    border-top: 1px solid var(--nv-table-border-color, #ebeef5);
+  }
+
+  // 表尾合计行区域
+  &__summary-wrapper {
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    border-top: 2px solid var(--nv-table-border-color, #ebeef5);
+    background-color: var(--nv-table-header-background-color, #f5f7fa);
+  }
+
+  &__summary-inner {
+    display: flex;
+    flex-shrink: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__summary-cell {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: var(--nv-table-cell-padding, 0 12px);
+    height: var(--nv-table-row-height, 48px);
+    font-size: inherit;
+    font-weight: 600;
+    color: var(--nv-table-font-color, #606266);
+    flex-shrink: 0;
+    overflow: hidden;
+
+    &.is-last-fixed-left {
+      box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+    }
+
+    &.is-first-fixed-right {
+      box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+}
+
+// 流体高度模式：wrapper 整体限制高度，body-wrapper 滚动
+.nv-table--fluid {
+  .nv-table__body-wrapper {
+    overflow-y: auto;
+  }
+}
+
+// 尺寸变体 (size)
+.nv-table--huge {
+  --nv-table-header-height: 64px;
+  --nv-table-row-height: 64px;
+  --nv-table-cell-padding: 0 16px;
+  font-size: 16px;
+}
+.nv-table--large {
+  --nv-table-header-height: 56px;
+  --nv-table-row-height: 56px;
+  --nv-table-cell-padding: 0 14px;
+  font-size: 15px;
+}
+.nv-table--small {
+  --nv-table-header-height: 40px;
+  --nv-table-row-height: 40px;
+  --nv-table-cell-padding: 0 10px;
+  font-size: 13px;
+}
+.nv-table--mini {
+  --nv-table-header-height: 32px;
+  --nv-table-row-height: 32px;
+  --nv-table-cell-padding: 0 8px;
+  font-size: 12px;
+}
